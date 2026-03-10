@@ -13,7 +13,7 @@ These are the core brand and semantic colors.
 ```css
 :root {
   --color-white: #ffffff;
-  --color-gold: #8f7d5e;
+  --color-gold: #FFD267;
   --color-silver: #cfcbb8;
   --color-concept: #7dc7e3;
   --color-red: #e36166;
@@ -25,27 +25,27 @@ These are the core brand and semantic colors.
 
 ### Theming
 
-#### Light Theme (Default)
+#### Dark Theme (Default)
 
-The light theme uses a bright, clean background with dark text for high contrast and readability.
+The dark theme is the primary/default mode. It uses `#031927` as the base background color, providing a deep, rich canvas inspired by the EU5 aesthetic.
 
 ```css
 :root {
   /* Text */
-  --text-primary: #1a1a1a;
-  --text-secondary: #4d4d4d;
+  --text-primary: #e0e0e0;
+  --text-secondary: #a0a0a0;
   --text-accent: var(--color-gold);
-  --text-link: #005a9c;
-  --text-inverted: var(--color-white);
+  --text-link: var(--color-concept);
+  --text-inverted: #031927;
 
   /* Background */
-  --bg-primary: #f5f5f5;
-  --bg-secondary: var(--color-white);
-  --bg-tertiary: #e0e0e0;
+  --bg-primary: #031927;
+  --bg-secondary: #072a3d;
+  --bg-tertiary: #0c3a52;
 
   /* Borders */
-  --border-primary: #cccccc;
-  --border-secondary: #e0e0e0;
+  --border-primary: #1a4d6e;
+  --border-secondary: #0c3a52;
   --border-focus: var(--color-gold);
 
   /* UI Elements */
@@ -57,35 +57,35 @@ The light theme uses a bright, clean background with dark text for high contrast
 }
 ```
 
-#### Dark Theme
+#### Light Theme
 
-The dark theme provides a comfortable viewing experience in low-light environments, inspired by modern development tools and the EU5 website.
+The light theme provides a bright alternative for well-lit environments. It mirrors the dark theme's structure with inverted contrast.
 
 ```css
-[data-theme="dark"] {
+[data-theme="light"] {
   /* Text */
-  --text-primary: #e0e0e0;
-  --text-secondary: #a0a0a0;
-  --text-accent: var(--color-gold);
-  --text-link: var(--color-concept);
-  --text-inverted: #1a1a1a;
+  --text-primary: #1a1a1a;
+  --text-secondary: #4d4d4d;
+  --text-accent: #8f7d5e;
+  --text-link: #005a9c;
+  --text-inverted: var(--color-white);
 
   /* Background */
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #242424;
-  --bg-tertiary: #333333;
+  --bg-primary: #f5f5f5;
+  --bg-secondary: var(--color-white);
+  --bg-tertiary: #e0e0e0;
 
   /* Borders */
-  --border-primary: #4d4d4d;
-  --border-secondary: #333333;
-  --border-focus: var(--color-gold);
+  --border-primary: #cccccc;
+  --border-secondary: #e0e0e0;
+  --border-focus: #8f7d5e;
 
   /* UI Elements */
-  --ui-primary: var(--color-gold);
+  --ui-primary: #8f7d5e;
   --ui-secondary: var(--color-silver);
-  --ui-interactive: var(--color-concept);
-  --ui-positive: var(--color-green);
-  --ui-negative: var(--color-red);
+  --ui-interactive: #2a8fad;
+  --ui-positive: #2d9e36;
+  --ui-negative: #c4383c;
 }
 ```
 
@@ -190,13 +190,15 @@ The application uses a three-column layout for the main editor view on desktop s
 
 ### Buttons
 
-- **Primary Button (`.btn-primary`):** Gold background, white text. For key actions like "Export" or "Save".
-- **Secondary Button (`.btn-secondary`):** Silver background, dark text. For less critical actions.
-- **Tertiary/Ghost Button (`.btn-ghost`):** Transparent background, bordered. For actions like "Cancel".
+All buttons use `border-radius: 2px`.
+
+- **Primary Button (`.btn-primary`):** White background (`#ffffff`), dark text (`--text-inverted` / `#031927`), `1px` solid white border. On hover: background flips to transparent, text becomes white, white border remains. Transition: `all 0.2s ease-in-out`. For key actions like "Export" or "Save".
+- **Secondary Button (`.btn-secondary`):** Same flip pattern but using `--color-silver` instead of white. For less critical actions.
+- **Tertiary/Ghost Button (`.btn-ghost`):** Transparent background, `1px` solid white border, white text. On hover: background fills white, text flips to dark. For actions like "Cancel".
 - **States:**
-  - `hover`: Slightly darken/lighten background.
+  - `hover`: Background and text colors flip with a smooth `0.2s` transition (see above).
   - `focus`: Visible outline using `--border-focus`.
-  - `disabled`: Reduced opacity, `not-allowed` cursor.
+  - `disabled`: Reduced opacity (`0.4`), `not-allowed` cursor.
 
 ### Form Inputs (`<input>`, `<select>`)
 
@@ -210,6 +212,7 @@ The application uses a three-column layout for the main editor view on desktop s
 
 - **Appearance:** Used for project selection, documentation links, and define categories.
 - **Style:** `background-color: var(--bg-secondary)`, `border: 1px solid var(--border-secondary)`, `border-radius: 8px`, `padding: var(--space-lg)`.
+- **Accent tiles:** Cards used as feature tiles or highlighted sections should use `--color-gold` for their heading/title text to create visual emphasis.
 - **Shadow:** Subtle box-shadow on hover to indicate interactivity.
 
 ### Modals (Export Dialog)

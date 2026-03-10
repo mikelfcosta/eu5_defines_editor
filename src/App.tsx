@@ -1,7 +1,14 @@
 import { useEffect, useMemo, useState } from "react";
-import { NavLink, Route, Routes } from "react-router-dom";
-import ReactMarkdown from "react-markdown";
+import { Route, Routes, useLocation } from "react-router-dom";
 import type { DefineEntry, DefineValue, Project } from "./types/defines";
+import { AboutPage } from "./components/About/AboutPage";
+import { DocsPage } from "./components/Docs/DocsPage";
+import { EditorView } from "./components/Editor/EditorView";
+import { ExportDialog } from "./components/Export/ExportDialog";
+import { AppShell } from "./components/Layout/AppShell";
+import { LeftSidebar } from "./components/Layout/LeftSidebar";
+import { RightSidebar } from "./components/Layout/RightSidebar";
+import { TopHeader } from "./components/Layout/TopHeader";
 import { availableVersions, definesByVersion } from "./lib/defines";
 import { parseInputValue, stringifyDefineValue, validateArrayItems } from "./lib/validation";
 import { bumpSemver, createProject, loadProjectState, saveProjectState } from "./lib/storage";
@@ -50,16 +57,19 @@ function defineMatchesQuery(entry: DefineEntry, query: string): boolean {
 }
 
 export default function App() {
+  const location = useLocation();
   const defaultVersion = availableVersions[0];
   const [theme, setTheme] = useState<Theme>("dark");
   const [selectedVersion, setSelectedVersion] = useState(defaultVersion);
   const [search, setSearch] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("all");
   const [modifiedOnly, setModifiedOnly] = useState(false);
+  const [collapsedCategories, setCollapsedCategories] = useState<Record<string, boolean>>({});
   const [menuOpen, setMenuOpen] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [drafts, setDrafts] = useState<Record<string, string>>({});
   const [bumpType, setBumpType] = useState<"patch" | "minor" | "major">("patch");
+  const [isExportDialogOpen, setIsExportDialogOpen] = useState(false);
   const [isExporting, setIsExporting] = useState(false);
 
   const [projectState, setProjectState] = useState(() => loadProjectState(defaultVersion));
@@ -85,6 +95,17 @@ export default function App() {
 
   const defines = definesByVersion[selectedVersion];
   const hasErrors = Object.keys(errors).length > 0;
+  const isDocsRoute = location.pathname.startsWith("/docs");
+
+  useEffect(() => {
+    if (!defines) {
+      return;
+    }
+
+    setCollapsedCategories(
+      Object.fromEntries(defines.categories.map((category) => [category.name, true]))
+    );
+  }, [defines]);
 
   if (!defaultVersion || !defines) {
     return <p>Unable to load defines data. Run npm run generate:defines.</p>;
@@ -201,6 +222,20 @@ export default function App() {
     })
     .filter((category) => category.defines.length > 0);
 
+  const getIsModified = (entry: DefineEntry): boolean => {
+    const currentValue = activeProject?.delta[entry.id] ?? entry.defaultValue;
+    return !equalsValue(currentValue, entry.defaultValue);
+  };
+
+  const getCategoryModifiedCount = (categoryName: string): number => {
+    const sourceCategory = defines.categories.find((category) => category.name === categoryName);
+    if (!sourceCategory) {
+      return 0;
+    }
+
+    return sourceCategory.defines.filter((entry) => getIsModified(entry)).length;
+  };
+
   const getDisplayValue = (entry: DefineEntry): string => {
     if (drafts[entry.id] !== undefined) {
       return drafts[entry.id];
@@ -268,23 +303,33 @@ export default function App() {
     updateProject((project) => ({ ...project, delta: {} }));
   };
 
-  const runExport = async () => {
+  const openExportDialog = () => {
+    if (!activeProject || hasErrors) {
+      return;
+    }
+
+    setIsExportDialogOpen(true);
+  };
+
+  const runExport = async (payload: {
+    modName: string;
+    modDescription: string;
+    bumpType: "patch" | "minor" | "major";
+    nextVersion: string;
+  }) => {
     if (!activeProject || hasErrors) {
       return;
     }
 
     setIsExporting(true);
     try {
-      const nextVersion = bumpSemver(activeProject.modVersion, bumpType);
-      const modName = window.prompt("Mod Name", activeProject.modName) ?? activeProject.modName;
-      const modDescription =
-        window.prompt("Mod Description", activeProject.modDescription) ?? activeProject.modDescription;
+      setBumpType(payload.bumpType);
 
       const nextProject: Project = {
         ...activeProject,
-        modName,
-        modDescription,
-        modVersion: nextVersion
+        modName: payload.modName,
+        modDescription: payload.modDescription,
+        modVersion: payload.nextVersion
       };
 
       setProjectState((state) => ({
@@ -296,277 +341,119 @@ export default function App() {
 
       const blob = await exportProjectZip(nextProject, defines);
       downloadBlob(blob, `${nextProject.modName.replace(/\s+/g, "_")}_${nextProject.modVersion}.zip`);
+      setIsExportDialogOpen(false);
     } finally {
       setIsExporting(false);
     }
   };
 
   const modifiedCount = activeProject ? Object.keys(activeProject.delta).length : 0;
+  const nextVersion = activeProject ? bumpSemver(activeProject.modVersion, bumpType) : "-";
+
+  const rightSidebarCategories = filteredCategories.map((category) => ({
+    name: category.name,
+    defineCount: category.defines.length,
+    modifiedCount: getCategoryModifiedCount(category.name)
+  }));
+  const showRightSidebar = location.pathname === "/";
+
+  const toggleCategory = (categoryName: string) => {
+    setCollapsedCategories((state) => ({
+      ...state,
+      [categoryName]: !state[categoryName]
+    }));
+  };
 
   return (
-    <div className="app-shell">
-      <aside className={`left-sidebar ${menuOpen ? "open" : ""}`}>
-        <h1>EUV Defines Editor</h1>
-        <p className="muted">Version {selectedVersion}</p>
-        <nav aria-label="Primary navigation" className="left-nav">
-          <NavLink to="/" end>
-            Editor
-          </NavLink>
-          <NavLink to="/docs">Docs</NavLink>
-          <NavLink to="/about">About</NavLink>
-        </nav>
-
-        <section className="sidebar-card">
-          <h2>Projects</h2>
-          <label htmlFor="project-select">Current project</label>
-          <select
-            id="project-select"
-            value={activeProject?.id ?? ""}
-            onChange={(event) => {
-              const selected = projectState.projects.find((project) => project.id === event.target.value);
+    <>
+      <AppShell
+        leftSidebar={
+          <LeftSidebar
+            menuOpen={menuOpen}
+            selectedVersion={selectedVersion}
+            projects={projectState.projects}
+            activeProjectId={activeProject?.id ?? null}
+            modifiedCount={modifiedCount}
+            availableVersions={availableVersions}
+            theme={theme}
+            docsPages={docsPages}
+            isDocsRoute={isDocsRoute}
+            onProjectChange={(projectId) => {
+              const selected = projectState.projects.find((project) => project.id === projectId);
               setProjectState((state) => ({ ...state, activeProjectId: selected?.id ?? null }));
               setErrors({});
               setDrafts({});
             }}
-          >
-            {projectState.projects.map((project) => (
-              <option key={project.id} value={project.id}>
-                {project.name}
-              </option>
-            ))}
-          </select>
-          <div className="button-row">
-            <button className="btn-secondary" onClick={createNewProject}>
-              New
-            </button>
-            <button className="btn-ghost" onClick={renameProject} disabled={!activeProject}>
-              Rename
-            </button>
-            <button
-              className="btn-ghost"
-              onClick={deleteProject}
-              disabled={!activeProject || projectState.projects.length <= 1}
-            >
-              Delete
-            </button>
-          </div>
-          <button className="btn-ghost" onClick={resetProject} disabled={!activeProject || modifiedCount === 0}>
-            Reset Project
-          </button>
-        </section>
-
-        <section className="sidebar-card">
-          <label htmlFor="version-select">Game Version</label>
-          <select
-            id="version-select"
-            value={selectedVersion}
-            onChange={(event) => {
-              const nextVersion = event.target.value;
-              setSelectedVersion(nextVersion);
+            onCreateProject={createNewProject}
+            onRenameProject={renameProject}
+            onDeleteProject={deleteProject}
+            onResetProject={resetProject}
+            onVersionChange={(version) => {
+              setSelectedVersion(version);
               if (activeProject) {
-                updateProject((project) => ({ ...project, version: nextVersion, delta: {} }));
+                updateProject((project) => ({ ...project, version, delta: {} }));
               }
             }}
-          >
-            {availableVersions.map((version) => (
-              <option key={version} value={version}>
-                {version}
-              </option>
-            ))}
-          </select>
-
-          <button
-            className="btn-primary"
-            onClick={() => setTheme((current) => (current === "dark" ? "light" : "dark"))}
-          >
-            Toggle {theme === "dark" ? "Light" : "Dark"} Theme
-          </button>
-        </section>
-      </aside>
-
-      <div className="content-shell">
-        <header className="top-header">
-          <button className="btn-ghost mobile-only" onClick={() => setMenuOpen((open) => !open)}>
-            Menu
-          </button>
-          <div>
-            <p className="muted">Modified: {modifiedCount}</p>
-          </div>
-          <div className="button-row">
-            <label htmlFor="bump-type" className="visually-hidden">
-              Version bump
-            </label>
-            <select id="bump-type" value={bumpType} onChange={(event) => setBumpType(event.target.value as never)}>
-              <option value="patch">Patch</option>
-              <option value="minor">Minor</option>
-              <option value="major">Major</option>
-            </select>
-            <button className="btn-primary" onClick={runExport} disabled={!activeProject || hasErrors || isExporting}>
-              {isExporting ? "Exporting..." : "Export Mod ZIP"}
-            </button>
-          </div>
-        </header>
-
-        <main>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <div className="editor-view">
-                  <section className="search-bar" aria-label="Define filters">
-                    <div>
-                      <label htmlFor="search-input">Search</label>
-                      <input
-                        id="search-input"
-                        type="search"
-                        placeholder="Search key or comment"
-                        value={search}
-                        onChange={(event) => setSearch(event.target.value)}
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="category-filter">Category</label>
-                      <select
-                        id="category-filter"
-                        value={categoryFilter}
-                        onChange={(event) => setCategoryFilter(event.target.value)}
-                      >
-                        <option value="all">All Categories</option>
-                        {categoryNames.map((name) => (
-                          <option key={name} value={name}>
-                            {name}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                    <div className="checkbox-wrap">
-                      <input
-                        id="modified-only"
-                        type="checkbox"
-                        checked={modifiedOnly}
-                        onChange={(event) => setModifiedOnly(event.target.checked)}
-                      />
-                      <label htmlFor="modified-only">Modified only</label>
-                    </div>
-                  </section>
-
-                  <section className="category-list" aria-label="Defines by category">
-                    {filteredCategories.map((category) => (
-                      <article className="category-card" id={`category-${category.name}`} key={category.name}>
-                        <h2>{category.name}</h2>
-                        <p className="muted">{category.defines.length} entries</p>
-                        <div className="define-list">
-                          {category.defines.map((entry) => {
-                            const value = getDisplayValue(entry);
-                            const currentValue = activeProject?.delta[entry.id] ?? entry.defaultValue;
-                            const isModified = !equalsValue(currentValue, entry.defaultValue);
-                            const error = errors[entry.id];
-
-                            return (
-                              <div className={`define-row ${isModified ? "modified" : ""}`} key={entry.id}>
-                                <div className="define-header">
-                                  <div>
-                                    <h3>{entry.key}</h3>
-                                    <p className="muted">Type: {entry.type}</p>
-                                  </div>
-                                  <button className="btn-ghost" onClick={() => resetDefine(entry)} disabled={!isModified}>
-                                    Reset
-                                  </button>
-                                </div>
-
-                                {entry.type === "boolean" ? (
-                                  <div className="toggle-row">
-                                    <button
-                                      className="btn-secondary"
-                                      role="switch"
-                                      aria-checked={value === "yes"}
-                                      onClick={() => updateDefine(entry, value === "yes" ? "no" : "yes")}
-                                    >
-                                      {value === "yes" ? "Yes" : "No"}
-                                    </button>
-                                  </div>
-                                ) : entry.type === "variable" || entry.type === "expression" ? (
-                                  <input type="text" value={value} disabled aria-readonly="true" />
-                                ) : entry.type === "array" ? (
-                                  <div>
-                                    <label htmlFor={`input-${entry.id}`}>List values (comma-separated)</label>
-                                    <textarea
-                                      id={`input-${entry.id}`}
-                                      rows={3}
-                                      value={value}
-                                      onChange={(event) => updateDefine(entry, event.target.value)}
-                                    />
-                                  </div>
-                                ) : (
-                                  <div>
-                                    <label htmlFor={`input-${entry.id}`}>Value</label>
-                                    <input
-                                      id={`input-${entry.id}`}
-                                      type={entry.type === "string" ? "text" : "number"}
-                                      step={entry.type === "float" ? "any" : "1"}
-                                      value={value}
-                                      onChange={(event) => updateDefine(entry, event.target.value)}
-                                    />
-                                  </div>
-                                )}
-
-                                {entry.comment ? <p className="comment">{entry.comment}</p> : null}
-                                {error ? (
-                                  <p className="error" role="alert">
-                                    {error}
-                                  </p>
-                                ) : null}
-                              </div>
-                            );
-                          })}
-                        </div>
-                      </article>
-                    ))}
-                    {filteredCategories.length === 0 ? <p>No defines match the current filters.</p> : null}
-                  </section>
-                </div>
-              }
-            />
-
-            {docsPages.map((page) => (
-              <Route
-                key={page.path}
-                path={page.path}
-                element={
-                  <article className="docs-page">
-                    <h2>{page.title}</h2>
-                    <ReactMarkdown>{page.markdown}</ReactMarkdown>
-                  </article>
-                }
+            onToggleTheme={() => setTheme((current) => (current === "dark" ? "light" : "dark"))}
+          />
+        }
+        topHeader={
+          <TopHeader
+            modifiedCount={modifiedCount}
+            bumpType={bumpType}
+            nextVersion={nextVersion}
+            onToggleMenu={() => setMenuOpen((open) => !open)}
+            onBumpTypeChange={setBumpType}
+            onExport={openExportDialog}
+            exportDisabled={!activeProject || hasErrors || isExporting}
+            isExporting={isExporting}
+          />
+        }
+        rightSidebar={showRightSidebar ? <RightSidebar categories={rightSidebarCategories} /> : null}
+      >
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <EditorView
+                search={search}
+                categoryFilter={categoryFilter}
+                categoryNames={categoryNames}
+                modifiedOnly={modifiedOnly}
+                filteredCategories={filteredCategories}
+                getCategoryModifiedCount={(category) => getCategoryModifiedCount(category.name)}
+                isCategoryCollapsed={(categoryName) => collapsedCategories[categoryName] ?? true}
+                getDisplayValue={getDisplayValue}
+                getIsModified={getIsModified}
+                getError={(entry) => errors[entry.id]}
+                onSearchChange={setSearch}
+                onCategoryFilterChange={setCategoryFilter}
+                onModifiedOnlyChange={setModifiedOnly}
+                onToggleCategory={toggleCategory}
+                onUpdateDefine={updateDefine}
+                onResetDefine={resetDefine}
               />
-            ))}
+            }
+          />
 
-            <Route
-              path="/about"
-              element={
-                <article className="docs-page">
-                  <h2>About</h2>
-                  <p>
-                    EUV Defines Editor is an offline-first frontend app for customizing Europa Universalis V defines
-                    and exporting valid mod files.
-                  </p>
-                </article>
-              }
-            />
-          </Routes>
-        </main>
-      </div>
-
-      <aside className="right-sidebar" aria-label="Category anchors">
-        <h2>Categories</h2>
-        <nav>
-          {filteredCategories.map((category) => (
-            <a key={category.name} href={`#category-${category.name}`}>
-              {category.name}
-            </a>
+          {docsPages.map((page) => (
+            <Route key={page.path} path={page.path} element={<DocsPage title={page.title} markdown={page.markdown} />} />
           ))}
-        </nav>
-      </aside>
-    </div>
+
+          <Route path="/about" element={<AboutPage />} />
+        </Routes>
+      </AppShell>
+
+      <ExportDialog
+        isOpen={isExportDialogOpen}
+        isExporting={isExporting}
+        initialModName={activeProject?.modName ?? "euv-defines-mod"}
+        initialModDescription={activeProject?.modDescription ?? ""}
+        initialVersion={activeProject?.modVersion ?? "0.0.0"}
+        initialBumpType={bumpType}
+        onCancel={() => setIsExportDialogOpen(false)}
+        onConfirm={runExport}
+      />
+    </>
   );
 }

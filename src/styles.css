@@ -179,6 +179,24 @@ textarea:focus-visible {
   font-weight: 700;
 }
 
+.docs-subnav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.docs-subnav a {
+  text-decoration: none;
+  color: var(--text-primary);
+  border-left: 3px solid transparent;
+  padding-left: var(--space-sm);
+}
+
+.docs-subnav a.active {
+  border-left-color: var(--color-gold);
+  font-weight: 700;
+}
+
 .sidebar-card {
   background: var(--bg-tertiary);
   border: 1px solid var(--border-secondary);
@@ -212,6 +230,11 @@ textarea:focus-visible {
   justify-content: space-between;
   align-items: center;
   gap: var(--space-md);
+}
+
+.top-header-meta {
+  display: grid;
+  gap: var(--space-xs);
 }
 
 main {
@@ -249,6 +272,35 @@ main {
   border: 1px solid var(--border-secondary);
   border-radius: 8px;
   padding: var(--space-lg);
+}
+
+.category-toggle {
+  width: 100%;
+  text-align: left;
+  border: 1px solid var(--border-primary);
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border-radius: 8px;
+  padding: var(--space-md);
+  margin-bottom: var(--space-md);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-md);
+}
+
+.category-toggle:hover {
+  border-color: var(--color-gold);
+}
+
+.category-title {
+  font-size: var(--font-size-h4);
+  font-weight: 600;
+}
+
+.category-meta {
+  color: var(--text-secondary);
+  font-size: var(--font-size-small);
 }
 
 .define-list {
@@ -296,6 +348,45 @@ main {
 
 .docs-page h2 {
   color: var(--color-gold);
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: grid;
+  place-items: center;
+  z-index: 30;
+  padding: var(--space-lg);
+}
+
+.export-dialog {
+  width: min(560px, 100%);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: 8px;
+  padding: var(--space-xl);
+  display: grid;
+  gap: var(--space-md);
+}
+
+.export-version-group {
+  border: 1px solid var(--border-primary);
+  border-radius: 8px;
+  padding: var(--space-md);
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.export-version-group label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: 0;
+}
+
+.export-version-group input {
+  width: auto;
 }
 
 label {

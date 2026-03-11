@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { Component, type ErrorInfo, type ReactNode, useCallback, useEffect, useMemo, useState } from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import {
   Box,
@@ -39,7 +39,6 @@ import { parseInputValue, stringifyDefineValue, validateArrayItems } from "./lib
 import { createProject, loadProjectState, saveProjectState } from "./lib/storage";
 import { exportProjectZip } from "./lib/exporter";
 
-import docsIndex from "./content/docs/index.md?raw";
 import docsGettingStarted from "./content/docs/getting-started.md?raw";
 import docsInstallMod from "./content/docs/install-mod.md?raw";
 import docsUsingEditor from "./content/docs/using-editor.md?raw";
@@ -214,6 +213,125 @@ function BottomFooter({
   );
 }
 
+interface AppErrorBoundaryState {
+  error: Error | null;
+  componentStack: string;
+}
+
+class AppErrorBoundary extends Component<{ children: ReactNode }, AppErrorBoundaryState> {
+  public constructor(props: { children: ReactNode }) {
+    super(props);
+    this.state = {
+      error: null,
+      componentStack: ""
+    };
+  }
+
+  public static getDerivedStateFromError(error: Error): AppErrorBoundaryState {
+    return {
+      error,
+      componentStack: ""
+    };
+  }
+
+  public componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
+    this.setState({ componentStack: errorInfo.componentStack ?? "" });
+    console.error("Unhandled app error:", error, errorInfo);
+  }
+
+  private readonly resetBoundary = () => {
+    this.setState({ error: null, componentStack: "" });
+  };
+
+  public render() {
+    if (!this.state.error) {
+      return this.props.children;
+    }
+
+    return (
+      <Box minH="100vh" bg="pageBg" color="textPrimary" display="grid" placeItems="center" p={6}>
+        <Box
+          as="section"
+          maxW="960px"
+          w="100%"
+          bg="panelBg"
+          border="1px solid"
+          borderColor="borderPrimary"
+          borderRadius="md"
+          p={6}
+          display="grid"
+          gap={4}
+        >
+          <Text fontSize="2xl" fontWeight={700} color="brand.gold">Something went wrong</Text>
+          <Text color="textSecondary">
+            The app hit an unexpected error while rendering. You can try to continue or reload the page.
+          </Text>
+
+          <HStack spacing={3}>
+            <Button colorScheme="yellow" onClick={this.resetBoundary}>Try again</Button>
+            <Button variant="outline" onClick={() => window.location.reload()}>Reload page</Button>
+          </HStack>
+
+          <Box>
+            <Text fontWeight={700} mb={2}>Error</Text>
+            <Box
+              as="pre"
+              bg="surface.800"
+              border="1px solid"
+              borderColor="borderSecondary"
+              borderRadius="md"
+              p={4}
+              whiteSpace="pre-wrap"
+              wordBreak="break-word"
+              overflowX="auto"
+            >
+              {`${this.state.error.name}: ${this.state.error.message}`}
+            </Box>
+          </Box>
+
+          {this.state.error.stack ? (
+            <Box>
+              <Text fontWeight={700} mb={2}>Stack Trace</Text>
+              <Box
+                as="pre"
+                bg="surface.800"
+                border="1px solid"
+                borderColor="borderSecondary"
+                borderRadius="md"
+                p={4}
+                whiteSpace="pre-wrap"
+                wordBreak="break-word"
+                overflowX="auto"
+              >
+                {this.state.error.stack}
+              </Box>
+            </Box>
+          ) : null}
+
+          {this.state.componentStack ? (
+            <Box>
+              <Text fontWeight={700} mb={2}>Component Stack</Text>
+              <Box
+                as="pre"
+                bg="surface.800"
+                border="1px solid"
+                borderColor="borderSecondary"
+                borderRadius="md"
+                p={4}
+                whiteSpace="pre-wrap"
+                wordBreak="break-word"
+                overflowX="auto"
+              >
+                {this.state.componentStack.trim()}
+              </Box>
+            </Box>
+          ) : null}
+        </Box>
+      </Box>
+    );
+  }
+}
+
 export default function App() {
   const location = useLocation();
   const defaultVersion = availableVersions[0];
@@ -251,10 +369,33 @@ export default function App() {
   }, [projectState]);
 
   useEffect(() => {
-    if (activeProject && activeProject.version !== selectedVersion) {
+    if (!activeProject) {
+      if (!definesByVersion[selectedVersion]) {
+        setSelectedVersion(defaultVersion);
+      }
+      return;
+    }
+
+    if (!definesByVersion[activeProject.version]) {
+      const fallbackVersion = defaultVersion;
+      setProjectState((state) => ({
+        ...state,
+        projects: state.projects.map((project) =>
+          project.id === activeProject.id
+            ? { ...project, version: fallbackVersion, updatedAt: new Date().toISOString() }
+            : project
+        )
+      }));
+      if (selectedVersion !== fallbackVersion) {
+        setSelectedVersion(fallbackVersion);
+      }
+      return;
+    }
+
+    if (activeProject.version !== selectedVersion) {
       setSelectedVersion(activeProject.version);
     }
-  }, [activeProject, selectedVersion]);
+  }, [activeProject, defaultVersion, selectedVersion]);
 
   useEffect(() => {
     if (!isProjectModalOpen) {
@@ -318,10 +459,6 @@ export default function App() {
       )
     );
   }, [categoryFilter, normalizedCategories]);
-
-  if (!defaultVersion || !defines) {
-    return <p>Unable to load defines data. Run npm run generate:defines.</p>;
-  }
 
   const categoryNames = normalizedCategories.map((category) => category.name);
 
@@ -595,7 +732,7 @@ export default function App() {
     bumpType: "patch" | "minor" | "major";
     nextVersion: string;
   }) => {
-    if (!activeProject || hasErrors) {
+    if (!activeProject || hasErrors || !defines) {
       return;
     }
 
@@ -732,7 +869,8 @@ export default function App() {
   };
 
   return (
-    <>
+    <AppErrorBoundary>
+      <>
       <AppShell
         leftSidebar={
           <LeftSidebar
@@ -843,7 +981,7 @@ export default function App() {
                 }
               }}
             >
-              <Table size="sm" variant="simple" tableLayout="fixed">
+              <Table size="sm" variant="simple" sx={{ tableLayout: "fixed" }}>
                 <colgroup>
                   <col style={{ width: "40%" }} />
                   <col style={{ width: "25%" }} />
@@ -1012,6 +1150,7 @@ export default function App() {
           </ModalFooter>
         </ModalContent>
       </Modal>
-    </>
+      </>
+    </AppErrorBoundary>
   );
 }

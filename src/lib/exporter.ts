@@ -1,6 +1,5 @@
 import JSZip from "jszip";
 import type { DefineValue, DefinesData, Project } from "../types/defines";
-import packageJson from "../../package.json";
 
 function toKebabCase(value: string): string {
   const normalized = value
@@ -86,7 +85,7 @@ export async function exportProjectZip(project: Project, defines: DefinesData): 
   };
 
   const editorExport = {
-    editorVersion: packageJson.version,
+    editorVersion: __APP_VERSION__,
     editorProject: {
       id: project.id,
       name: project.name,

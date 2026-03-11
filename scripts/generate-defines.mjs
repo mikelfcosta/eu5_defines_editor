@@ -10,6 +10,7 @@ const assetsDir = path.join(root, "assets");
 const outputDir = path.join(root, "src", "data", "defines");
 
 async function generate() {
+  await fs.rm(outputDir, { recursive: true, force: true });
   await fs.mkdir(outputDir, { recursive: true });
   const entries = await fs.readdir(assetsDir, { withFileTypes: true });
   const defineFiles = entries.filter((entry) => entry.isFile() && entry.name.endsWith(".txt"));

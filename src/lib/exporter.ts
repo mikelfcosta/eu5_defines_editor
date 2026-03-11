@@ -1,5 +1,6 @@
 import JSZip from "jszip";
 import type { DefineValue, DefinesData, Project } from "../types/defines";
+import packageJson from "../../package.json";
 
 function toKebabCase(value: string): string {
   const normalized = value
@@ -84,8 +85,27 @@ export async function exportProjectZip(project: Project, defines: DefinesData): 
     game_custom_data: {}
   };
 
+  const editorExport = {
+    editorVersion: packageJson.version,
+    editorProject: {
+      id: project.id,
+      name: project.name,
+      modName: project.modName,
+      version: project.modVersion,
+      gameVersion: project.version,
+      updatedAt: project.updatedAt
+    },
+    modifiedValues: Object.fromEntries(
+      Object.entries(project.delta).map(([key, value]) => [
+        key,
+        Array.isArray(value) ? [...value] : value
+      ])
+    )
+  };
+
   root.file("loading_screen/common/defines/00_defines.txt", fullDefines);
   root.file(".metadata/metadata.json", `${JSON.stringify(metadata, null, "\t")}\n`);
+  root.file("editor.json", `${JSON.stringify(editorExport, null, 2)}\n`);
 
   return zip.generateAsync({ type: "blob" });
 }

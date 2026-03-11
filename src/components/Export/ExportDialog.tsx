@@ -1,4 +1,23 @@
 import { useEffect, useState } from "react";
+import {
+  Box,
+  Button,
+  FormControl,
+  FormLabel,
+  Input,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Radio,
+  RadioGroup,
+  Stack,
+  Text,
+  Textarea
+} from "@chakra-ui/react";
 import { bumpSemver } from "../../lib/storage";
 
 interface ExportDialogProps {
@@ -41,102 +60,57 @@ export function ExportDialog({
     setBumpType(initialBumpType);
   }, [initialBumpType, initialModDescription, initialModName, isOpen]);
 
-  useEffect(() => {
-    if (!isOpen) {
-      return;
-    }
-
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        onCancel();
-      }
-    };
-
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [isOpen, onCancel]);
-
-  if (!isOpen) {
-    return null;
-  }
-
   const nextVersion = bumpSemver(initialVersion, bumpType);
 
   return (
-    <div className="modal-overlay" role="presentation" onClick={onCancel}>
-      <div
-        className="export-dialog"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="export-dialog-title"
-        onClick={(event) => event.stopPropagation()}
-      >
-        <h2 id="export-dialog-title">Export Mod</h2>
-
-        <div>
-          <label htmlFor="export-mod-name">Mod Name</label>
-          <input
+    <Modal isOpen={isOpen} onClose={onCancel} isCentered>
+      <ModalOverlay bg="blackAlpha.600" />
+      <ModalContent bg="panelBg" border="1px solid" borderColor="borderPrimary">
+        <ModalHeader color="brand.gold">Export Mod</ModalHeader>
+        <ModalCloseButton />
+        <ModalBody display="grid" gap={4}>
+          <FormControl>
+            <FormLabel htmlFor="export-mod-name">Mod Name</FormLabel>
+            <Input
             id="export-mod-name"
             type="text"
             value={modName}
             onChange={(event) => setModName(event.target.value)}
             disabled={isExporting}
           />
-        </div>
+          </FormControl>
 
-        <div>
-          <label htmlFor="export-mod-description">Mod Description</label>
-          <textarea
+          <FormControl>
+            <FormLabel htmlFor="export-mod-description">Mod Description</FormLabel>
+            <Textarea
             id="export-mod-description"
             rows={3}
             value={modDescription}
             onChange={(event) => setModDescription(event.target.value)}
             disabled={isExporting}
           />
-        </div>
+          </FormControl>
 
-        <fieldset className="export-version-group" disabled={isExporting}>
-          <legend>Version Bump</legend>
-          <label>
-            <input
-              type="radio"
-              name="export-bump-type"
-              value="patch"
-              checked={bumpType === "patch"}
-              onChange={() => setBumpType("patch")}
-            />
-            Patch ({bumpSemver(initialVersion, "patch")})
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="export-bump-type"
-              value="minor"
-              checked={bumpType === "minor"}
-              onChange={() => setBumpType("minor")}
-            />
-            Minor ({bumpSemver(initialVersion, "minor")})
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="export-bump-type"
-              value="major"
-              checked={bumpType === "major"}
-              onChange={() => setBumpType("major")}
-            />
-            Major ({bumpSemver(initialVersion, "major")})
-          </label>
-        </fieldset>
+          <Box border="1px solid" borderColor="borderPrimary" borderRadius="md" p={4}>
+            <Text mb={2}>Version Bump</Text>
+            <RadioGroup value={bumpType} onChange={(value: "patch" | "minor" | "major") => setBumpType(value)}>
+              <Stack>
+                <Radio value="patch">Patch ({bumpSemver(initialVersion, "patch")})</Radio>
+                <Radio value="minor">Minor ({bumpSemver(initialVersion, "minor")})</Radio>
+                <Radio value="major">Major ({bumpSemver(initialVersion, "major")})</Radio>
+              </Stack>
+            </RadioGroup>
+          </Box>
 
-        <p className="muted">Exporting will set project version to {nextVersion}.</p>
+          <Text color="textSecondary">Exporting will set project version to {nextVersion}.</Text>
+        </ModalBody>
 
-        <div className="button-row">
-          <button className="btn-ghost" onClick={onCancel} disabled={isExporting}>
+        <ModalFooter gap={2}>
+          <Button variant="outline" onClick={onCancel} isDisabled={isExporting}>
             Cancel
-          </button>
-          <button
-            className="btn-primary"
+          </Button>
+          <Button
+            colorScheme="yellow"
             onClick={() =>
               onConfirm({
                 modName: modName.trim() || initialModName,
@@ -145,12 +119,12 @@ export function ExportDialog({
                 nextVersion
               })
             }
-            disabled={isExporting || modName.trim().length === 0}
+            isDisabled={isExporting || modName.trim().length === 0}
           >
             {isExporting ? "Exporting..." : "Export"}
-          </button>
-        </div>
-      </div>
-    </div>
+          </Button>
+        </ModalFooter>
+      </ModalContent>
+    </Modal>
   );
 }

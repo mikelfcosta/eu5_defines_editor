@@ -1,4 +1,5 @@
 import type { DefineCategory, DefineEntry } from "../../types/defines";
+import { Box, Button, Collapse, Text, VStack } from "@chakra-ui/react";
 import { DefineRow } from "./DefineRow";
 
 interface CategoryCardProps {
@@ -24,22 +25,34 @@ export function CategoryCard({
   onUpdateDefine,
   onResetDefine
 }: CategoryCardProps) {
+  const categoryId = category.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+
   return (
-    <article className="category-card" id={`category-${category.name}`}>
-      <button
-        className="category-toggle"
+    <Box as="article" id={`category-${categoryId}`} bg="panelBg" border="1px solid" borderColor="borderPrimary" borderRadius="md" scrollMarginTop="140px">
+      <Button
+        variant="ghost"
+        w="full"
+        justifyContent="space-between"
+        borderRadius={0}
+        px={4}
+        py={2}
+        color="textPrimary"
+        _hover={{ bg: "surface.700" }}
         onClick={() => onToggleCollapse(category.name)}
         aria-expanded={!isCollapsed}
         aria-controls={`category-panel-${category.name}`}
       >
-        <span className="category-title">{category.name}</span>
-        <span className="category-meta">
+        <Text fontSize="xl" fontWeight={600}>{category.name}</Text>
+        <Text color="textSecondary" fontSize="sm" ml="auto" mr={4}>
           {category.defines.length} entries / {modifiedCount} modified
-        </span>
-      </button>
+        </Text>
+        <Text color="textSecondary" aria-hidden="true">
+          {isCollapsed ? "+" : "-"}
+        </Text>
+      </Button>
 
-      {!isCollapsed ? (
-        <div className="define-list" id={`category-panel-${category.name}`}>
+      <Collapse in={!isCollapsed} animateOpacity unmountOnExit>
+        <VStack id={`category-panel-${category.name}`} spacing={0} align="stretch">
           {category.defines.map((entry) => (
             <DefineRow
               key={entry.id}
@@ -51,8 +64,8 @@ export function CategoryCard({
               onReset={onResetDefine}
             />
           ))}
-        </div>
-      ) : null}
-    </article>
+        </VStack>
+      </Collapse>
+    </Box>
   );
 }

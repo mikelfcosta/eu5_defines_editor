@@ -1,6 +1,5 @@
 import { NavLink } from "react-router-dom";
-import type { Project } from "../../types/defines";
-
+import { Box, Button, Heading, Link, Stack, Text } from "@chakra-ui/react";
 interface DocsNavPage {
   path: string;
   title: string;
@@ -9,108 +8,96 @@ interface DocsNavPage {
 interface LeftSidebarProps {
   menuOpen: boolean;
   selectedVersion: string;
-  projects: Project[];
-  activeProjectId: string | null;
-  modifiedCount: number;
-  availableVersions: string[];
-  theme: "dark" | "light";
   docsPages: DocsNavPage[];
   isDocsRoute: boolean;
-  onProjectChange: (projectId: string) => void;
-  onCreateProject: () => void;
-  onRenameProject: () => void;
-  onDeleteProject: () => void;
-  onResetProject: () => void;
-  onVersionChange: (version: string) => void;
-  onToggleTheme: () => void;
+  onOpenVersionModal: () => void;
 }
 
 export function LeftSidebar({
   menuOpen,
   selectedVersion,
-  projects,
-  activeProjectId,
-  modifiedCount,
-  availableVersions,
-  theme,
   docsPages,
   isDocsRoute,
-  onProjectChange,
-  onCreateProject,
-  onRenameProject,
-  onDeleteProject,
-  onResetProject,
-  onVersionChange,
-  onToggleTheme
+  onOpenVersionModal
 }: LeftSidebarProps) {
   return (
-    <aside className={`left-sidebar ${menuOpen ? "open" : ""}`}>
-      <h1>EUV Defines Editor</h1>
-      <p className="muted">Version {selectedVersion}</p>
+    <Box
+      as="aside"
+      bg="pageBg"
+      borderRight="1px solid"
+      borderColor="borderPrimary"
+      p={6}
+      zIndex={2}
+      display={{ base: menuOpen ? "flex" : "none", md: "flex" }}
+      position={{ base: "fixed", md: "relative" }}
+      left={{ base: 0, md: "auto" }}
+      top={{ base: 0, md: "auto" }}
+      bottom={{ base: 0, md: "auto" }}
+      w={{ base: "240px", md: "auto" }}
+      flexDirection="column"
+    >
+      <Box my="auto">
+        <Heading size="lg" lineHeight="1" textAlign="right" textTransform="uppercase" color="brand.gold" mb={6}>
+          <Text as="span" display="block">EUV</Text>
+          <Text as="span" display="block">Defines Editor</Text>
+        </Heading>
 
-      <nav aria-label="Primary navigation" className="left-nav">
-        <NavLink to="/" end>
-          Editor
-        </NavLink>
-        <NavLink to="/docs">Docs</NavLink>
-        <NavLink to="/about">About</NavLink>
-      </nav>
-
-      {isDocsRoute ? (
-        <section className="sidebar-card docs-subnav-card">
-          <h2>Docs Pages</h2>
-          <nav aria-label="Documentation pages" className="docs-subnav">
-            {docsPages.map((page) => (
-              <NavLink key={page.path} to={page.path} end={page.path === "/docs"}>
-                {page.title}
-              </NavLink>
-            ))}
-          </nav>
-        </section>
-      ) : null}
-
-      <section className="sidebar-card">
-        <h2>Projects</h2>
-        <label htmlFor="project-select">Current project</label>
-        <select id="project-select" value={activeProjectId ?? ""} onChange={(event) => onProjectChange(event.target.value)}>
-          {projects.map((project) => (
-            <option key={project.id} value={project.id}>
-              {project.name}
-            </option>
+        <Stack as="nav" aria-label="Primary navigation" spacing={1} mb={6}>
+          {[{ to: "/", label: "Editor", end: true }, { to: "/docs", label: "Docs" }, { to: "/about", label: "About" }].map((item) => (
+            <NavLink key={item.to} to={item.to} end={item.end as boolean | undefined}>
+              {({ isActive }) => (
+                <Link
+                  display="block"
+                  textAlign="right"
+                  textDecoration="none"
+                  color="textPrimary"
+                  borderRight="3px solid"
+                  borderColor={isActive ? "brand.gold" : "transparent"}
+                  fontWeight={isActive ? 700 : 500}
+                  px={2}
+                  py={1}
+                  _hover={{ textDecoration: "none", color: "textPrimary", bgGradient: "linear(to-l, rgba(255,255,255,0.15), transparent)" }}
+                >
+                  {item.label}
+                </Link>
+              )}
+            </NavLink>
           ))}
-        </select>
+        </Stack>
 
-        <div className="button-row">
-          <button className="btn-secondary" onClick={onCreateProject}>
-            New
-          </button>
-          <button className="btn-ghost" onClick={onRenameProject} disabled={!activeProjectId}>
-            Rename
-          </button>
-          <button className="btn-ghost" onClick={onDeleteProject} disabled={!activeProjectId || projects.length <= 1}>
-            Delete
-          </button>
-        </div>
+        {isDocsRoute ? (
+          <Box border="1px solid" borderColor="borderSecondary" bg="surface.700" borderRadius="md" p={4}>
+            <Heading size="md" color="brand.gold" mb={2}>Docs Pages</Heading>
+            <Stack as="nav" aria-label="Documentation pages" spacing={1}>
+              {docsPages.map((page) => (
+                <NavLink key={page.path} to={page.path} end={page.path === "/docs"}>
+                  {({ isActive }) => (
+                    <Link
+                      display="block"
+                      textAlign="right"
+                      textDecoration="none"
+                      color="textPrimary"
+                      borderRight="3px solid"
+                      borderColor={isActive ? "brand.gold" : "transparent"}
+                      fontWeight={isActive ? 700 : 500}
+                      px={2}
+                      py={1}
+                      _hover={{ textDecoration: "none", color: "textPrimary" }}
+                    >
+                      {page.title}
+                    </Link>
+                  )}
+                </NavLink>
+              ))}
+            </Stack>
+          </Box>
+        ) : null}
+      </Box>
 
-        <button className="btn-ghost" onClick={onResetProject} disabled={!activeProjectId || modifiedCount === 0}>
-          Reset Project
-        </button>
-      </section>
-
-      <section className="sidebar-card">
-        <label htmlFor="version-select">Game Version</label>
-        <select id="version-select" value={selectedVersion} onChange={(event) => onVersionChange(event.target.value)}>
-          {availableVersions.map((version) => (
-            <option key={version} value={version}>
-              {version}
-            </option>
-          ))}
-        </select>
-
-        <button className="btn-primary" onClick={onToggleTheme}>
-          Toggle {theme === "dark" ? "Light" : "Dark"} Theme
-        </button>
-      </section>
-    </aside>
+      <Button mt="auto" variant="outline" borderColor="borderPrimary" onClick={onOpenVersionModal} justifyContent="space-between">
+        <Text>Version {selectedVersion}</Text>
+        <Text aria-hidden="true">✎</Text>
+      </Button>
+    </Box>
   );
 }

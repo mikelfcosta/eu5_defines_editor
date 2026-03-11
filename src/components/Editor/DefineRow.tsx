@@ -1,4 +1,5 @@
 import type { DefineEntry } from "../../types/defines";
+import { Box, Button, HStack, Input, Select, Text, Tooltip } from "@chakra-ui/react";
 
 interface DefineRowProps {
   entry: DefineEntry;
@@ -10,55 +11,56 @@ interface DefineRowProps {
 }
 
 export function DefineRow({ entry, value, isModified, error, onUpdate, onReset }: DefineRowProps) {
+  const infoText = [
+    `Type: ${entry.type}`,
+    `Default: ${Array.isArray(entry.defaultValue) ? entry.defaultValue.join(", ") : String(entry.defaultValue)}`,
+    entry.comment ? `Comment: ${entry.comment}` : null
+  ]
+    .filter((line): line is string => Boolean(line))
+    .join("\n");
+
   return (
-    <div className={`define-row ${isModified ? "modified" : ""}`}>
-      <div className="define-header">
-        <div>
-          <h3>{entry.key}</h3>
-          <p className="muted">Type: {entry.type}</p>
-        </div>
-        <button className="btn-ghost" onClick={() => onReset(entry)} disabled={!isModified}>
-          Reset
-        </button>
-      </div>
+    <Box id={`define-${entry.id}`} borderTop="1px solid" borderColor={isModified ? "brand.green" : "borderSecondary"} px={4} py={1.5} bg="panelBg">
+      <HStack align="center" spacing={2}>
+        <Text minW="220px" flex="1" fontSize="sm" fontWeight={500}>{entry.key}</Text>
 
-      {entry.type === "boolean" ? (
-        <div className="toggle-row">
-          <button
-            className="btn-secondary"
-            role="switch"
-            aria-checked={value === "yes"}
-            onClick={() => onUpdate(entry, value === "yes" ? "no" : "yes")}
-          >
-            {value === "yes" ? "Yes" : "No"}
-          </button>
-        </div>
-      ) : entry.type === "variable" || entry.type === "expression" ? (
-        <input type="text" value={value} disabled aria-readonly="true" />
-      ) : entry.type === "array" ? (
-        <div>
-          <label htmlFor={`input-${entry.id}`}>List values (comma-separated)</label>
-          <textarea id={`input-${entry.id}`} rows={3} value={value} onChange={(event) => onUpdate(entry, event.target.value)} />
-        </div>
-      ) : (
-        <div>
-          <label htmlFor={`input-${entry.id}`}>Value</label>
-          <input
-            id={`input-${entry.id}`}
-            type={entry.type === "string" ? "text" : "number"}
-            step={entry.type === "float" ? "any" : "1"}
-            value={value}
-            onChange={(event) => onUpdate(entry, event.target.value)}
-          />
-        </div>
-      )}
+        <HStack spacing={2} justify="flex-end" flex="0 0 auto">
+          {entry.type === "boolean" ? (
+            <Select id={`input-${entry.id}`} value={value} onChange={(event) => onUpdate(entry, event.target.value)} w="260px" size="sm">
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </Select>
+          ) : (
+            <Input
+              id={`input-${entry.id}`}
+              type={entry.type === "integer" || entry.type === "float" ? "number" : "text"}
+              step={entry.type === "float" ? "any" : "1"}
+              value={value}
+              onChange={(event) => onUpdate(entry, event.target.value)}
+              disabled={entry.type === "variable" || entry.type === "expression"}
+              aria-readonly={entry.type === "variable" || entry.type === "expression"}
+              w="260px"
+              size="sm"
+            />
+          )}
 
-      {entry.comment ? <p className="comment">{entry.comment}</p> : null}
+          <Tooltip label={<Text whiteSpace="pre-wrap">{infoText}</Text>} hasArrow>
+            <Button variant="outline" size="sm" minW="2rem" px={0} aria-label={`Info for ${entry.key}`}>
+              i
+            </Button>
+          </Tooltip>
+
+          <Button variant="outline" size="sm" minW="2rem" px={0} onClick={() => onReset(entry)} isDisabled={!isModified} aria-label={`Reset ${entry.key}`}>
+            ↺
+          </Button>
+        </HStack>
+      </HStack>
+
       {error ? (
-        <p className="error" role="alert">
+        <Text color="brand.red" mt={1} role="alert">
           {error}
-        </p>
+        </Text>
       ) : null}
-    </div>
+    </Box>
   );
 }

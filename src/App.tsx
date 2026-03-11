@@ -1,5 +1,24 @@
 import { useEffect, useMemo, useState } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
+import {
+  Box,
+  Button,
+  Checkbox,
+  FormControl,
+  FormLabel,
+  HStack,
+  IconButton,
+  Input,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Select,
+  Text,
+  useColorMode
+} from "@chakra-ui/react";
 import type { DefineEntry, DefineValue, Project } from "./types/defines";
 import { AboutPage } from "./components/About/AboutPage";
 import { DocsPage } from "./components/Docs/DocsPage";
@@ -9,9 +28,10 @@ import { AppShell } from "./components/Layout/AppShell";
 import { LeftSidebar } from "./components/Layout/LeftSidebar";
 import { RightSidebar } from "./components/Layout/RightSidebar";
 import { TopHeader } from "./components/Layout/TopHeader";
+import { SearchBar } from "./components/Editor/SearchBar";
 import { availableVersions, definesByVersion } from "./lib/defines";
 import { parseInputValue, stringifyDefineValue, validateArrayItems } from "./lib/validation";
-import { bumpSemver, createProject, loadProjectState, saveProjectState } from "./lib/storage";
+import { createProject, loadProjectState, saveProjectState } from "./lib/storage";
 import { exportProjectZip } from "./lib/exporter";
 
 import docsIndex from "./content/docs/index.md?raw";
@@ -19,8 +39,6 @@ import docsGettingStarted from "./content/docs/getting-started.md?raw";
 import docsInstallMod from "./content/docs/install-mod.md?raw";
 import docsUsingEditor from "./content/docs/using-editor.md?raw";
 import docsExporting from "./content/docs/exporting-versioning.md?raw";
-
-type Theme = "dark" | "light";
 
 const docsPages = [
   { path: "/docs", title: "Docs", markdown: docsIndex },
@@ -56,10 +74,68 @@ function defineMatchesQuery(entry: DefineEntry, query: string): boolean {
   return entry.key.toLowerCase().includes(normalized) || entry.comment?.toLowerCase().includes(normalized) === true;
 }
 
+function toCategoryId(name: string): string {
+  return name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+}
+
+interface BottomFooterProps {
+  saveStatus: string;
+  saveDisabled: boolean;
+  exportDisabled: boolean;
+  onSave: () => void;
+  onExport: () => void;
+}
+
+function BottomFooter({
+  saveStatus,
+  saveDisabled,
+  exportDisabled,
+  onSave,
+  onExport
+}: BottomFooterProps) {
+  const { colorMode, toggleColorMode } = useColorMode();
+
+  return (
+    <Box
+      as="footer"
+      bg="transparent"
+      px={6}
+      py={2}
+      display="flex"
+      alignItems="center"
+      justifyContent="space-between"
+      gap={4}
+      flex="0 0 auto"
+      position="relative"
+      boxShadow="0 -10px 18px -14px rgba(0, 0, 0, 0.8)"
+      _before={{
+        content: '""',
+        position: "absolute",
+        left: 6,
+        right: 6,
+        top: 0,
+        height: "1px",
+        bg: "borderPrimary"
+      }}
+    >
+      <Text color="textSecondary">{saveStatus}</Text>
+      <HStack spacing={2} ml="auto">
+        <IconButton aria-label="Save project" variant="outline" icon={<span>💾</span>} onClick={onSave} isDisabled={saveDisabled} />
+        <IconButton aria-label="Export project" variant="outline" icon={<span>⇩</span>} onClick={onExport} isDisabled={exportDisabled} />
+        <IconButton
+          aria-label={colorMode === "dark" ? "Switch to light theme" : "Switch to dark theme"}
+          variant="outline"
+          icon={<span>{colorMode === "dark" ? "☀" : "☾"}</span>}
+          onClick={toggleColorMode}
+        />
+      </HStack>
+    </Box>
+  );
+}
+
 export default function App() {
   const location = useLocation();
   const defaultVersion = availableVersions[0];
-  const [theme, setTheme] = useState<Theme>("dark");
   const [selectedVersion, setSelectedVersion] = useState(defaultVersion);
   const [search, setSearch] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("all");
@@ -71,6 +147,11 @@ export default function App() {
   const [bumpType, setBumpType] = useState<"patch" | "minor" | "major">("patch");
   const [isExportDialogOpen, setIsExportDialogOpen] = useState(false);
   const [isExporting, setIsExporting] = useState(false);
+  const [isProjectModalOpen, setIsProjectModalOpen] = useState(false);
+  const [isVersionModalOpen, setIsVersionModalOpen] = useState(false);
+  const [pendingVersion, setPendingVersion] = useState(defaultVersion);
+  const [newProjectName, setNewProjectName] = useState("");
+  const [saveStatus, setSaveStatus] = useState("All changes saved");
 
   const [projectState, setProjectState] = useState(() => loadProjectState(defaultVersion));
 
@@ -80,11 +161,8 @@ export default function App() {
   }, [projectState]);
 
   useEffect(() => {
-    document.documentElement.dataset.theme = theme;
-  }, [theme]);
-
-  useEffect(() => {
     saveProjectState(projectState);
+    setSaveStatus("All changes saved");
   }, [projectState]);
 
   useEffect(() => {
@@ -97,21 +175,63 @@ export default function App() {
   const hasErrors = Object.keys(errors).length > 0;
   const isDocsRoute = location.pathname.startsWith("/docs");
 
-  useEffect(() => {
+  const normalizedCategories = useMemo(() => {
     if (!defines) {
+      return [];
+    }
+
+    const byName = new Map<string, typeof defines.categories[number]>();
+
+    for (const category of defines.categories) {
+      const existing = byName.get(category.name);
+      if (!existing) {
+        byName.set(category.name, { ...category, defines: [...category.defines] });
+        continue;
+      }
+
+      byName.set(category.name, {
+        ...existing,
+        defines: [...existing.defines, ...category.defines]
+      });
+    }
+
+    return Array.from(byName.values());
+  }, [defines]);
+
+  useEffect(() => {
+    if (!normalizedCategories.length) {
       return;
     }
 
     setCollapsedCategories(
-      Object.fromEntries(defines.categories.map((category) => [category.name, true]))
+      Object.fromEntries(normalizedCategories.map((category) => [category.name, true]))
     );
-  }, [defines]);
+  }, [normalizedCategories]);
+
+  useEffect(() => {
+    if (!normalizedCategories.length) {
+      return;
+    }
+
+    if (categoryFilter === "all") {
+      setCollapsedCategories(
+        Object.fromEntries(normalizedCategories.map((category) => [category.name, true]))
+      );
+      return;
+    }
+
+    setCollapsedCategories(
+      Object.fromEntries(
+        normalizedCategories.map((category) => [category.name, category.name !== categoryFilter])
+      )
+    );
+  }, [categoryFilter, normalizedCategories]);
 
   if (!defaultVersion || !defines) {
     return <p>Unable to load defines data. Run npm run generate:defines.</p>;
   }
 
-  const categoryNames = defines.categories.map((category) => category.name);
+  const categoryNames = normalizedCategories.map((category) => category.name);
 
   const updateProject = (updater: (project: Project) => Project) => {
     if (!activeProject) {
@@ -203,7 +323,7 @@ export default function App() {
     });
   };
 
-  const filteredCategories = defines.categories
+  const filteredCategories = normalizedCategories
     .map((category) => {
       if (categoryFilter !== "all" && category.name !== categoryFilter) {
         return { ...category, defines: [] };
@@ -228,7 +348,7 @@ export default function App() {
   };
 
   const getCategoryModifiedCount = (categoryName: string): number => {
-    const sourceCategory = defines.categories.find((category) => category.name === categoryName);
+    const sourceCategory = normalizedCategories.find((category) => category.name === categoryName);
     if (!sourceCategory) {
       return 0;
     }
@@ -245,62 +365,27 @@ export default function App() {
     return stringifyDefineValue(value);
   };
 
-  const createNewProject = () => {
-    const name = window.prompt("Project name", "New Project");
-    if (!name) {
+  const createNewProject = (name: string) => {
+    const trimmedName = name.trim();
+    if (!trimmedName) {
       return;
     }
 
-    const project = createProject(selectedVersion, name.trim());
+    const project = createProject(selectedVersion, trimmedName);
     setProjectState((state) => ({
       projects: [...state.projects, project],
       activeProjectId: project.id
     }));
+    setNewProjectName("");
   };
 
-  const renameProject = () => {
-    if (!activeProject) {
-      return;
+  const applyVersionChange = (version: string) => {
+    setSelectedVersion(version);
+    if (activeProject) {
+      updateProject((project) => ({ ...project, version, delta: {} }));
     }
-
-    const nextName = window.prompt("Rename project", activeProject.name);
-    if (!nextName) {
-      return;
-    }
-
-    updateProject((project) => ({ ...project, name: nextName.trim() }));
-  };
-
-  const deleteProject = () => {
-    if (!activeProject || projectState.projects.length <= 1) {
-      return;
-    }
-
-    if (!window.confirm(`Delete project ${activeProject.name}?`)) {
-      return;
-    }
-
-    setProjectState((state) => {
-      const remaining = state.projects.filter((project) => project.id !== activeProject.id);
-      return {
-        projects: remaining,
-        activeProjectId: remaining[0]?.id ?? null
-      };
-    });
-  };
-
-  const resetProject = () => {
-    if (!activeProject) {
-      return;
-    }
-
-    if (!window.confirm("Reset all changes in this project?")) {
-      return;
-    }
-
     setErrors({});
     setDrafts({});
-    updateProject((project) => ({ ...project, delta: {} }));
   };
 
   const openExportDialog = () => {
@@ -348,13 +433,25 @@ export default function App() {
   };
 
   const modifiedCount = activeProject ? Object.keys(activeProject.delta).length : 0;
-  const nextVersion = activeProject ? bumpSemver(activeProject.modVersion, bumpType) : "-";
+  const categoryStats = new Map(
+    normalizedCategories.map((category) => [
+      category.name,
+      {
+        defineCount: category.defines.length,
+        modifiedCount: getCategoryModifiedCount(category.name)
+      }
+    ])
+  );
 
-  const rightSidebarCategories = filteredCategories.map((category) => ({
-    name: category.name,
-    defineCount: category.defines.length,
-    modifiedCount: getCategoryModifiedCount(category.name)
-  }));
+  const rightSidebarCategories = filteredCategories.map((category) => {
+    const stats = categoryStats.get(category.name);
+    return {
+      id: toCategoryId(category.name),
+      name: category.name,
+      defineCount: stats?.defineCount ?? 0,
+      modifiedCount: stats?.modifiedCount ?? 0
+    };
+  });
   const showRightSidebar = location.pathname === "/";
 
   const toggleCategory = (categoryName: string) => {
@@ -364,6 +461,12 @@ export default function App() {
     }));
   };
 
+  const openOnlyCategory = (categoryName: string) => {
+    setCollapsedCategories(
+      Object.fromEntries(normalizedCategories.map((category) => [category.name, category.name !== categoryName]))
+    );
+  };
+
   return (
     <>
       <AppShell
@@ -371,64 +474,63 @@ export default function App() {
           <LeftSidebar
             menuOpen={menuOpen}
             selectedVersion={selectedVersion}
-            projects={projectState.projects}
-            activeProjectId={activeProject?.id ?? null}
-            modifiedCount={modifiedCount}
-            availableVersions={availableVersions}
-            theme={theme}
             docsPages={docsPages}
             isDocsRoute={isDocsRoute}
-            onProjectChange={(projectId) => {
-              const selected = projectState.projects.find((project) => project.id === projectId);
-              setProjectState((state) => ({ ...state, activeProjectId: selected?.id ?? null }));
-              setErrors({});
-              setDrafts({});
+            onOpenVersionModal={() => {
+              setPendingVersion(selectedVersion);
+              setIsVersionModalOpen(true);
             }}
-            onCreateProject={createNewProject}
-            onRenameProject={renameProject}
-            onDeleteProject={deleteProject}
-            onResetProject={resetProject}
-            onVersionChange={(version) => {
-              setSelectedVersion(version);
-              if (activeProject) {
-                updateProject((project) => ({ ...project, version, delta: {} }));
-              }
-            }}
-            onToggleTheme={() => setTheme((current) => (current === "dark" ? "light" : "dark"))}
           />
         }
         topHeader={
           <TopHeader
-            modifiedCount={modifiedCount}
-            bumpType={bumpType}
-            nextVersion={nextVersion}
+            projectName={activeProject?.name ?? "No active project"}
             onToggleMenu={() => setMenuOpen((open) => !open)}
-            onBumpTypeChange={setBumpType}
-            onExport={openExportDialog}
-            exportDisabled={!activeProject || hasErrors || isExporting}
-            isExporting={isExporting}
+            onOpenProjectModal={() => setIsProjectModalOpen(true)}
+            filters={
+              showRightSidebar ? (
+                <SearchBar
+                  search={search}
+                  categoryFilter={categoryFilter}
+                  categoryNames={categoryNames}
+                  modifiedOnly={modifiedOnly}
+                  onSearchChange={setSearch}
+                  onCategoryFilterChange={setCategoryFilter}
+                  onModifiedOnlyChange={setModifiedOnly}
+                />
+              ) : null
+            }
           />
         }
-        rightSidebar={showRightSidebar ? <RightSidebar categories={rightSidebarCategories} /> : null}
+        footer={
+          <BottomFooter
+            saveStatus={saveStatus}
+            saveDisabled={!activeProject}
+            exportDisabled={!activeProject || hasErrors || isExporting}
+            onSave={() => {
+              saveProjectState(projectState);
+              setSaveStatus(`Saved at ${new Date().toLocaleTimeString()}`);
+            }}
+            onExport={openExportDialog}
+          />
+        }
+        rightSidebar={
+          showRightSidebar ? (
+            <RightSidebar categories={rightSidebarCategories} onSelectCategory={openOnlyCategory} />
+          ) : null
+        }
       >
         <Routes>
           <Route
             path="/"
             element={
               <EditorView
-                search={search}
-                categoryFilter={categoryFilter}
-                categoryNames={categoryNames}
-                modifiedOnly={modifiedOnly}
                 filteredCategories={filteredCategories}
                 getCategoryModifiedCount={(category) => getCategoryModifiedCount(category.name)}
                 isCategoryCollapsed={(categoryName) => collapsedCategories[categoryName] ?? true}
                 getDisplayValue={getDisplayValue}
                 getIsModified={getIsModified}
                 getError={(entry) => errors[entry.id]}
-                onSearchChange={setSearch}
-                onCategoryFilterChange={setCategoryFilter}
-                onModifiedOnlyChange={setModifiedOnly}
                 onToggleCategory={toggleCategory}
                 onUpdateDefine={updateDefine}
                 onResetDefine={resetDefine}
@@ -454,6 +556,83 @@ export default function App() {
         onCancel={() => setIsExportDialogOpen(false)}
         onConfirm={runExport}
       />
+
+      <Modal isOpen={isProjectModalOpen} onClose={() => setIsProjectModalOpen(false)} isCentered>
+        <ModalOverlay bg="blackAlpha.600" />
+        <ModalContent bg="panelBg" border="1px solid" borderColor="borderPrimary">
+          <ModalHeader color="brand.gold">Project Selection</ModalHeader>
+          <ModalBody display="grid" gap={3}>
+            <FormControl>
+              <FormLabel htmlFor="project-modal-select">Current project</FormLabel>
+              <Select
+                id="project-modal-select"
+                value={activeProject?.id ?? ""}
+                onChange={(event) => {
+                  const selected = projectState.projects.find((project) => project.id === event.target.value);
+                  setProjectState((state) => ({ ...state, activeProjectId: selected?.id ?? null }));
+                  setErrors({});
+                  setDrafts({});
+                }}
+              >
+                {projectState.projects.map((project) => (
+                  <option key={project.id} value={project.id}>
+                    {project.name}
+                  </option>
+                ))}
+              </Select>
+            </FormControl>
+
+            <FormControl>
+              <FormLabel htmlFor="new-project-name">Create new project</FormLabel>
+              <HStack>
+                <Input
+                  id="new-project-name"
+                  type="text"
+                  value={newProjectName}
+                  placeholder="New Project"
+                  onChange={(event) => setNewProjectName(event.target.value)}
+                />
+                <Button onClick={() => createNewProject(newProjectName)} colorScheme="yellow">Create</Button>
+              </HStack>
+            </FormControl>
+          </ModalBody>
+          <ModalFooter>
+            <Button colorScheme="yellow" onClick={() => setIsProjectModalOpen(false)}>Done</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+
+      <Modal isOpen={isVersionModalOpen} onClose={() => setIsVersionModalOpen(false)} isCentered>
+        <ModalOverlay bg="blackAlpha.600" />
+        <ModalContent bg="panelBg" border="1px solid" borderColor="borderPrimary">
+          <ModalHeader color="brand.gold">Select Game Version</ModalHeader>
+          <ModalBody display="grid" gap={3}>
+            <FormControl>
+              <FormLabel htmlFor="version-modal-select">Version</FormLabel>
+              <Select id="version-modal-select" value={pendingVersion} onChange={(event) => setPendingVersion(event.target.value)}>
+                {availableVersions.map((version) => (
+                  <option key={version} value={version}>
+                    {version}
+                  </option>
+                ))}
+              </Select>
+            </FormControl>
+            <Text color="textSecondary">Applying a new version resets current project define overrides.</Text>
+          </ModalBody>
+          <ModalFooter gap={2}>
+            <Button variant="outline" onClick={() => setIsVersionModalOpen(false)}>Cancel</Button>
+            <Button
+              colorScheme="yellow"
+              onClick={() => {
+                applyVersionChange(pendingVersion);
+                setIsVersionModalOpen(false);
+              }}
+            >
+              Apply
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </>
   );
 }

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import type { DefineCategory, DefineEntry } from "../../types/defines";
+import type { DefineCategory, DefineEntry } from "../../../types/defines";
 import { Box, Button, Collapse, Text, VStack } from "@chakra-ui/react";
 import { DefineRow } from "./DefineRow";
 

@@ -1,5 +1,5 @@
-import type { DefineCategory, DefineEntry } from "../../types/defines";
 import { Box, Text } from "@chakra-ui/react";
+import type { DefineCategory, DefineEntry } from "../../../types/defines";
 import { CategoryCard } from "./CategoryCard";
 
 interface EditorViewProps {

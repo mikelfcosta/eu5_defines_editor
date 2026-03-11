@@ -25,11 +25,11 @@ export function SearchBar({
         <InputGroup minW={{ base: "100%", md: "340px" }} flex="1 1 360px">
           <InputLeftElement pointerEvents="none" color="textSecondary">⌕</InputLeftElement>
           <Input
-          id="search-input"
-          type="search"
-          placeholder="Search key or comment"
-          value={search}
-          onChange={(event) => onSearchChange(event.target.value)}
+            id="search-input"
+            type="search"
+            placeholder="Search key or comment"
+            value={search}
+            onChange={(event) => onSearchChange(event.target.value)}
           />
         </InputGroup>
 

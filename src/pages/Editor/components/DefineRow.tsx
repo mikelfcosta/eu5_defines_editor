@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { DefineEntry } from "../../types/defines";
+import type { DefineEntry } from "../../../types/defines";
 import { Box, Button, HStack, Input, InputGroup, InputRightElement, Select, Text, Tooltip } from "@chakra-ui/react";
 
 interface DefineRowProps {

@@ -13,7 +13,7 @@ import {
   Tr
 } from "@chakra-ui/react";
 
-interface DocsPageProps {
+interface DocsArticleProps {
   title: string;
   markdown: string;
 }
@@ -63,7 +63,7 @@ const markdownComponents = {
   )
 };
 
-export function DocsPage({ title, markdown }: DocsPageProps) {
+export function DocsArticle({ title, markdown }: DocsArticleProps) {
   return (
     <Box as="article" maxW="880px" bg="panelBg" border="1px solid" borderColor="borderPrimary" borderRadius="md" p={8}>
       <Heading size="lg" color="brand.gold" mb={4}>{title}</Heading>

@@ -53,10 +53,12 @@ export function SearchBar({
           onChange={(event) => onModifiedOnlyChange(event.target.checked)}
           title="Show only modified values"
           border="1px solid"
-          borderColor="borderPrimary"
-          px={2}
-          py={1}
-          borderRadius="sm"
+          borderColor="whiteAlpha.200"
+          bg="panelBg"
+          px={4}
+          py={2}
+          borderRadius="md"
+          _hover={{ borderColor: "borderSecondary" }}
         >
           Modified
         </Checkbox>

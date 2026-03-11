@@ -21,8 +21,10 @@ export function AppShell({ leftSidebar, topHeader, footer, rightSidebar, childre
           h="full"
           overflow="hidden"
           bg="pageBg"
-          borderRadius="4px"
-          boxShadow="-14px 0 24px rgba(0, 0, 0, 0.35), 14px 0 24px rgba(0, 0, 0, 0.35)"
+          borderRadius="xl"
+          boxShadow="-8px 0 32px rgba(0, 0, 0, 0.4), 8px 0 32px rgba(0, 0, 0, 0.4)"
+          border="1px solid"
+          borderColor="whiteAlpha.100"
           zIndex={3}
           position="relative"
         >

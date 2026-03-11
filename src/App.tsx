@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import {
   Box,
   Button,
@@ -46,7 +46,6 @@ import docsUsingEditor from "./content/docs/using-editor.md?raw";
 import docsExporting from "./content/docs/exporting-versioning.md?raw";
 
 const docsPages = [
-  { path: "/docs", title: "Docs", markdown: docsIndex },
   { path: "/docs/getting-started", title: "Getting Started", markdown: docsGettingStarted },
   { path: "/docs/install-mod", title: "How to Install a Mod", markdown: docsInstallMod },
   { path: "/docs/using-editor", title: "Using the Editor", markdown: docsUsingEditor },
@@ -664,7 +663,7 @@ export default function App() {
       modifiedCount: stats?.modifiedCount ?? 0
     };
   });
-  const showRightSidebar = location.pathname === "/";
+  const showCategoriesSidebar = location.pathname === "/";
   const hasChangesSinceExport = activeProject
     ? hasDeltaChangedSinceExport(activeProject.delta, activeProject.lastExportedDelta)
     : false;
@@ -739,8 +738,6 @@ export default function App() {
           <LeftSidebar
             menuOpen={menuOpen}
             selectedVersion={selectedVersion}
-            docsPages={docsPages}
-            isDocsRoute={isDocsRoute}
             onOpenVersionModal={() => {
               setPendingVersion(selectedVersion);
               setIsVersionModalOpen(true);
@@ -755,7 +752,7 @@ export default function App() {
             onToggleMenu={() => setMenuOpen((open) => !open)}
             onOpenProjectModal={() => setIsProjectModalOpen(true)}
             filters={
-              showRightSidebar ? (
+              showCategoriesSidebar ? (
                 <SearchBar
                   search={search}
                   categoryFilter={categoryFilter}
@@ -782,8 +779,10 @@ export default function App() {
           />
         }
         rightSidebar={
-          showRightSidebar ? (
+          showCategoriesSidebar ? (
             <RightSidebar categories={rightSidebarCategories} onSelectCategory={openOnlyCategory} />
+          ) : isDocsRoute ? (
+            <RightSidebar docsPages={docsPages} />
           ) : null
         }
       >
@@ -805,7 +804,7 @@ export default function App() {
               />
             }
           />
-
+          <Route path="/docs" element={<Navigate to="/docs/getting-started" replace />} />
           {docsPages.map((page) => (
             <Route key={page.path} path={page.path} element={<DocsPage title={page.title} markdown={page.markdown} />} />
           ))}

@@ -52,9 +52,11 @@ export function DefineRow({ entry, value, isModified, error, onUpdate, onReset }
   };
 
   return (
-    <Box id={`define-${entry.id}`} borderTop="1px solid" borderColor="borderSecondary" px={4} py={1.5} bg="panelBg">
-      <HStack align="center" spacing={2}>
-        <Text minW="220px" flex="1" fontSize="sm" fontWeight={500}>{entry.key}</Text>
+    <Box id={`define-${entry.id}`} borderTop="1px solid" borderColor="borderSecondary" px={6} py={3} bg="panelBg" _hover={{ bg: "panelHover" }} transition="background 0.2s">
+      <HStack align="center" spacing={4} overflow="hidden">
+        <Tooltip label={entry.key} placement="top-start">
+          <Text minW="220px" flex="1" fontSize="sm" fontWeight={500} noOfLines={1}>{entry.key}</Text>
+        </Tooltip>
 
         <HStack spacing={2} justify="flex-end" flex="0 0 auto">
           <Box as="form" action={handleSubmit}>

@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Box, Button, HStack, IconButton, Text, useColorMode } from "@chakra-ui/react";
+import { Box, Button, HStack, Text } from "@chakra-ui/react";
 
 interface TopHeaderProps {
   projectName: string;
@@ -18,30 +18,22 @@ export function TopHeader({
   onOpenProjectModal,
   filters
 }: TopHeaderProps) {
-  const { colorMode, toggleColorMode } = useColorMode();
-
   return (
     <Box
       as="header"
       position="relative"
       zIndex={8}
-      bg="transparent"
-      px={6}
-      py={2}
+      bg="rgba(3, 25, 39, 0.7)"
+      backdropFilter="blur(16px)"
+      px={8}
+      py={3}
       display="flex"
       justifyContent="space-between"
       alignItems="flex-start"
       gap={0}
-      boxShadow="0 10px 18px -14px rgba(0, 0, 0, 0.8)"
-      _after={{
-        content: '""',
-        position: "absolute",
-        left: 6,
-        right: 6,
-        bottom: 0,
-        height: "1px",
-        bg: "borderPrimary"
-      }}
+      boxShadow="0 4px 12px rgba(0, 0, 0, 0.15)"
+      borderBottom="1px solid"
+      borderBottomColor="borderPrimary"
     >
       <HStack flex="0 0 auto" align="center" spacing={2}>
         <Button display={{ base: "inline-flex", md: "none" }} variant="outline" onClick={onToggleMenu}>
@@ -57,13 +49,7 @@ export function TopHeader({
             <Button size="sm" variant="outline" onClick={onOpenProjectModal} aria-label="Edit projects">
               ✎
             </Button>
-            <IconButton
-              size="sm"
-              aria-label={colorMode === "dark" ? "Switch to light theme" : "Switch to dark theme"}
-              variant="outline"
-              icon={<span>{colorMode === "dark" ? "☀" : "☾"}</span>}
-              onClick={toggleColorMode}
-            />
+
           </HStack>
           {filters ?? null}
         </Box>

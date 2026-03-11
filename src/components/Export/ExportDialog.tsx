@@ -63,9 +63,9 @@ export function ExportDialog({
   const nextVersion = bumpSemver(initialVersion, bumpType);
 
   return (
-    <Modal isOpen={isOpen} onClose={onCancel} isCentered>
-      <ModalOverlay bg="blackAlpha.600" />
-      <ModalContent bg="panelBg" border="1px solid" borderColor="borderPrimary">
+    <Modal isOpen={isOpen} onClose={onCancel} isCentered size="lg">
+      <ModalOverlay bg="blackAlpha.600" backdropFilter="blur(4px)" />
+      <ModalContent>
         <ModalHeader color="brand.gold">Export Mod</ModalHeader>
         <ModalCloseButton />
         <ModalBody display="grid" gap={4}>

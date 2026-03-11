@@ -100,8 +100,11 @@ export function CategoryCard({
       id={`category-${categoryId}`}
       bg="panelBg"
       border="1px solid"
-      borderColor="borderPrimary"
-      borderRadius="md"
+      borderColor={!effectiveCollapsed ? "brand.gold" : "borderPrimary"}
+      borderRadius="xl"
+      boxShadow="sm"
+      transition="box-shadow 0.2s, border-color 0.2s"
+      _hover={{ boxShadow: "md", borderColor: "brand.gold" }}
       scrollMarginTop="140px"
       h={shouldFillExpandedHeight ? "full" : undefined}
       display={shouldFillExpandedHeight ? "flex" : undefined}
@@ -112,9 +115,9 @@ export function CategoryCard({
         variant="ghost"
         w="full"
         justifyContent="space-between"
-        borderRadius={0}
-        px={4}
-        py={2}
+        borderRadius={isLockedOpen ? "xl" : effectiveCollapsed ? "xl" : "xl xl 0 0"}
+        px={8}
+        py={6}
         color="textPrimary"
         _hover={{ bg: "surface.700" }}
         onClick={isLockedOpen ? undefined : () => onToggleCollapse(category.name)}

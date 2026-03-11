@@ -1,16 +1,48 @@
 import ReactMarkdown from "react-markdown";
-import { Box, Heading } from "@chakra-ui/react";
+import remarkGfm from "remark-gfm";
+import {
+  Box,
+  Code,
+  Heading,
+  Table,
+  Tbody,
+  Td,
+  Text,
+  Th,
+  Thead,
+  Tr
+} from "@chakra-ui/react";
 
 interface DocsPageProps {
   title: string;
   markdown: string;
 }
 
+const markdownComponents = {
+  table: (props: any) => <Table variant="simple" size="sm" {...props} />,
+  thead: (props: any) => <Thead {...props} />,
+  tbody: (props: any) => <Tbody {...props} />,
+  tr: (props: any) => <Tr {...props} />,
+  th: (props: any) => <Th borderBottom="1px solid" borderColor="borderSecondary" {...props} />,
+  td: (props: any) => <Td borderBottom="1px solid" borderColor="borderSecondary" {...props} />,
+  p: (props: any) => <Text as="p" mb={4} {...props} />,
+  code: (props: any) => {
+    const { inline, children } = props;
+    if (inline) {
+      return <Code colorScheme="yellow" fontSize="sm" px={1} py="2px" borderRadius="md">{children}</Code>;
+    }
+    return <Code display="block" p={4} borderRadius="md" bg="rgba(0,0,0,0.2)" w="full" whiteSpace="pre-wrap">{children}</Code>;
+  },
+  pre: (props: any) => <Box as="pre" bg="surface.800" p={4} borderRadius="md" mb={4} {...props} />
+};
+
 export function DocsPage({ title, markdown }: DocsPageProps) {
   return (
     <Box as="article" maxW="880px" bg="panelBg" border="1px solid" borderColor="borderPrimary" borderRadius="md" p={8}>
       <Heading size="lg" color="brand.gold" mb={4}>{title}</Heading>
-      <ReactMarkdown>{markdown}</ReactMarkdown>
+      <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
+        {markdown}
+      </ReactMarkdown>
     </Box>
   );
 }

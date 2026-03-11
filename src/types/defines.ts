@@ -41,6 +41,7 @@ export interface Project {
   modName: string;
   modDescription: string;
   delta: Record<string, DefineValue>;
+  lastExportedDelta: Record<string, DefineValue>;
 }
 
 export interface ProjectState {

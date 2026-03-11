@@ -13,7 +13,8 @@ function newProject(version: string, name = "My Project"): Project {
     modVersion: "0.0.0",
     modName: "euv-defines-mod",
     modDescription: "Created with EUV Defines Editor",
-    delta: {}
+    delta: {},
+    lastExportedDelta: {}
   };
 }
 
@@ -33,7 +34,8 @@ export function loadProjectState(defaultVersion: string): ProjectState {
 
     const projects = parsed.projects.map((project) => ({
       ...project,
-      updatedAt: project.updatedAt ?? new Date().toISOString()
+      updatedAt: project.updatedAt ?? new Date().toISOString(),
+      lastExportedDelta: project.lastExportedDelta ?? {}
     }));
 
     return {

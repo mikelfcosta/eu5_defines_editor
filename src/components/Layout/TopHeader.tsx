@@ -3,12 +3,21 @@ import { Box, Button, HStack, IconButton, Text, useColorMode } from "@chakra-ui/
 
 interface TopHeaderProps {
   projectName: string;
+  projectVersion: string;
+  hasChangesSinceExport: boolean;
   onToggleMenu: () => void;
   onOpenProjectModal: () => void;
   filters?: ReactNode;
 }
 
-export function TopHeader({ projectName, onToggleMenu, onOpenProjectModal, filters }: TopHeaderProps) {
+export function TopHeader({
+  projectName,
+  projectVersion,
+  hasChangesSinceExport,
+  onToggleMenu,
+  onOpenProjectModal,
+  filters
+}: TopHeaderProps) {
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
@@ -42,7 +51,9 @@ export function TopHeader({ projectName, onToggleMenu, onOpenProjectModal, filte
       <Box flex="1 1 auto" minW={0} display="flex" justifyContent="flex-end" alignItems="center">
         <Box display="grid" justifyItems="stretch" gap={0} w="100%">
           <HStack justify="flex-end" spacing={2}>
-            <Text color="textSecondary">{projectName}</Text>
+            <Text color={hasChangesSinceExport ? "brand.gold" : "textSecondary"}>
+              {projectName} ({projectVersion}){hasChangesSinceExport ? " *" : ""}
+            </Text>
             <Button size="sm" variant="outline" onClick={onOpenProjectModal} aria-label="Edit projects">
               ✎
             </Button>

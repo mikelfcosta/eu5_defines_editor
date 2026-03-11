@@ -138,6 +138,32 @@ function formatDateTime(value: string): string {
   return date.toLocaleString();
 }
 
+function hasDeltaChangedSinceExport(
+  current: Record<string, DefineValue>,
+  baseline: Record<string, DefineValue>
+): boolean {
+  const currentKeys = Object.keys(current);
+  const baselineKeys = Object.keys(baseline);
+
+  if (currentKeys.length !== baselineKeys.length) {
+    return true;
+  }
+
+  for (const key of currentKeys) {
+    if (!(key in baseline)) {
+      return true;
+    }
+
+    const currentValue = current[key];
+    const baselineValue = baseline[key];
+    if (!equalsValue(currentValue, baselineValue)) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
 const PROJECT_TABLE_MAX_VISIBLE_ROWS = 10;
 const PROJECT_TABLE_ROW_HEIGHT = 52;
 const PROJECT_TABLE_OVERSCAN = 3;
@@ -583,7 +609,13 @@ export default function App() {
         modName: payload.modName,
         modDescription: payload.modDescription,
         modVersion: payload.nextVersion,
-        updatedAt: new Date().toISOString()
+        updatedAt: new Date().toISOString(),
+        lastExportedDelta: Object.fromEntries(
+          Object.entries(activeProject.delta).map(([key, value]) => [
+            key,
+            Array.isArray(value) ? [...value] : value
+          ])
+        )
       };
 
       setProjectState((state) => ({
@@ -633,6 +665,9 @@ export default function App() {
     };
   });
   const showRightSidebar = location.pathname === "/";
+  const hasChangesSinceExport = activeProject
+    ? hasDeltaChangedSinceExport(activeProject.delta, activeProject.lastExportedDelta)
+    : false;
   const pendingDeleteProject = pendingDeleteProjectId
     ? projectState.projects.find((project) => project.id === pendingDeleteProjectId) ?? null
     : null;
@@ -715,6 +750,8 @@ export default function App() {
         topHeader={
           <TopHeader
             projectName={activeProject?.name ?? "No active project"}
+            projectVersion={activeProject?.modVersion ?? "0.0.0"}
+            hasChangesSinceExport={hasChangesSinceExport}
             onToggleMenu={() => setMenuOpen((open) => !open)}
             onOpenProjectModal={() => setIsProjectModalOpen(true)}
             filters={

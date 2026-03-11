@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Box, Button, HStack, Text } from "@chakra-ui/react";
+import { Box, Button, HStack, IconButton, Text, useColorMode } from "@chakra-ui/react";
 
 interface TopHeaderProps {
   projectName: string;
@@ -9,6 +9,8 @@ interface TopHeaderProps {
 }
 
 export function TopHeader({ projectName, onToggleMenu, onOpenProjectModal, filters }: TopHeaderProps) {
+  const { colorMode, toggleColorMode } = useColorMode();
+
   return (
     <Box
       as="header"
@@ -44,6 +46,13 @@ export function TopHeader({ projectName, onToggleMenu, onOpenProjectModal, filte
             <Button size="sm" variant="outline" onClick={onOpenProjectModal} aria-label="Edit projects">
               ✎
             </Button>
+            <IconButton
+              size="sm"
+              aria-label={colorMode === "dark" ? "Switch to light theme" : "Switch to dark theme"}
+              variant="outline"
+              icon={<span>{colorMode === "dark" ? "☀" : "☾"}</span>}
+              onClick={toggleColorMode}
+            />
           </HStack>
           {filters ?? null}
         </Box>

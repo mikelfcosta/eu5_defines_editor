@@ -4,6 +4,7 @@ import { CategoryCard } from "./CategoryCard";
 
 interface EditorViewProps {
   filteredCategories: DefineCategory[];
+  isCategoryFiltered: boolean;
   getCategoryModifiedCount: (category: DefineCategory) => number;
   isCategoryCollapsed: (categoryName: string) => boolean;
   getDisplayValue: (entry: DefineEntry) => string;
@@ -16,6 +17,7 @@ interface EditorViewProps {
 
 export function EditorView({
   filteredCategories,
+  isCategoryFiltered,
   getCategoryModifiedCount,
   isCategoryCollapsed,
   getDisplayValue,
@@ -25,15 +27,18 @@ export function EditorView({
   onUpdateDefine,
   onResetDefine
 }: EditorViewProps) {
+  const shouldFillFilteredCategoryHeight = isCategoryFiltered && filteredCategories.length === 1;
+
   return (
-    <Box>
-      <Box as="section" aria-label="Defines by category" display="grid" gap={2}>
+    <Box h={shouldFillFilteredCategoryHeight ? "full" : undefined}>
+      <Box as="section" aria-label="Defines by category" display="grid" gap={2} h={shouldFillFilteredCategoryHeight ? "full" : undefined}>
         {filteredCategories.map((category) => (
           <CategoryCard
             key={category.name}
             category={category}
             modifiedCount={getCategoryModifiedCount(category)}
             isCollapsed={isCategoryCollapsed(category.name)}
+            fillAvailableHeight={shouldFillFilteredCategoryHeight}
             getDisplayValue={getDisplayValue}
             getIsModified={getIsModified}
             getError={getError}

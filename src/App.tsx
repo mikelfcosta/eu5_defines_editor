@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import {
   Box,
@@ -16,8 +16,13 @@ import {
   ModalHeader,
   ModalOverlay,
   Select,
+  Table,
+  Tbody,
+  Td,
+  Th,
+  Thead,
   Text,
-  useColorMode
+  Tr,
 } from "@chakra-ui/react";
 import type { DefineEntry, DefineValue, Project } from "./types/defines";
 import { AboutPage } from "./components/About/AboutPage";
@@ -78,6 +83,65 @@ function toCategoryId(name: string): string {
   return name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 }
 
+function toKebabCase(value: string): string {
+  const normalized = value
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+  return normalized || "euv-defines-mod";
+}
+
+function summarizeChangedCategories(delta: Record<string, DefineValue>): string {
+  const counts = new Map<string, number>();
+
+  for (const defineId of Object.keys(delta)) {
+    const categoryName = defineId.split(".")[0];
+    if (!categoryName) {
+      continue;
+    }
+
+    counts.set(categoryName, (counts.get(categoryName) ?? 0) + 1);
+  }
+
+  if (counts.size === 0) {
+    return "Changed no categories";
+  }
+
+  const segments = Array.from(counts.entries())
+    .sort(([left], [right]) => left.localeCompare(right))
+    .map(([categoryName, count]) => `${categoryName} (${count})`);
+
+  return `Changed ${segments.join(", ")}`;
+}
+
+function stripGeneratedChangeSummary(description: string): string {
+  const lines = description
+    .split("\n")
+    .map((line) => line.trim())
+    .filter((line) => line.length > 0);
+
+  const filtered = lines.filter(
+    (line) => !/^Changed\s.+\(\d+\)(,\s*.+\(\d+\))*$/i.test(line)
+  );
+
+  return filtered.join("\n").trim();
+}
+
+function formatDateTime(value: string): string {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) {
+    return "-";
+  }
+
+  return date.toLocaleString();
+}
+
+const PROJECT_TABLE_MAX_VISIBLE_ROWS = 10;
+const PROJECT_TABLE_ROW_HEIGHT = 52;
+const PROJECT_TABLE_OVERSCAN = 3;
+
 interface BottomFooterProps {
   saveStatus: string;
   saveDisabled: boolean;
@@ -93,8 +157,6 @@ function BottomFooter({
   onSave,
   onExport
 }: BottomFooterProps) {
-  const { colorMode, toggleColorMode } = useColorMode();
-
   return (
     <Box
       as="footer"
@@ -118,16 +180,10 @@ function BottomFooter({
         bg: "borderPrimary"
       }}
     >
-      <Text color="textSecondary">{saveStatus}</Text>
       <HStack spacing={2} ml="auto">
+        <Text color="textSecondary" textAlign="right">{saveStatus}</Text>
         <IconButton aria-label="Save project" variant="outline" icon={<span>💾</span>} onClick={onSave} isDisabled={saveDisabled} />
         <IconButton aria-label="Export project" variant="outline" icon={<span>⇩</span>} onClick={onExport} isDisabled={exportDisabled} />
-        <IconButton
-          aria-label={colorMode === "dark" ? "Switch to light theme" : "Switch to dark theme"}
-          variant="outline"
-          icon={<span>{colorMode === "dark" ? "☀" : "☾"}</span>}
-          onClick={toggleColorMode}
-        />
       </HStack>
     </Box>
   );
@@ -150,8 +206,12 @@ export default function App() {
   const [isProjectModalOpen, setIsProjectModalOpen] = useState(false);
   const [isVersionModalOpen, setIsVersionModalOpen] = useState(false);
   const [pendingVersion, setPendingVersion] = useState(defaultVersion);
-  const [newProjectName, setNewProjectName] = useState("");
   const [saveStatus, setSaveStatus] = useState("All changes saved");
+  const [editingProjectId, setEditingProjectId] = useState<string | null>(null);
+  const [editingProjectName, setEditingProjectName] = useState("");
+  const [pendingDeleteProjectId, setPendingDeleteProjectId] = useState<string | null>(null);
+  const [projectTableScrollTop, setProjectTableScrollTop] = useState(0);
+  const [projectTableRowHeight, setProjectTableRowHeight] = useState(PROJECT_TABLE_ROW_HEIGHT);
 
   const [projectState, setProjectState] = useState(() => loadProjectState(defaultVersion));
 
@@ -170,6 +230,13 @@ export default function App() {
       setSelectedVersion(activeProject.version);
     }
   }, [activeProject, selectedVersion]);
+
+  useEffect(() => {
+    if (!isProjectModalOpen) {
+      setProjectTableScrollTop(0);
+      setPendingDeleteProjectId(null);
+    }
+  }, [isProjectModalOpen]);
 
   const defines = definesByVersion[selectedVersion];
   const hasErrors = Object.keys(errors).length > 0;
@@ -240,9 +307,100 @@ export default function App() {
 
     setProjectState((state) => ({
       ...state,
-      projects: state.projects.map((project) => (project.id === activeProject.id ? updater(project) : project))
+      projects: state.projects.map((project) =>
+        project.id === activeProject.id ? { ...updater(project), updatedAt: new Date().toISOString() } : project
+      )
     }));
   };
+
+  const selectProject = (projectId: string) => {
+    setProjectState((state) => ({ ...state, activeProjectId: projectId }));
+    setErrors({});
+    setDrafts({});
+  };
+
+  const beginProjectRename = (project: Project) => {
+    setEditingProjectId(project.id);
+    setEditingProjectName(project.name);
+  };
+
+  const commitProjectRename = (projectId: string) => {
+    const trimmed = editingProjectName.trim();
+    if (!trimmed) {
+      setEditingProjectId(null);
+      setEditingProjectName("");
+      return;
+    }
+
+    setProjectState((state) => ({
+      ...state,
+      projects: state.projects.map((project) =>
+        project.id === projectId
+          ? {
+            ...project,
+            name: trimmed,
+            updatedAt: new Date().toISOString()
+          }
+          : project
+      )
+    }));
+    setEditingProjectId(null);
+    setEditingProjectName("");
+  };
+
+  const removeProject = (projectId: string) => {
+    setProjectState((state) => {
+      if (state.projects.length <= 1) {
+        return state;
+      }
+
+      const projects = state.projects.filter((project) => project.id !== projectId);
+      const nextActiveProjectId =
+        state.activeProjectId === projectId
+          ? projects[0]?.id ?? null
+          : state.activeProjectId;
+
+      return {
+        projects,
+        activeProjectId: nextActiveProjectId
+      };
+    });
+    setErrors({});
+    setDrafts({});
+  };
+
+  const requestProjectDelete = (projectId: string) => {
+    setPendingDeleteProjectId(projectId);
+  };
+
+  const confirmProjectDelete = () => {
+    if (!pendingDeleteProjectId) {
+      return;
+    }
+
+    removeProject(pendingDeleteProjectId);
+    setPendingDeleteProjectId(null);
+  };
+
+  useEffect(() => {
+    if (!pendingDeleteProjectId) {
+      return;
+    }
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.repeat) {
+        return;
+      }
+
+      if (event.key.toLowerCase() === "c") {
+        event.preventDefault();
+        confirmProjectDelete();
+      }
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [pendingDeleteProjectId]);
 
   const updateDefine = (entry: DefineEntry, raw: string) => {
     if (!activeProject) {
@@ -365,10 +523,10 @@ export default function App() {
     return stringifyDefineValue(value);
   };
 
-  const createNewProject = (name: string) => {
+  const createNewProject = (name: string): Project | null => {
     const trimmedName = name.trim();
     if (!trimmedName) {
-      return;
+      return null;
     }
 
     const project = createProject(selectedVersion, trimmedName);
@@ -376,7 +534,17 @@ export default function App() {
       projects: [...state.projects, project],
       activeProjectId: project.id
     }));
-    setNewProjectName("");
+    return project;
+  };
+
+  const createNewProjectFromTable = () => {
+    const project = createNewProject("My new project");
+    if (!project) {
+      return;
+    }
+
+    setEditingProjectId(project.id);
+    setEditingProjectName(project.name);
   };
 
   const applyVersionChange = (version: string) => {
@@ -414,7 +582,8 @@ export default function App() {
         ...activeProject,
         modName: payload.modName,
         modDescription: payload.modDescription,
-        modVersion: payload.nextVersion
+        modVersion: payload.nextVersion,
+        updatedAt: new Date().toISOString()
       };
 
       setProjectState((state) => ({
@@ -433,6 +602,17 @@ export default function App() {
   };
 
   const modifiedCount = activeProject ? Object.keys(activeProject.delta).length : 0;
+  const changedSummary = activeProject ? summarizeChangedCategories(activeProject.delta) : "Changed no categories";
+  const fallbackModName = activeProject ? toKebabCase(activeProject.name) : "euv-defines-mod";
+  const exportInitialModName = activeProject
+    ? activeProject.modName.trim() && activeProject.modName.trim() !== "euv-defines-mod"
+      ? activeProject.modName
+      : fallbackModName
+    : "euv-defines-mod";
+  const baseExportDescription = activeProject
+    ? stripGeneratedChangeSummary(activeProject.modDescription)
+    : "";
+  const exportInitialModDescription = [baseExportDescription, changedSummary].filter(Boolean).join("\n");
   const categoryStats = new Map(
     normalizedCategories.map((category) => [
       category.name,
@@ -453,6 +633,56 @@ export default function App() {
     };
   });
   const showRightSidebar = location.pathname === "/";
+  const pendingDeleteProject = pendingDeleteProjectId
+    ? projectState.projects.find((project) => project.id === pendingDeleteProjectId) ?? null
+    : null;
+
+  const shouldVirtualizeProjects = projectState.projects.length > PROJECT_TABLE_MAX_VISIBLE_ROWS;
+  const projectTableViewportHeight = PROJECT_TABLE_MAX_VISIBLE_ROWS * projectTableRowHeight;
+
+  const measureProjectRowHeight = useCallback((node: HTMLTableRowElement | null) => {
+    if (!node) {
+      return;
+    }
+
+    const nextHeight = node.getBoundingClientRect().height;
+    if (nextHeight > 0 && Math.abs(nextHeight - projectTableRowHeight) > 0.5) {
+      setProjectTableRowHeight(nextHeight);
+    }
+  }, [projectTableRowHeight]);
+
+  const projectRowsWindow = useMemo(() => {
+    const total = projectState.projects.length;
+    if (!shouldVirtualizeProjects || total === 0) {
+      return {
+        startIndex: 0,
+        endIndex: total,
+        offsetTop: 0,
+        offsetBottom: 0
+      };
+    }
+
+    const startIndex = Math.max(0, Math.floor(projectTableScrollTop / projectTableRowHeight) - PROJECT_TABLE_OVERSCAN);
+    const endIndex = Math.min(
+      total,
+      Math.ceil((projectTableScrollTop + projectTableViewportHeight) / projectTableRowHeight) + PROJECT_TABLE_OVERSCAN
+    );
+
+    const offsetTop = startIndex * projectTableRowHeight;
+    const renderedHeight = (endIndex - startIndex) * projectTableRowHeight;
+    const offsetBottom = Math.max(0, total * projectTableRowHeight - offsetTop - renderedHeight);
+
+    return {
+      startIndex,
+      endIndex,
+      offsetTop,
+      offsetBottom
+    };
+  }, [projectState.projects.length, projectTableRowHeight, projectTableScrollTop, projectTableViewportHeight, shouldVirtualizeProjects]);
+
+  const visibleProjects = shouldVirtualizeProjects
+    ? projectState.projects.slice(projectRowsWindow.startIndex, projectRowsWindow.endIndex)
+    : projectState.projects;
 
   const toggleCategory = (categoryName: string) => {
     setCollapsedCategories((state) => ({
@@ -526,6 +756,7 @@ export default function App() {
             element={
               <EditorView
                 filteredCategories={filteredCategories}
+                isCategoryFiltered={categoryFilter !== "all"}
                 getCategoryModifiedCount={(category) => getCategoryModifiedCount(category.name)}
                 isCategoryCollapsed={(categoryName) => collapsedCategories[categoryName] ?? true}
                 getDisplayValue={getDisplayValue}
@@ -549,52 +780,148 @@ export default function App() {
       <ExportDialog
         isOpen={isExportDialogOpen}
         isExporting={isExporting}
-        initialModName={activeProject?.modName ?? "euv-defines-mod"}
-        initialModDescription={activeProject?.modDescription ?? ""}
+        initialModName={exportInitialModName}
+        initialModDescription={exportInitialModDescription}
         initialVersion={activeProject?.modVersion ?? "0.0.0"}
         initialBumpType={bumpType}
         onCancel={() => setIsExportDialogOpen(false)}
         onConfirm={runExport}
       />
 
-      <Modal isOpen={isProjectModalOpen} onClose={() => setIsProjectModalOpen(false)} isCentered>
+      <Modal isOpen={isProjectModalOpen} onClose={() => setIsProjectModalOpen(false)} isCentered size="4xl">
         <ModalOverlay bg="blackAlpha.600" />
-        <ModalContent bg="panelBg" border="1px solid" borderColor="borderPrimary">
+        <ModalContent bg="surface.900" border="1px solid" borderColor="borderPrimary">
           <ModalHeader color="brand.gold">Project Selection</ModalHeader>
           <ModalBody display="grid" gap={3}>
-            <FormControl>
-              <FormLabel htmlFor="project-modal-select">Current project</FormLabel>
-              <Select
-                id="project-modal-select"
-                value={activeProject?.id ?? ""}
-                onChange={(event) => {
-                  const selected = projectState.projects.find((project) => project.id === event.target.value);
-                  setProjectState((state) => ({ ...state, activeProjectId: selected?.id ?? null }));
-                  setErrors({});
-                  setDrafts({});
-                }}
-              >
-                {projectState.projects.map((project) => (
-                  <option key={project.id} value={project.id}>
-                    {project.name}
-                  </option>
-                ))}
-              </Select>
-            </FormControl>
+            <Box
+              border="none"
+              borderRadius="md"
+              overflow="hidden"
+              bg="transparent"
+              fontFamily="sans-serif"
+              maxH={shouldVirtualizeProjects ? `${projectTableViewportHeight}px` : undefined}
+              overflowY={shouldVirtualizeProjects ? "auto" : "visible"}
+              onScroll={(event) => {
+                if (shouldVirtualizeProjects) {
+                  setProjectTableScrollTop(event.currentTarget.scrollTop);
+                }
+              }}
+            >
+              <Table size="sm" variant="simple" tableLayout="fixed">
+                <colgroup>
+                  <col style={{ width: "40%" }} />
+                  <col style={{ width: "25%" }} />
+                  <col style={{ width: "15%" }} />
+                  <col style={{ width: "10%" }} />
+                  <col style={{ width: "10%" }} />
+                </colgroup>
+                <Thead bg="transparent">
+                  <Tr borderBottom="1px solid" borderColor="borderSecondary">
+                    <Th py={3}>Project Name</Th>
+                    <Th py={3}>Last Updated</Th>
+                    <Th py={3}>Latest Version</Th>
+                    <Th py={3} textAlign="center">Edit</Th>
+                    <Th py={3} textAlign="center">Delete</Th>
+                  </Tr>
+                </Thead>
+                <Tbody>
+                  {shouldVirtualizeProjects && projectRowsWindow.offsetTop > 0 ? (
+                    <Tr>
+                      <Td colSpan={5} p={0} h={`${projectRowsWindow.offsetTop}px`} borderBottom="none" />
+                    </Tr>
+                  ) : null}
 
-            <FormControl>
-              <FormLabel htmlFor="new-project-name">Create new project</FormLabel>
-              <HStack>
-                <Input
-                  id="new-project-name"
-                  type="text"
-                  value={newProjectName}
-                  placeholder="New Project"
-                  onChange={(event) => setNewProjectName(event.target.value)}
-                />
-                <Button onClick={() => createNewProject(newProjectName)} colorScheme="yellow">Create</Button>
-              </HStack>
-            </FormControl>
+                  {visibleProjects.map((project, index) => {
+                    const isActive = project.id === activeProject?.id;
+                    const isEditing = editingProjectId === project.id;
+
+                    return (
+                      <Tr
+                        key={project.id}
+                        ref={index === 0 ? measureProjectRowHeight : undefined}
+                        bg={isActive ? "rgba(255, 210, 103, 0.2)" : undefined}
+                        _hover={{ bg: isActive ? "rgba(255, 210, 103, 0.24)" : "surface.700" }}
+                        cursor="pointer"
+                        onClick={() => selectProject(project.id)}
+                      >
+                        <Td>
+                          {isEditing ? (
+                            <Input
+                              size="sm"
+                              value={editingProjectName}
+                              onChange={(event) => setEditingProjectName(event.target.value)}
+                              onBlur={() => commitProjectRename(project.id)}
+                              onKeyDown={(event) => {
+                                if (event.key === "Enter") {
+                                  event.preventDefault();
+                                  commitProjectRename(project.id);
+                                }
+
+                                if (event.key === "Escape") {
+                                  setEditingProjectId(null);
+                                  setEditingProjectName("");
+                                }
+                              }}
+                              autoFocus
+                            />
+                          ) : (
+                            <Text>{project.name}</Text>
+                          )}
+                        </Td>
+                        <Td>{formatDateTime(project.updatedAt)}</Td>
+                        <Td>{project.modVersion}</Td>
+                        <Td textAlign="center" verticalAlign="middle">
+                          <Box display="flex" justifyContent="center" alignItems="center">
+                            <IconButton
+                              aria-label={`Edit ${project.name}`}
+                              size="sm"
+                              variant="outline"
+                              icon={<span>✎</span>}
+                              onClick={(event) => {
+                                event.stopPropagation();
+                                beginProjectRename(project);
+                              }}
+                            />
+                          </Box>
+                        </Td>
+                        <Td textAlign="center" verticalAlign="middle">
+                          <Box display="flex" justifyContent="center" alignItems="center">
+                            <IconButton
+                              aria-label={`Delete ${project.name}`}
+                              size="sm"
+                              variant="outline"
+                              icon={<span>✕</span>}
+                              colorScheme="red"
+                              isDisabled={projectState.projects.length <= 1}
+                              onClick={(event) => {
+                                event.stopPropagation();
+                                requestProjectDelete(project.id);
+                              }}
+                            />
+                          </Box>
+                        </Td>
+                      </Tr>
+                    );
+                  })}
+
+                  {shouldVirtualizeProjects && projectRowsWindow.offsetBottom > 0 ? (
+                    <Tr>
+                      <Td colSpan={5} p={0} h={`${projectRowsWindow.offsetBottom}px`} borderBottom="none" />
+                    </Tr>
+                  ) : null}
+
+                  <Tr
+                    _hover={{ bg: "surface.700" }}
+                    cursor="pointer"
+                    onClick={createNewProjectFromTable}
+                  >
+                    <Td colSpan={5} py={4} borderBottom="none" w="100%">
+                      <Text color="brand.gold" fontWeight={600}>+ Create new project</Text>
+                    </Td>
+                  </Tr>
+                </Tbody>
+              </Table>
+            </Box>
           </ModalBody>
           <ModalFooter>
             <Button colorScheme="yellow" onClick={() => setIsProjectModalOpen(false)}>Done</Button>
@@ -630,6 +957,22 @@ export default function App() {
             >
               Apply
             </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+
+      <Modal isOpen={Boolean(pendingDeleteProject)} onClose={() => setPendingDeleteProjectId(null)} isCentered>
+        <ModalOverlay bg="blackAlpha.700" />
+        <ModalContent bg="surface.900" border="1px solid" borderColor="borderPrimary">
+          <ModalHeader color="brand.gold">Delete Project?</ModalHeader>
+          <ModalBody>
+            <Text color="textSecondary">
+              Delete <Text as="span" color="textPrimary" fontWeight={700}>{pendingDeleteProject?.name ?? "this project"}</Text>? This action cannot be undone.
+            </Text>
+          </ModalBody>
+          <ModalFooter gap={2}>
+            <Button variant="outline" onClick={() => setPendingDeleteProjectId(null)}>Cancel</Button>
+            <Button colorScheme="red" onClick={confirmProjectDelete} isDisabled={!pendingDeleteProject}>Delete</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

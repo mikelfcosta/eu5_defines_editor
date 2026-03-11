@@ -4,9 +4,11 @@ const STORAGE_KEY = "euv-defines-editor-projects-v1";
 
 function newProject(version: string, name = "My Project"): Project {
   const id = crypto.randomUUID();
+  const updatedAt = new Date().toISOString();
   return {
     id,
     name,
+    updatedAt,
     version,
     modVersion: "0.0.0",
     modName: "euv-defines-mod",
@@ -29,7 +31,15 @@ export function loadProjectState(defaultVersion: string): ProjectState {
       return { projects: [first], activeProjectId: first.id };
     }
 
-    return parsed;
+    const projects = parsed.projects.map((project) => ({
+      ...project,
+      updatedAt: project.updatedAt ?? new Date().toISOString()
+    }));
+
+    return {
+      projects,
+      activeProjectId: parsed.activeProjectId
+    };
   } catch {
     const first = newProject(defaultVersion);
     return { projects: [first], activeProjectId: first.id };

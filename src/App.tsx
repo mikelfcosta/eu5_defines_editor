@@ -1,3 +1,4 @@
+import React from "react";
 import { Component, type ErrorInfo, type ReactNode, useCallback, useEffect, useMemo, useState } from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import {
@@ -160,6 +161,58 @@ function hasDeltaChangedSinceExport(
   }
 
   return false;
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null;
+}
+
+function isDefineValue(value: unknown): value is DefineValue {
+  if (typeof value === "string" || typeof value === "number" || typeof value === "boolean") {
+    return true;
+  }
+
+  if (!Array.isArray(value)) {
+    return false;
+  }
+
+  return value.every(
+    (item) => typeof item === "string" || typeof item === "number" || typeof item === "boolean"
+  );
+}
+
+function sanitizeImportedDelta(value: unknown): Record<string, DefineValue> {
+  if (!isRecord(value)) {
+    return {};
+  }
+
+  const sanitized: Record<string, DefineValue> = {};
+  for (const [key, item] of Object.entries(value)) {
+    if (isDefineValue(item)) {
+      sanitized[key] = Array.isArray(item) ? [...item] : item;
+    }
+  }
+
+  return sanitized;
+}
+
+function parseImportedProjectPayload(value: unknown): {
+  editorProject: Record<string, unknown>;
+  modifiedValues: Record<string, DefineValue>;
+} | null {
+  if (!isRecord(value)) {
+    return null;
+  }
+
+  const editorProject = isRecord(value.editorProject) ? value.editorProject : null;
+  if (!editorProject) {
+    return null;
+  }
+
+  return {
+    editorProject,
+    modifiedValues: sanitizeImportedDelta(value.modifiedValues)
+  };
 }
 
 const PROJECT_TABLE_MAX_VISIBLE_ROWS = 10;
@@ -333,6 +386,7 @@ class AppErrorBoundary extends Component<{ children: ReactNode }, AppErrorBounda
 }
 
 export default function App() {
+  const fileInputRef = React.useRef<HTMLInputElement>(null);
   const location = useLocation();
   const defaultVersion = availableVersions[0];
   const [selectedVersion, setSelectedVersion] = useState(defaultVersion);
@@ -707,6 +761,65 @@ export default function App() {
 
     setEditingProjectId(project.id);
     setEditingProjectName(project.name);
+  };
+
+  const handleFileImport = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    event.currentTarget.value = "";
+
+    if (!file) {
+      return;
+    }
+
+    try {
+      const raw = await file.text();
+      const parsed = JSON.parse(raw) as unknown;
+      const payload = parseImportedProjectPayload(parsed);
+
+      if (!payload) {
+        window.alert("Invalid editor.json file. Missing editorProject metadata.");
+        return;
+      }
+
+      const importedName = typeof payload.editorProject.name === "string" && payload.editorProject.name.trim().length > 0
+        ? payload.editorProject.name.trim()
+        : file.name.replace(/\.json$/i, "").trim() || "Imported project";
+
+      const importedVersion = typeof payload.editorProject.gameVersion === "string" && payload.editorProject.gameVersion.trim().length > 0
+        ? payload.editorProject.gameVersion.trim()
+        : defaultVersion;
+      const resolvedVersion = definesByVersion[importedVersion] ? importedVersion : defaultVersion;
+
+      const project = createProject(resolvedVersion, importedName);
+      const importedModName = typeof payload.editorProject.modName === "string" && payload.editorProject.modName.trim().length > 0
+        ? payload.editorProject.modName.trim()
+        : project.modName;
+      const importedModVersion = typeof payload.editorProject.version === "string" && payload.editorProject.version.trim().length > 0
+        ? payload.editorProject.version.trim()
+        : project.modVersion;
+
+      const importedProject: Project = {
+        ...project,
+        name: importedName,
+        version: resolvedVersion,
+        modName: importedModName,
+        modVersion: importedModVersion,
+        delta: payload.modifiedValues,
+        lastExportedDelta: {}
+      };
+
+      setProjectState((state) => ({
+        projects: [...state.projects, importedProject],
+        activeProjectId: importedProject.id
+      }));
+      setErrors({});
+      setDrafts({});
+      setEditingProjectId(null);
+      setEditingProjectName("");
+    } catch (error) {
+      console.error("Failed to import project:", error);
+      window.alert("Could not import editor.json. Please verify the file and try again.");
+    }
   };
 
   const applyVersionChange = (version: string) => {
@@ -1098,6 +1211,20 @@ export default function App() {
             </Box>
           </ModalBody>
           <ModalFooter>
+            <input
+              type="file"
+              accept=".json"
+              style={{ display: "none" }}
+              ref={fileInputRef}
+              onChange={handleFileImport}
+            />
+            <Button
+              variant="outline"
+              mr={3}
+              onClick={() => fileInputRef.current?.click()}
+            >
+              Import Project
+            </Button>
             <Button colorScheme="yellow" onClick={() => setIsProjectModalOpen(false)}>Done</Button>
           </ModalFooter>
         </ModalContent>

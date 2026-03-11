@@ -4,6 +4,7 @@
   "description": "EUV Defines Editor",
   "scripts": {
     "generate:defines": "node ./scripts/generate-defines.mjs",
+    "diff:defines": "node ./scripts/diff-defines.mjs",
     "dev": "npm run generate:defines && vite",
     "build": "npm run generate:defines && vite build",
     "start": "vite",

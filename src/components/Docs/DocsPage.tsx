@@ -26,14 +26,41 @@ const markdownComponents = {
   th: (props: any) => <Th borderBottom="1px solid" borderColor="borderSecondary" {...props} />,
   td: (props: any) => <Td borderBottom="1px solid" borderColor="borderSecondary" {...props} />,
   p: (props: any) => <Text as="p" mb={4} {...props} />,
-  code: (props: any) => {
-    const { inline, children } = props;
-    if (inline) {
-      return <Code colorScheme="yellow" fontSize="sm" px={1} py="2px" borderRadius="md">{children}</Code>;
-    }
-    return <Code display="block" p={4} borderRadius="md" bg="rgba(0,0,0,0.2)" w="full" whiteSpace="pre-wrap">{children}</Code>;
-  },
-  pre: (props: any) => <Box as="pre" bg="surface.800" p={4} borderRadius="md" mb={4} {...props} />
+  code: (props: any) => (
+    <Code
+      fontSize="0.9em"
+      fontFamily="mono"
+      px={1}
+      py="2px"
+      borderRadius="sm"
+      bg="whiteAlpha.200"
+      color="textPrimary"
+      {...props}
+    />
+  ),
+  pre: (props: any) => (
+    <Box
+      as="pre"
+      bg="surface.800"
+      p={4}
+      borderRadius="md"
+      mb={4}
+      overflowX="auto"
+      border="1px solid"
+      borderColor="borderSecondary"
+      sx={{
+        "& code": {
+          background: "transparent",
+          padding: 0,
+          borderRadius: 0,
+          color: "inherit",
+          fontSize: "0.95em",
+          whiteSpace: "pre"
+        }
+      }}
+      {...props}
+    />
+  )
 };
 
 export function DocsPage({ title, markdown }: DocsPageProps) {

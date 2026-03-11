@@ -1,14 +1,37 @@
-import type { DefinesData } from "../types/defines";
+import type { DefineCategory, DefinesData } from "../types/defines";
 
-const modules = import.meta.glob("../data/defines/*.json", { eager: true });
+interface VersionIndex {
+  version: string;
+  generatedAt: string;
+  totalDefines: number;
+  categories: string[];
+}
 
-const entries = Object.entries(modules)
-  .filter(([path]) => !path.endsWith("manifest.json"))
-  .map(([path, module]) => {
-    const match = path.match(/\/([^/]+)\.json$/);
-    const version = match?.[1] ?? "unknown";
-    const data = (module as { default: DefinesData }).default;
-    return { version, data };
+const indexModules = import.meta.glob("../data/defines/*/index.json", { eager: true });
+const categoryModules = import.meta.glob("../data/defines/*/*.json", { eager: true });
+
+const entries = Object.entries(indexModules)
+  .map(([indexPath, indexModule]) => {
+    const index = (indexModule as { default: VersionIndex }).default;
+    const dirPrefix = indexPath.replace(/index\.json$/, "");
+
+    const categories: DefineCategory[] = index.categories.map((name) => {
+      const catPath = `${dirPrefix}${name}.json`;
+      const catModule = categoryModules[catPath] as { default: DefineCategory } | undefined;
+      if (!catModule) {
+        throw new Error(`Missing category file: ${catPath}`);
+      }
+      return catModule.default;
+    });
+
+    const data: DefinesData = {
+      version: index.version,
+      generatedAt: index.generatedAt,
+      totalDefines: index.totalDefines,
+      categories,
+    };
+
+    return { version: index.version, data };
   })
   .sort((a, b) => a.version.localeCompare(b.version, undefined, { numeric: true }));
 

@@ -1,0 +1,296 @@
+{
+  "name": "NMarket",
+  "defines": [
+    {
+      "id": "NMarket.MONTHLY_PRICE_CHANGE",
+      "category": "NMarket",
+      "key": "MONTHLY_PRICE_CHANGE",
+      "type": "float",
+      "defaultValue": 0.05,
+      "comment": "as fraction of (target - price)"
+    },
+    {
+      "id": "NMarket.MARITIME_PRESENCE_POWER_ON_POP_SCALE",
+      "category": "NMarket",
+      "key": "MARITIME_PRESENCE_POWER_ON_POP_SCALE",
+      "type": "integer",
+      "defaultValue": 100,
+      "comment": "divides on this."
+    },
+    {
+      "id": "NMarket.BURGHER_TRADE_IMPACT_ON_SUPPLY_SCALE",
+      "category": "NMarket",
+      "key": "BURGHER_TRADE_IMPACT_ON_SUPPLY_SCALE",
+      "type": "float",
+      "defaultValue": 0.25
+    },
+    {
+      "id": "NMarket.TRADE_IMPACT_ON_SUPPLY_SCALE",
+      "category": "NMarket",
+      "key": "TRADE_IMPACT_ON_SUPPLY_SCALE",
+      "type": "float",
+      "defaultValue": 0.75
+    },
+    {
+      "id": "NMarket.BURGHER_TRADE_IMPACT_ON_DEMAND_SCALE",
+      "category": "NMarket",
+      "key": "BURGHER_TRADE_IMPACT_ON_DEMAND_SCALE",
+      "type": "float",
+      "defaultValue": 0.25
+    },
+    {
+      "id": "NMarket.TRADE_IMPACT_ON_DEMAND_SCALE",
+      "category": "NMarket",
+      "key": "TRADE_IMPACT_ON_DEMAND_SCALE",
+      "type": "float",
+      "defaultValue": 0.75
+    },
+    {
+      "id": "NMarket.MIN_PRICE_IMPACT",
+      "category": "NMarket",
+      "key": "MIN_PRICE_IMPACT",
+      "type": "float",
+      "defaultValue": -0.33
+    },
+    {
+      "id": "NMarket.MAX_PRICE_IMPACT",
+      "category": "NMarket",
+      "key": "MAX_PRICE_IMPACT",
+      "type": "float",
+      "defaultValue": 1.5
+    },
+    {
+      "id": "NMarket.FOOD_CAPACITY_FACTOR",
+      "category": "NMarket",
+      "key": "FOOD_CAPACITY_FACTOR",
+      "type": "float",
+      "defaultValue": 1
+    },
+    {
+      "id": "NMarket.FOOD_PRICE",
+      "category": "NMarket",
+      "key": "FOOD_PRICE",
+      "type": "float",
+      "defaultValue": 0.05
+    },
+    {
+      "id": "NMarket.FOOD_PRICE_IMPACT_ON_PRICES",
+      "category": "NMarket",
+      "key": "FOOD_PRICE_IMPACT_ON_PRICES",
+      "type": "float",
+      "defaultValue": 0.25
+    },
+    {
+      "id": "NMarket.FOOD_PROPORTION_TO_PRESERVE_IN_MARKET_IF_POSSIBLE",
+      "category": "NMarket",
+      "key": "FOOD_PROPORTION_TO_PRESERVE_IN_MARKET_IF_POSSIBLE",
+      "type": "float",
+      "defaultValue": 0.25
+    },
+    {
+      "id": "NMarket.MARKET_BASE_ACCESS",
+      "category": "NMarket",
+      "key": "MARKET_BASE_ACCESS",
+      "type": "integer",
+      "defaultValue": 1,
+      "comment": "100%"
+    },
+    {
+      "id": "NMarket.MARKET_BASE_DISTANCE_FACTOR",
+      "category": "NMarket",
+      "key": "MARKET_BASE_DISTANCE_FACTOR",
+      "type": "float",
+      "defaultValue": 0.005,
+      "comment": "Access lost per pixel of distance"
+    },
+    {
+      "id": "NMarket.MARKET_OPEN_SEA_DISTANCE_FACTOR",
+      "category": "NMarket",
+      "key": "MARKET_OPEN_SEA_DISTANCE_FACTOR",
+      "type": "float",
+      "defaultValue": 1.5,
+      "comment": "not good at open sea."
+    },
+    {
+      "id": "NMarket.MARKET_SEA_DISTANCE_FACTOR",
+      "category": "NMarket",
+      "key": "MARKET_SEA_DISTANCE_FACTOR",
+      "type": "float",
+      "defaultValue": 0.75,
+      "comment": "Markets propagate better over sea"
+    },
+    {
+      "id": "NMarket.MARKET_SEA_TO_LAND_DISTANCE_FACTOR",
+      "category": "NMarket",
+      "key": "MARKET_SEA_TO_LAND_DISTANCE_FACTOR",
+      "type": "float",
+      "defaultValue": 0.5
+    },
+    {
+      "id": "NMarket.MARKET_DOWNSTREAM_FACTOR",
+      "category": "NMarket",
+      "key": "MARKET_DOWNSTREAM_FACTOR",
+      "type": "float",
+      "defaultValue": 0.5,
+      "comment": "downstream is great!"
+    },
+    {
+      "id": "NMarket.MARKET_UPSTREAM_FACTOR",
+      "category": "NMarket",
+      "key": "MARKET_UPSTREAM_FACTOR",
+      "type": "float",
+      "defaultValue": 0.9,
+      "comment": "better upstream than not.."
+    },
+    {
+      "id": "NMarket.MARKET_NO_PORT_EXTRA_DISTANCE",
+      "category": "NMarket",
+      "key": "MARKET_NO_PORT_EXTRA_DISTANCE",
+      "type": "float",
+      "defaultValue": 0.1,
+      "comment": "Absolute access penalty for going between land and sea without port"
+    },
+    {
+      "id": "NMarket.MARKET_PORT_EXTRA_DISTANCE",
+      "category": "NMarket",
+      "key": "MARKET_PORT_EXTRA_DISTANCE",
+      "type": "float",
+      "defaultValue": 0.02,
+      "comment": "Access penalty for going between land and sea with port, scaled with 1-harbor suitability"
+    },
+    {
+      "id": "NMarket.MARKET_ASSIGNMENT_PERFORMANCE_FACTOR",
+      "category": "NMarket",
+      "key": "MARKET_ASSIGNMENT_PERFORMANCE_FACTOR",
+      "type": "float",
+      "defaultValue": 0.5,
+      "comment": "Lowering this number reduces performance cost of market assignments, but might cause market assignment to ignore protectionism for locations far away from any market"
+    },
+    {
+      "id": "NMarket.LOCATION_NUMS_DIVISOR_FOR_DESTRUCTION_PRICE",
+      "category": "NMarket",
+      "key": "LOCATION_NUMS_DIVISOR_FOR_DESTRUCTION_PRICE",
+      "type": "integer",
+      "defaultValue": 40
+    },
+    {
+      "id": "NMarket.MARKET_CREATION_MONTHS",
+      "category": "NMarket",
+      "key": "MARKET_CREATION_MONTHS",
+      "type": "integer",
+      "defaultValue": 3
+    },
+    {
+      "id": "NMarket.MARKET_TRADE_CHANGE_PER_CLICK",
+      "category": "NMarket",
+      "key": "MARKET_TRADE_CHANGE_PER_CLICK",
+      "type": "integer",
+      "defaultValue": 1
+    },
+    {
+      "id": "NMarket.MARKET_CONSTRUCTION_NEEDS_BLOCK_FACTOR",
+      "category": "NMarket",
+      "key": "MARKET_CONSTRUCTION_NEEDS_BLOCK_FACTOR",
+      "type": "float",
+      "defaultValue": 2
+    },
+    {
+      "id": "NMarket.COUNTRY_COMMON_LANGUAGE_MARKET_ATTRACTION",
+      "category": "NMarket",
+      "key": "COUNTRY_COMMON_LANGUAGE_MARKET_ATTRACTION",
+      "type": "float",
+      "defaultValue": 0.05
+    },
+    {
+      "id": "NMarket.COUNTRY_COMMON_LANGUAGE_GROUP_MARKET_ATTRACTION",
+      "category": "NMarket",
+      "key": "COUNTRY_COMMON_LANGUAGE_GROUP_MARKET_ATTRACTION",
+      "type": "float",
+      "defaultValue": 0.01
+    },
+    {
+      "id": "NMarket.LOCATION_DOMINANT_LANGUAGE_MARKET_ATTRACTION",
+      "category": "NMarket",
+      "key": "LOCATION_DOMINANT_LANGUAGE_MARKET_ATTRACTION",
+      "type": "float",
+      "defaultValue": 0.05
+    },
+    {
+      "id": "NMarket.LOCATION_DOMINANT_LANGUAGE_GROUP_MARKET_ATTRACTION",
+      "category": "NMarket",
+      "key": "LOCATION_DOMINANT_LANGUAGE_GROUP_MARKET_ATTRACTION",
+      "type": "float",
+      "defaultValue": 0.01
+    },
+    {
+      "id": "NMarket.LOCATION_SAME_PROVINCE_MARKET_ATTRACTION",
+      "category": "NMarket",
+      "key": "LOCATION_SAME_PROVINCE_MARKET_ATTRACTION",
+      "type": "float",
+      "defaultValue": 0.2
+    },
+    {
+      "id": "NMarket.LOCATION_SAME_AREA_MARKET_ATTRACTION",
+      "category": "NMarket",
+      "key": "LOCATION_SAME_AREA_MARKET_ATTRACTION",
+      "type": "float",
+      "defaultValue": 0.1
+    },
+    {
+      "id": "NMarket.LOCATION_SAME_REGION_MARKET_ATTRACTION",
+      "category": "NMarket",
+      "key": "LOCATION_SAME_REGION_MARKET_ATTRACTION",
+      "type": "float",
+      "defaultValue": 0
+    },
+    {
+      "id": "NMarket.LOCATION_SAME_SUBCONTINENT_MARKET_ATTRACTION",
+      "category": "NMarket",
+      "key": "LOCATION_SAME_SUBCONTINENT_MARKET_ATTRACTION",
+      "type": "float",
+      "defaultValue": 0
+    },
+    {
+      "id": "NMarket.LOCATION_SAME_CONTINENT_MARKET_ATTRACTION",
+      "category": "NMarket",
+      "key": "LOCATION_SAME_CONTINENT_MARKET_ATTRACTION",
+      "type": "float",
+      "defaultValue": 0
+    },
+    {
+      "id": "NMarket.MARKET_LANGUAGE_POWER_ATTRACTION",
+      "category": "NMarket",
+      "key": "MARKET_LANGUAGE_POWER_ATTRACTION",
+      "type": "float",
+      "defaultValue": 0.1
+    },
+    {
+      "id": "NMarket.MARKET_FOOD_STOCKPILE_TRESHOLD_MONTHS",
+      "category": "NMarket",
+      "key": "MARKET_FOOD_STOCKPILE_TRESHOLD_MONTHS",
+      "type": "float",
+      "defaultValue": 24
+    },
+    {
+      "id": "NMarket.MARKET_MIN_STOCKPILE_TO_ALLOW_EXTRA_TRADE",
+      "category": "NMarket",
+      "key": "MARKET_MIN_STOCKPILE_TO_ALLOW_EXTRA_TRADE",
+      "type": "float",
+      "defaultValue": 0.5
+    },
+    {
+      "id": "NMarket.MARKET_STOCKPILE_PERCENTAGE_FOR_EXTRA_TRADE",
+      "category": "NMarket",
+      "key": "MARKET_STOCKPILE_PERCENTAGE_FOR_EXTRA_TRADE",
+      "type": "float",
+      "defaultValue": 0.05
+    },
+    {
+      "id": "NMarket.MARKET_WASTED_MANUAL_TRADE_CAPACITY_TRESHOLD",
+      "category": "NMarket",
+      "key": "MARKET_WASTED_MANUAL_TRADE_CAPACITY_TRESHOLD",
+      "type": "float",
+      "defaultValue": 0.1
+    }
+  ]
+}

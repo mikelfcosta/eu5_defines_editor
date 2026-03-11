@@ -1,0 +1,311 @@
+{
+  "name": "NCulture",
+  "defines": [
+    {
+      "id": "NCulture.ACCEPTED_CULTURE_BASE_COST",
+      "category": "NCulture",
+      "key": "ACCEPTED_CULTURE_BASE_COST",
+      "type": "integer",
+      "defaultValue": 3
+    },
+    {
+      "id": "NCulture.TOLERATED_CULTURE_BASE_COST",
+      "category": "NCulture",
+      "key": "TOLERATED_CULTURE_BASE_COST",
+      "type": "float",
+      "defaultValue": 1
+    },
+    {
+      "id": "NCulture.ACCEPTANCE_OPINION_POSITIVE_FACTOR",
+      "category": "NCulture",
+      "key": "ACCEPTANCE_OPINION_POSITIVE_FACTOR",
+      "type": "float",
+      "defaultValue": -0.25,
+      "comment": "Kindred and Positive"
+    },
+    {
+      "id": "NCulture.ACCEPTANCE_OPINION_NEGATIVE_FACTOR",
+      "category": "NCulture",
+      "key": "ACCEPTANCE_OPINION_NEGATIVE_FACTOR",
+      "type": "float",
+      "defaultValue": -0.5,
+      "comment": "Enemy and Negative has a bigger impact"
+    },
+    {
+      "id": "NCulture.ACCEPTANCE_LANGUAGE_FACTOR",
+      "category": "NCulture",
+      "key": "ACCEPTANCE_LANGUAGE_FACTOR",
+      "type": "float",
+      "defaultValue": -0.15
+    },
+    {
+      "id": "NCulture.ACCEPTANCE_LANGUAGE_FAMILY_FACTOR",
+      "category": "NCulture",
+      "key": "ACCEPTANCE_LANGUAGE_FAMILY_FACTOR",
+      "type": "float",
+      "defaultValue": -0.05
+    },
+    {
+      "id": "NCulture.ACCEPTANCE_POP_SIZE_COUNTRY_MULTIPLIER",
+      "category": "NCulture",
+      "key": "ACCEPTANCE_POP_SIZE_COUNTRY_MULTIPLIER",
+      "type": "float",
+      "defaultValue": 0.35
+    },
+    {
+      "id": "NCulture.ACCEPTANCE_POP_SIZE_GLOBAL_MULTIPLIER",
+      "category": "NCulture",
+      "key": "ACCEPTANCE_POP_SIZE_GLOBAL_MULTIPLIER",
+      "type": "float",
+      "defaultValue": 0.35
+    },
+    {
+      "id": "NCulture.ACCEPTANCE_POP_SIZE_COUNTRY_MIN_MAX",
+      "category": "NCulture",
+      "key": "ACCEPTANCE_POP_SIZE_COUNTRY_MIN_MAX",
+      "type": "array",
+      "defaultValue": [
+        -0.35,
+        0.35
+      ],
+      "itemTypes": [
+        "float",
+        "float"
+      ]
+    },
+    {
+      "id": "NCulture.ACCEPTANCE_POP_SIZE_GLOBAL_MIN_MAX",
+      "category": "NCulture",
+      "key": "ACCEPTANCE_POP_SIZE_GLOBAL_MIN_MAX",
+      "type": "array",
+      "defaultValue": [
+        -0.35,
+        0.35
+      ],
+      "itemTypes": [
+        "float",
+        "float"
+      ]
+    },
+    {
+      "id": "NCulture.ACCEPTANCE_SHARED_CULTURE_GROUP_FACTOR",
+      "category": "NCulture",
+      "key": "ACCEPTANCE_SHARED_CULTURE_GROUP_FACTOR",
+      "type": "float",
+      "defaultValue": -0.3,
+      "comment": "the maximum. reduced by each unshared culture group"
+    },
+    {
+      "id": "NCulture.TRADITION_DECAY",
+      "category": "NCulture",
+      "key": "TRADITION_DECAY",
+      "type": "float",
+      "defaultValue": -0.05
+    },
+    {
+      "id": "NCulture.INFLUENCE_DECAY",
+      "category": "NCulture",
+      "key": "INFLUENCE_DECAY",
+      "type": "float",
+      "defaultValue": -0.05
+    },
+    {
+      "id": "NCulture.ARTIST_INFLUENCE_GAIN_FACTOR",
+      "category": "NCulture",
+      "key": "ARTIST_INFLUENCE_GAIN_FACTOR",
+      "type": "integer",
+      "defaultValue": 2
+    },
+    {
+      "id": "NCulture.ARTIST_MONTHLY_PROGRESS",
+      "category": "NCulture",
+      "key": "ARTIST_MONTHLY_PROGRESS",
+      "type": "float",
+      "defaultValue": 0.01
+    },
+    {
+      "id": "NCulture.ART_DESTROY_CHANCE_ON_CONQUEST",
+      "category": "NCulture",
+      "key": "ART_DESTROY_CHANCE_ON_CONQUEST",
+      "type": "integer",
+      "defaultValue": 10,
+      "comment": "% chance 0-100"
+    },
+    {
+      "id": "NCulture.ART_CAPTURE_CHANCE_ON_CONQUEST",
+      "category": "NCulture",
+      "key": "ART_CAPTURE_CHANCE_ON_CONQUEST",
+      "type": "integer",
+      "defaultValue": 40,
+      "comment": "% chance 0-100"
+    },
+    {
+      "id": "NCulture.STATE_CLERGY_LITURGICAL_POWER",
+      "category": "NCulture",
+      "key": "STATE_CLERGY_LITURGICAL_POWER",
+      "type": "integer",
+      "defaultValue": 20
+    },
+    {
+      "id": "NCulture.COUNTRY_POWER_COURT_LANGUAGE",
+      "category": "NCulture",
+      "key": "COUNTRY_POWER_COURT_LANGUAGE",
+      "type": "integer",
+      "defaultValue": 1
+    },
+    {
+      "id": "NCulture.MERCHANT_POWER_COMMON_LANGUAGE",
+      "category": "NCulture",
+      "key": "MERCHANT_POWER_COMMON_LANGUAGE",
+      "type": "integer",
+      "defaultValue": 1
+    },
+    {
+      "id": "NCulture.CULTURAL_INFLUENCE_ON_LANGUAGE_POWER",
+      "category": "NCulture",
+      "key": "CULTURAL_INFLUENCE_ON_LANGUAGE_POWER",
+      "type": "integer",
+      "defaultValue": 1
+    },
+    {
+      "id": "NCulture.MARKET_TOTAL_MERCHANT_POWER_ON_LANGUAGE_POWER",
+      "category": "NCulture",
+      "key": "MARKET_TOTAL_MERCHANT_POWER_ON_LANGUAGE_POWER",
+      "type": "integer",
+      "defaultValue": 1
+    },
+    {
+      "id": "NCulture.NOBLE_LIKE_LANGUAGE_THRESHOLD",
+      "category": "NCulture",
+      "key": "NOBLE_LIKE_LANGUAGE_THRESHOLD",
+      "type": "float",
+      "defaultValue": 0.5
+    },
+    {
+      "id": "NCulture.MINIMUM_NAMES_PER_LANGUAGE",
+      "category": "NCulture",
+      "key": "MINIMUM_NAMES_PER_LANGUAGE",
+      "type": "integer",
+      "defaultValue": 10,
+      "comment": "lowest number of male or female names in a language before throwing an error"
+    },
+    {
+      "id": "NCulture.CORE_THRESHOLD",
+      "category": "NCulture",
+      "key": "CORE_THRESHOLD",
+      "type": "float",
+      "defaultValue": 0.5
+    },
+    {
+      "id": "NCulture.CULTURE_WAR_RANGE",
+      "category": "NCulture",
+      "key": "CULTURE_WAR_RANGE",
+      "type": "float",
+      "defaultValue": 0.5
+    },
+    {
+      "id": "NCulture.ASSIMILATION_SHARED_CULTURE_GROUPS_MODIFIER",
+      "category": "NCulture",
+      "key": "ASSIMILATION_SHARED_CULTURE_GROUPS_MODIFIER",
+      "type": "float",
+      "defaultValue": 0.3
+    },
+    {
+      "id": "NCulture.ASSIMILATION_DOMINANT_ACTOR_CULTURE_MODIFIER",
+      "category": "NCulture",
+      "key": "ASSIMILATION_DOMINANT_ACTOR_CULTURE_MODIFIER",
+      "type": "float",
+      "defaultValue": 0.5
+    },
+    {
+      "id": "NCulture.ASSIMILATION_SAME_LANGUAGE_MODIFIER",
+      "category": "NCulture",
+      "key": "ASSIMILATION_SAME_LANGUAGE_MODIFIER",
+      "type": "float",
+      "defaultValue": 0.5
+    },
+    {
+      "id": "NCulture.ASSIMILATION_SAME_LANGUAGE_FAMILY_MODIFIER",
+      "category": "NCulture",
+      "key": "ASSIMILATION_SAME_LANGUAGE_FAMILY_MODIFIER",
+      "type": "float",
+      "defaultValue": 0.1
+    },
+    {
+      "id": "NCulture.ASSIMILATION_ACTOR_AND_TARGET_HAVE_MARKET_LANGUAGE_MODIFIER",
+      "category": "NCulture",
+      "key": "ASSIMILATION_ACTOR_AND_TARGET_HAVE_MARKET_LANGUAGE_MODIFIER",
+      "type": "float",
+      "defaultValue": 0.4
+    },
+    {
+      "id": "NCulture.ASSIMILATION_ACTOR_HAS_MARKET_LANGUAGE_MODIFIER",
+      "category": "NCulture",
+      "key": "ASSIMILATION_ACTOR_HAS_MARKET_LANGUAGE_MODIFIER",
+      "type": "float",
+      "defaultValue": 0.2
+    },
+    {
+      "id": "NCulture.ASSIMILATION_TARGET_HAS_MARKET_LANGUAGE_MODIFIER",
+      "category": "NCulture",
+      "key": "ASSIMILATION_TARGET_HAS_MARKET_LANGUAGE_MODIFIER",
+      "type": "float",
+      "defaultValue": -0.2
+    },
+    {
+      "id": "NCulture.ASSIMILATION_ACCEPTED_CULTURE_MODIFIER",
+      "category": "NCulture",
+      "key": "ASSIMILATION_ACCEPTED_CULTURE_MODIFIER",
+      "type": "float",
+      "defaultValue": -0.75,
+      "comment": "Accepted cultures are slower to assimilate because we already give them extra rights"
+    },
+    {
+      "id": "NCulture.ASSIMILATION_TOLERATED_CULTURE_MODIFIER",
+      "category": "NCulture",
+      "key": "ASSIMILATION_TOLERATED_CULTURE_MODIFIER",
+      "type": "float",
+      "defaultValue": -0.25
+    },
+    {
+      "id": "NCulture.ASSIMILATION_IS_MERGED_CULTURE_GROUP_MODIFIER",
+      "category": "NCulture",
+      "key": "ASSIMILATION_IS_MERGED_CULTURE_GROUP_MODIFIER",
+      "type": "float",
+      "defaultValue": 1,
+      "comment": "if the owner culture is a Unified Culture Group and the target is part of that culture group"
+    },
+    {
+      "id": "NCulture.ASSIMILATION_TARGET_CULTURE_OPINION_OF_OWNER_MODIFER",
+      "category": "NCulture",
+      "key": "ASSIMILATION_TARGET_CULTURE_OPINION_OF_OWNER_MODIFER",
+      "type": "float",
+      "defaultValue": 0.2,
+      "comment": "range -3 to +3"
+    },
+    {
+      "id": "NCulture.ASSIMILATION_OWNER_CULTURE_OPINION_OF_TARGET_MODIFER",
+      "category": "NCulture",
+      "key": "ASSIMILATION_OWNER_CULTURE_OPINION_OF_TARGET_MODIFER",
+      "type": "float",
+      "defaultValue": -0.1,
+      "comment": "range -3 to +3. negative because the more they like a culture, the less drive to eradicate it"
+    },
+    {
+      "id": "NCulture.ACCEPTED_CULTURE_SETUP_ERROR_IF_ABOVE_MAX",
+      "category": "NCulture",
+      "key": "ACCEPTED_CULTURE_SETUP_ERROR_IF_ABOVE_MAX",
+      "type": "integer",
+      "defaultValue": 2,
+      "comment": "If setup country has this many accepted cultures above the max accepted cultures, throw an error"
+    },
+    {
+      "id": "NCulture.ACCEPTED_CULTURE_SETUP_ERROR_IF_BELOW_MAX",
+      "category": "NCulture",
+      "key": "ACCEPTED_CULTURE_SETUP_ERROR_IF_BELOW_MAX",
+      "type": "integer",
+      "defaultValue": 1,
+      "comment": "If setup country has this many accepted cultures below the max accepted cultures (and there are available targets inside the country), throw an error"
+    }
+  ]
+}

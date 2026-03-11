@@ -1,0 +1,515 @@
+{
+  "name": "NEconomy",
+  "defines": [
+    {
+      "id": "NEconomy.ECONOMICAL_BASE_FROM_TAX_BASE",
+      "category": "NEconomy",
+      "key": "ECONOMICAL_BASE_FROM_TAX_BASE",
+      "type": "float",
+      "defaultValue": 0.5
+    },
+    {
+      "id": "NEconomy.ECONOMICAL_BASE_FROM_POP",
+      "category": "NEconomy",
+      "key": "ECONOMICAL_BASE_FROM_POP",
+      "type": "float",
+      "defaultValue": 0.015
+    },
+    {
+      "id": "NEconomy.ECONOMICAL_BASE_FROM_TRADE_VALUE",
+      "category": "NEconomy",
+      "key": "ECONOMICAL_BASE_FROM_TRADE_VALUE",
+      "type": "float",
+      "defaultValue": 0.2
+    },
+    {
+      "id": "NEconomy.ECONOMICAL_BASE_FROM_TRADE_PROFIT",
+      "category": "NEconomy",
+      "key": "ECONOMICAL_BASE_FROM_TRADE_PROFIT",
+      "type": "float",
+      "defaultValue": 0.2
+    },
+    {
+      "id": "NEconomy.ECONOMICAL_BASE_INTEREST",
+      "category": "NEconomy",
+      "key": "ECONOMICAL_BASE_INTEREST",
+      "type": "float",
+      "defaultValue": 0.25
+    },
+    {
+      "id": "NEconomy.ECONOMICAL_BASE_FROM_SUBJECT",
+      "category": "NEconomy",
+      "key": "ECONOMICAL_BASE_FROM_SUBJECT",
+      "type": "float",
+      "defaultValue": 0.05
+    },
+    {
+      "id": "NEconomy.ECONOMICAL_BASE_SCALE_FROM_EACH_INSTITUTION",
+      "category": "NEconomy",
+      "key": "ECONOMICAL_BASE_SCALE_FROM_EACH_INSTITUTION",
+      "type": "float",
+      "defaultValue": 0.066
+    },
+    {
+      "id": "NEconomy.ECONOMICAL_BASE_ALL_HAS_TRADE",
+      "category": "NEconomy",
+      "key": "ECONOMICAL_BASE_ALL_HAS_TRADE",
+      "type": "boolean",
+      "defaultValue": false,
+      "comment": "if no, only building based countries, if yes, all countries"
+    },
+    {
+      "id": "NEconomy.MINTING_GOODS_LEVEL",
+      "category": "NEconomy",
+      "key": "MINTING_GOODS_LEVEL",
+      "type": "float",
+      "defaultValue": 0.01
+    },
+    {
+      "id": "NEconomy.PRIVATEER_STEAL_MONEY_FACTOR",
+      "category": "NEconomy",
+      "key": "PRIVATEER_STEAL_MONEY_FACTOR",
+      "type": "float",
+      "defaultValue": 0.01
+    },
+    {
+      "id": "NEconomy.ESTATE_LOAN_SIZE",
+      "category": "NEconomy",
+      "key": "ESTATE_LOAN_SIZE",
+      "type": "float",
+      "defaultValue": 0.5
+    },
+    {
+      "id": "NEconomy.MIN_ESTATE_LOAN",
+      "category": "NEconomy",
+      "key": "MIN_ESTATE_LOAN",
+      "type": "integer",
+      "defaultValue": 2
+    },
+    {
+      "id": "NEconomy.ESTATE_LOAN_DURATION_IN_MONTHS",
+      "category": "NEconomy",
+      "key": "ESTATE_LOAN_DURATION_IN_MONTHS",
+      "type": "integer",
+      "defaultValue": 60,
+      "comment": "5 years minimum"
+    },
+    {
+      "id": "NEconomy.ESTATE_LOAN_MIN_INTEREST",
+      "category": "NEconomy",
+      "key": "ESTATE_LOAN_MIN_INTEREST",
+      "type": "float",
+      "defaultValue": 0.01
+    },
+    {
+      "id": "NEconomy.OVER_FORT_LIMIT_MULTIPLIER",
+      "category": "NEconomy",
+      "key": "OVER_FORT_LIMIT_MULTIPLIER",
+      "type": "float",
+      "defaultValue": 1
+    },
+    {
+      "id": "NEconomy.OVER_FORT_LIMIT_ERROR_LOG",
+      "category": "NEconomy",
+      "key": "OVER_FORT_LIMIT_ERROR_LOG",
+      "type": "float",
+      "defaultValue": 1,
+      "comment": "If setup country is this far above its fort level, throw an error"
+    },
+    {
+      "id": "NEconomy.ARTIST_SALARY_BASE_FACTOR",
+      "category": "NEconomy",
+      "key": "ARTIST_SALARY_BASE_FACTOR",
+      "type": "float",
+      "defaultValue": 0.025
+    },
+    {
+      "id": "NEconomy.UPGRADE_PRICE_MODIFIER",
+      "category": "NEconomy",
+      "key": "UPGRADE_PRICE_MODIFIER",
+      "type": "float",
+      "defaultValue": -0.25
+    },
+    {
+      "id": "NEconomy.CHANCE_FOR_SUBUNIT_LOSS_AT_BANKRUPTCY",
+      "category": "NEconomy",
+      "key": "CHANCE_FOR_SUBUNIT_LOSS_AT_BANKRUPTCY",
+      "type": "integer",
+      "defaultValue": 25
+    },
+    {
+      "id": "NEconomy.CHANCE_FOR_BUILDING_REDUCTION_AT_BANKRUPTCY",
+      "category": "NEconomy",
+      "key": "CHANCE_FOR_BUILDING_REDUCTION_AT_BANKRUPTCY",
+      "type": "integer",
+      "defaultValue": 10
+    },
+    {
+      "id": "NEconomy.BANKRUPTCY_STAB_LOSS",
+      "category": "NEconomy",
+      "key": "BANKRUPTCY_STAB_LOSS",
+      "type": "integer",
+      "defaultValue": -50
+    },
+    {
+      "id": "NEconomy.BANKRUPTCY_INFLATION_CHANGE_PERCENT",
+      "category": "NEconomy",
+      "key": "BANKRUPTCY_INFLATION_CHANGE_PERCENT",
+      "type": "float",
+      "defaultValue": -0.25
+    },
+    {
+      "id": "NEconomy.BANKRUPTCY_DURATION_IN_MONTHS",
+      "category": "NEconomy",
+      "key": "BANKRUPTCY_DURATION_IN_MONTHS",
+      "type": "integer",
+      "defaultValue": 60
+    },
+    {
+      "id": "NEconomy.BANKRUPTCY_CONTROL_CHANGE_PERCENT",
+      "category": "NEconomy",
+      "key": "BANKRUPTCY_CONTROL_CHANGE_PERCENT",
+      "type": "float",
+      "defaultValue": -0.33
+    },
+    {
+      "id": "NEconomy.SUPPLY_AND_DEMAND_STABILITY_OFFSET_CONSTANT",
+      "category": "NEconomy",
+      "key": "SUPPLY_AND_DEMAND_STABILITY_OFFSET_CONSTANT",
+      "type": "integer",
+      "defaultValue": 1,
+      "comment": "added to supply and demand when calculating market price, higher value means lower price volatility"
+    },
+    {
+      "id": "NEconomy.UNPROFITABLE_BUILDING_WORKERS_LAID_OFF_PERCENTAGE",
+      "category": "NEconomy",
+      "key": "UNPROFITABLE_BUILDING_WORKERS_LAID_OFF_PERCENTAGE",
+      "type": "integer",
+      "defaultValue": 10,
+      "comment": "percentage of workers that an unprofitable, unsubsidised building will lay off per month"
+    },
+    {
+      "id": "NEconomy.PROFITABLE_BUILDING_WORKERS_REHIRED_PERCENTAGE",
+      "category": "NEconomy",
+      "key": "PROFITABLE_BUILDING_WORKERS_REHIRED_PERCENTAGE",
+      "type": "integer",
+      "defaultValue": 10,
+      "comment": "percentage of workers that a profitable, unsubsidised building look to rehire per month if they're not at full employment percentage"
+    },
+    {
+      "id": "NEconomy.LOAN_MIN_INTEREST",
+      "category": "NEconomy",
+      "key": "LOAN_MIN_INTEREST",
+      "type": "float",
+      "defaultValue": 0.01
+    },
+    {
+      "id": "NEconomy.LOAN_MAX_INTEREST",
+      "category": "NEconomy",
+      "key": "LOAN_MAX_INTEREST",
+      "type": "float",
+      "defaultValue": 0.25
+    },
+    {
+      "id": "NEconomy.LOAN_MIN_DURATION",
+      "category": "NEconomy",
+      "key": "LOAN_MIN_DURATION",
+      "type": "integer",
+      "defaultValue": 12
+    },
+    {
+      "id": "NEconomy.LOAN_MAX_DURATION",
+      "category": "NEconomy",
+      "key": "LOAN_MAX_DURATION",
+      "type": "integer",
+      "defaultValue": 360
+    },
+    {
+      "id": "NEconomy.LOAN_MIN_AMOUNT",
+      "category": "NEconomy",
+      "key": "LOAN_MIN_AMOUNT",
+      "type": "integer",
+      "defaultValue": 10
+    },
+    {
+      "id": "NEconomy.PRODUCTION_EFFIENCY_BONUS_PER_LEVEL",
+      "category": "NEconomy",
+      "key": "PRODUCTION_EFFIENCY_BONUS_PER_LEVEL",
+      "type": "float",
+      "defaultValue": 0.01
+    },
+    {
+      "id": "NEconomy.PATROL_THE_SEAS_THRESHOLD",
+      "category": "NEconomy",
+      "key": "PATROL_THE_SEAS_THRESHOLD",
+      "type": "integer",
+      "defaultValue": 90,
+      "comment": "patrol until this maritime (0-100)"
+    },
+    {
+      "id": "NEconomy.REFUND_FACTOR",
+      "category": "NEconomy",
+      "key": "REFUND_FACTOR",
+      "type": "float",
+      "defaultValue": 0.8
+    },
+    {
+      "id": "NEconomy.BUILDING_UPKEEP_FACTOR",
+      "category": "NEconomy",
+      "key": "BUILDING_UPKEEP_FACTOR",
+      "type": "float",
+      "defaultValue": 0.2
+    },
+    {
+      "id": "NEconomy.INFLATION_MINTING_GOLD_DEMANDS_FACTOR",
+      "category": "NEconomy",
+      "key": "INFLATION_MINTING_GOLD_DEMANDS_FACTOR",
+      "type": "float",
+      "defaultValue": 1
+    },
+    {
+      "id": "NEconomy.INFLATION_RGO_IMPACT_FACTOR",
+      "category": "NEconomy",
+      "key": "INFLATION_RGO_IMPACT_FACTOR",
+      "type": "float",
+      "defaultValue": 0.01
+    },
+    {
+      "id": "NEconomy.INFLATION_RGO_CAP",
+      "category": "NEconomy",
+      "key": "INFLATION_RGO_CAP",
+      "type": "float",
+      "defaultValue": 0.5
+    },
+    {
+      "id": "NEconomy.INFLATION_RGO_INCOME_FACTOR",
+      "category": "NEconomy",
+      "key": "INFLATION_RGO_INCOME_FACTOR",
+      "type": "integer",
+      "defaultValue": 2
+    },
+    {
+      "id": "NEconomy.INFLATION_MINTING_IMPACT_FACTOR",
+      "category": "NEconomy",
+      "key": "INFLATION_MINTING_IMPACT_FACTOR",
+      "type": "float",
+      "defaultValue": 0.005
+    },
+    {
+      "id": "NEconomy.INFLATION_MINTING_TAX_FACTOR",
+      "category": "NEconomy",
+      "key": "INFLATION_MINTING_TAX_FACTOR",
+      "type": "float",
+      "defaultValue": 0.25
+    },
+    {
+      "id": "NEconomy.STABILITY_INVEST_FACTOR",
+      "category": "NEconomy",
+      "key": "STABILITY_INVEST_FACTOR",
+      "type": "float",
+      "defaultValue": 0.5
+    },
+    {
+      "id": "NEconomy.STABILIY_EXPENSE_FACTOR",
+      "category": "NEconomy",
+      "key": "STABILIY_EXPENSE_FACTOR",
+      "type": "float",
+      "defaultValue": 0.1
+    },
+    {
+      "id": "NEconomy.PRESTIGE_INVEST_FACTOR",
+      "category": "NEconomy",
+      "key": "PRESTIGE_INVEST_FACTOR",
+      "type": "float",
+      "defaultValue": 0.1
+    },
+    {
+      "id": "NEconomy.GOV_POWER_INVEST_FACTOR",
+      "category": "NEconomy",
+      "key": "GOV_POWER_INVEST_FACTOR",
+      "type": "float",
+      "defaultValue": 2
+    },
+    {
+      "id": "NEconomy.ESTATE_BUILD_MAX_CONTROL_THRESHOLD",
+      "category": "NEconomy",
+      "key": "ESTATE_BUILD_MAX_CONTROL_THRESHOLD",
+      "type": "float",
+      "defaultValue": 0.75
+    },
+    {
+      "id": "NEconomy.DESTROY_ESTATE_BUILD_MIN_CONTROL_THRESHOLD",
+      "category": "NEconomy",
+      "key": "DESTROY_ESTATE_BUILD_MIN_CONTROL_THRESHOLD",
+      "type": "float",
+      "defaultValue": 0.75
+    },
+    {
+      "id": "NEconomy.ESTATE_MAX_PRICE_MULTIPLIER",
+      "category": "NEconomy",
+      "key": "ESTATE_MAX_PRICE_MULTIPLIER",
+      "type": "integer",
+      "defaultValue": 4
+    },
+    {
+      "id": "NEconomy.SETUP_PRINT_OBSOLETE_BUILDINGS",
+      "category": "NEconomy",
+      "key": "SETUP_PRINT_OBSOLETE_BUILDINGS",
+      "type": "boolean",
+      "defaultValue": false
+    },
+    {
+      "id": "NEconomy.BALANCE_CACHE_IN_MONTHS",
+      "category": "NEconomy",
+      "key": "BALANCE_CACHE_IN_MONTHS",
+      "type": "integer",
+      "defaultValue": 12
+    },
+    {
+      "id": "NEconomy.MOTHBALL_MAINTENANCE_FACTOR",
+      "category": "NEconomy",
+      "key": "MOTHBALL_MAINTENANCE_FACTOR",
+      "type": "float",
+      "defaultValue": 0.5
+    },
+    {
+      "id": "NEconomy.PRISONERS_MAINTENANCE_FACTOR",
+      "category": "NEconomy",
+      "key": "PRISONERS_MAINTENANCE_FACTOR",
+      "type": "float",
+      "defaultValue": 0.3
+    },
+    {
+      "id": "NEconomy.SOUND_TOLL_FACTOR",
+      "category": "NEconomy",
+      "key": "SOUND_TOLL_FACTOR",
+      "type": "float",
+      "defaultValue": 0.25
+    },
+    {
+      "id": "NEconomy.BURGHER_MAX_TRADE_RANGE",
+      "category": "NEconomy",
+      "key": "BURGHER_MAX_TRADE_RANGE",
+      "type": "integer",
+      "defaultValue": 1000
+    },
+    {
+      "id": "NEconomy.TRADE_BURGHER_PROFIT_SCALE",
+      "category": "NEconomy",
+      "key": "TRADE_BURGHER_PROFIT_SCALE",
+      "type": "float",
+      "defaultValue": 0.1
+    },
+    {
+      "id": "NEconomy.TRADE_IMPACT_ON_SUPPLY_AND_DEMAND",
+      "category": "NEconomy",
+      "key": "TRADE_IMPACT_ON_SUPPLY_AND_DEMAND",
+      "type": "boolean",
+      "defaultValue": true
+    },
+    {
+      "id": "NEconomy.DEFAULT_CURRENCY_STABILITY",
+      "category": "NEconomy",
+      "key": "DEFAULT_CURRENCY_STABILITY",
+      "type": "integer",
+      "defaultValue": 30
+    },
+    {
+      "id": "NEconomy.DEFAULT_CURRENCY_GOVERNMENT_POWER",
+      "category": "NEconomy",
+      "key": "DEFAULT_CURRENCY_GOVERNMENT_POWER",
+      "type": "integer",
+      "defaultValue": 95
+    },
+    {
+      "id": "NEconomy.DEFAULT_CURRENCY_PRESTIGE",
+      "category": "NEconomy",
+      "key": "DEFAULT_CURRENCY_PRESTIGE",
+      "type": "integer",
+      "defaultValue": 20
+    },
+    {
+      "id": "NEconomy.DEFAULT_CURRENCY_PURITY",
+      "category": "NEconomy",
+      "key": "DEFAULT_CURRENCY_PURITY",
+      "type": "integer",
+      "defaultValue": 60
+    },
+    {
+      "id": "NEconomy.DEFAULT_CURRENCY_RIGHTEOUSNESS",
+      "category": "NEconomy",
+      "key": "DEFAULT_CURRENCY_RIGHTEOUSNESS",
+      "type": "integer",
+      "defaultValue": 90
+    },
+    {
+      "id": "NEconomy.GROWTH_FROM_FOOD_MULTIPLIER_MAX",
+      "category": "NEconomy",
+      "key": "GROWTH_FROM_FOOD_MULTIPLIER_MAX",
+      "type": "integer",
+      "defaultValue": 10,
+      "comment": "Maximum scaling of the growth from food"
+    },
+    {
+      "id": "NEconomy.TRADE_PATH_UPSTREAM_COST_MULTIPLIER",
+      "category": "NEconomy",
+      "key": "TRADE_PATH_UPSTREAM_COST_MULTIPLIER",
+      "type": "float",
+      "defaultValue": -0.2,
+      "comment": "moving upstream is still better than over land"
+    },
+    {
+      "id": "NEconomy.TRADE_PATH_DOWNSTREAM_COST_MULTIPLIER",
+      "category": "NEconomy",
+      "key": "TRADE_PATH_DOWNSTREAM_COST_MULTIPLIER",
+      "type": "float",
+      "defaultValue": -0.5,
+      "comment": "moving downstream is easy peasy"
+    },
+    {
+      "id": "NEconomy.TRADE_PATH_RIVER_CROSSING_COST_MULTIPLIER",
+      "category": "NEconomy",
+      "key": "TRADE_PATH_RIVER_CROSSING_COST_MULTIPLIER",
+      "type": "float",
+      "defaultValue": 0.3,
+      "comment": "crossing a river :\\"
+    },
+    {
+      "id": "NEconomy.TRADE_SEA_MULTIPLIER",
+      "category": "NEconomy",
+      "key": "TRADE_SEA_MULTIPLIER",
+      "type": "float",
+      "defaultValue": 0.2,
+      "comment": "moving through sea is cheaper"
+    },
+    {
+      "id": "NEconomy.TRADE_PORT_COST",
+      "category": "NEconomy",
+      "key": "TRADE_PORT_COST",
+      "type": "integer",
+      "defaultValue": 10,
+      "comment": "fixed cost of loading/unloading boats"
+    },
+    {
+      "id": "NEconomy.LOCATION_DEPOPULATION_ALERT_MONTHS",
+      "category": "NEconomy",
+      "key": "LOCATION_DEPOPULATION_ALERT_MONTHS",
+      "type": "integer",
+      "defaultValue": 60
+    },
+    {
+      "id": "NEconomy.TRADE_PATH_TRAVEL_COST_MULT",
+      "category": "NEconomy",
+      "key": "TRADE_PATH_TRAVEL_COST_MULT",
+      "type": "integer",
+      "defaultValue": 10
+    },
+    {
+      "id": "NEconomy.LOW_PURITY_THRESHOLD",
+      "category": "NEconomy",
+      "key": "LOW_PURITY_THRESHOLD",
+      "type": "integer",
+      "defaultValue": 25
+    }
+  ]
+}

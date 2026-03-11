@@ -1,0 +1,119 @@
+{
+  "name": "NColony",
+  "defines": [
+    {
+      "id": "NColony.BASE_COST",
+      "category": "NColony",
+      "key": "BASE_COST",
+      "type": "integer",
+      "defaultValue": 1
+    },
+    {
+      "id": "NColony.DISTANCE_COST_FACTOR",
+      "category": "NColony",
+      "key": "DISTANCE_COST_FACTOR",
+      "type": "float",
+      "defaultValue": 0.0005
+    },
+    {
+      "id": "NColony.POPULATION_COST_FACTOR",
+      "category": "NColony",
+      "key": "POPULATION_COST_FACTOR",
+      "type": "float",
+      "defaultValue": 0.25
+    },
+    {
+      "id": "NColony.POPULATION_COST_CAP",
+      "category": "NColony",
+      "key": "POPULATION_COST_CAP",
+      "type": "integer",
+      "defaultValue": 3
+    },
+    {
+      "id": "NColony.LOCATION_MAX_POP_ALLOWED_FOR_COLONY",
+      "category": "NColony",
+      "key": "LOCATION_MAX_POP_ALLOWED_FOR_COLONY",
+      "type": "integer",
+      "defaultValue": 50
+    },
+    {
+      "id": "NColony.DEVELOPMENT_AT_NEW_COLONY",
+      "category": "NColony",
+      "key": "DEVELOPMENT_AT_NEW_COLONY",
+      "type": "integer",
+      "defaultValue": 5
+    },
+    {
+      "id": "NColony.SAME_AREA_COST_FACTOR",
+      "category": "NColony",
+      "key": "SAME_AREA_COST_FACTOR",
+      "type": "float",
+      "defaultValue": -0.5
+    },
+    {
+      "id": "NColony.SAME_REGION_COST_FACTOR",
+      "category": "NColony",
+      "key": "SAME_REGION_COST_FACTOR",
+      "type": "float",
+      "defaultValue": -0.33
+    },
+    {
+      "id": "NColony.POWER_PROJECTION_SPREAD",
+      "category": "NColony",
+      "key": "POWER_PROJECTION_SPREAD",
+      "type": "float",
+      "defaultValue": 0.005
+    },
+    {
+      "id": "NColony.CONQUISTADOR_CONSTRUCTION_TIME",
+      "category": "NColony",
+      "key": "CONQUISTADOR_CONSTRUCTION_TIME",
+      "type": "integer",
+      "defaultValue": 90,
+      "comment": "days"
+    },
+    {
+      "id": "NColony.EXPLORATION_CONSTRUCTION_TIME",
+      "category": "NColony",
+      "key": "EXPLORATION_CONSTRUCTION_TIME",
+      "type": "integer",
+      "defaultValue": 270,
+      "comment": "days"
+    },
+    {
+      "id": "NColony.EXPLORATION_BASE_COST",
+      "category": "NColony",
+      "key": "EXPLORATION_BASE_COST",
+      "type": "integer",
+      "defaultValue": 10
+    },
+    {
+      "id": "NColony.EXPLORATION_BASE_TIME",
+      "category": "NColony",
+      "key": "EXPLORATION_BASE_TIME",
+      "type": "integer",
+      "defaultValue": 3
+    },
+    {
+      "id": "NColony.EXPLORATION_DISTANCE_TIME",
+      "category": "NColony",
+      "key": "EXPLORATION_DISTANCE_TIME",
+      "type": "integer",
+      "defaultValue": 9
+    },
+    {
+      "id": "NColony.EXPEL_TRIBAL_BENEFIT_DURATION",
+      "category": "NColony",
+      "key": "EXPEL_TRIBAL_BENEFIT_DURATION",
+      "type": "integer",
+      "defaultValue": 120
+    },
+    {
+      "id": "NColony.MAX_CHARTERS_IN_PROVINCE",
+      "category": "NColony",
+      "key": "MAX_CHARTERS_IN_PROVINCE",
+      "type": "integer",
+      "defaultValue": 3
+    }
+  ]
+}

@@ -1,0 +1,290 @@
+{
+  "name": "NUnit",
+  "defines": [
+    {
+      "id": "NUnit.EMBARK_DISEMBARK_MULTIPLIER",
+      "category": "NUnit",
+      "key": "EMBARK_DISEMBARK_MULTIPLIER",
+      "type": "float",
+      "defaultValue": 0.2,
+      "comment": "to make disembark/embark from coast slower."
+    },
+    {
+      "id": "NUnit.SIZE_IMPACT_ON_MOVEMENT_SCALE",
+      "category": "NUnit",
+      "key": "SIZE_IMPACT_ON_MOVEMENT_SCALE",
+      "type": "float",
+      "defaultValue": -0.02
+    },
+    {
+      "id": "NUnit.SIZE_IMPACT_ON_MOVEMENT_CAP",
+      "category": "NUnit",
+      "key": "SIZE_IMPACT_ON_MOVEMENT_CAP",
+      "type": "float",
+      "defaultValue": -0.5
+    },
+    {
+      "id": "NUnit.BASE_REGIMENT_PRICE_SCALE",
+      "category": "NUnit",
+      "key": "BASE_REGIMENT_PRICE_SCALE",
+      "type": "float",
+      "defaultValue": 0.1,
+      "comment": "100 men is a base  (divided)"
+    },
+    {
+      "id": "NUnit.BASE_SCALE_SHIP_DOUBLE_PER_AGE",
+      "category": "NUnit",
+      "key": "BASE_SCALE_SHIP_DOUBLE_PER_AGE",
+      "type": "integer",
+      "defaultValue": 1,
+      "comment": "as regiments double in size each age.. 0 to disable."
+    },
+    {
+      "id": "NUnit.EXPERIENCE_GAIN_FROM_MISSIONS",
+      "category": "NUnit",
+      "key": "EXPERIENCE_GAIN_FROM_MISSIONS",
+      "type": "float",
+      "defaultValue": 1
+    },
+    {
+      "id": "NUnit.UPGRADE_COST_SCALE",
+      "category": "NUnit",
+      "key": "UPGRADE_COST_SCALE",
+      "type": "float",
+      "defaultValue": 0.1
+    },
+    {
+      "id": "NUnit.REGIMENT_SIZE",
+      "category": "NUnit",
+      "key": "REGIMENT_SIZE",
+      "type": "integer",
+      "defaultValue": 1000
+    },
+    {
+      "id": "NUnit.ATTRITION_ON_FOOD_CONSUMPTION_IMPACT",
+      "category": "NUnit",
+      "key": "ATTRITION_ON_FOOD_CONSUMPTION_IMPACT",
+      "type": "float",
+      "defaultValue": 2
+    },
+    {
+      "id": "NUnit.MONTHS_OF_FOOD_FOR_DETACHED_SUPPORT",
+      "category": "NUnit",
+      "key": "MONTHS_OF_FOOD_FOR_DETACHED_SUPPORT",
+      "type": "integer",
+      "defaultValue": 6
+    },
+    {
+      "id": "NUnit.ATTRITION_LACK_OF_FOOD",
+      "category": "NUnit",
+      "key": "ATTRITION_LACK_OF_FOOD",
+      "type": "integer",
+      "defaultValue": 5
+    },
+    {
+      "id": "NUnit.LEVY_MAINTENANCE_FACTOR",
+      "category": "NUnit",
+      "key": "LEVY_MAINTENANCE_FACTOR",
+      "type": "float",
+      "defaultValue": 0.01
+    },
+    {
+      "id": "NUnit.MOTHBALL_PERCENT",
+      "category": "NUnit",
+      "key": "MOTHBALL_PERCENT",
+      "type": "float",
+      "defaultValue": 0.1
+    },
+    {
+      "id": "NUnit.LAND_MORALE",
+      "category": "NUnit",
+      "key": "LAND_MORALE",
+      "type": "float",
+      "defaultValue": 3
+    },
+    {
+      "id": "NUnit.NAVAL_MORALE",
+      "category": "NUnit",
+      "key": "NAVAL_MORALE",
+      "type": "float",
+      "defaultValue": 3
+    },
+    {
+      "id": "NUnit.ARMY_MOVEMENT_SPEED",
+      "category": "NUnit",
+      "key": "ARMY_MOVEMENT_SPEED",
+      "type": "float",
+      "defaultValue": 0.13
+    },
+    {
+      "id": "NUnit.NAVY_MOVEMENT_SPEED",
+      "category": "NUnit",
+      "key": "NAVY_MOVEMENT_SPEED",
+      "type": "float",
+      "defaultValue": 0.5
+    },
+    {
+      "id": "NUnit.ARMY_MOVEMENT_SPEED_INTO_UNKNOWN_TERRITORY_MODIFIER",
+      "category": "NUnit",
+      "key": "ARMY_MOVEMENT_SPEED_INTO_UNKNOWN_TERRITORY_MODIFIER",
+      "type": "integer",
+      "defaultValue": 1
+    },
+    {
+      "id": "NUnit.MOVEMENT_LOCKED",
+      "category": "NUnit",
+      "key": "MOVEMENT_LOCKED",
+      "type": "float",
+      "defaultValue": 0.5
+    },
+    {
+      "id": "NUnit.LOW_MORALE_THRESHOLD",
+      "category": "NUnit",
+      "key": "LOW_MORALE_THRESHOLD",
+      "type": "float",
+      "defaultValue": 0.5
+    },
+    {
+      "id": "NUnit.SHIP_UPGRADE_STARTING_STRENGTH",
+      "category": "NUnit",
+      "key": "SHIP_UPGRADE_STARTING_STRENGTH",
+      "type": "float",
+      "defaultValue": 0.01
+    },
+    {
+      "id": "NUnit.MONTHLY_REINFORCE",
+      "category": "NUnit",
+      "key": "MONTHLY_REINFORCE",
+      "type": "float",
+      "defaultValue": 0.25
+    },
+    {
+      "id": "NUnit.MONTHLY_REPAIR",
+      "category": "NUnit",
+      "key": "MONTHLY_REPAIR",
+      "type": "float",
+      "defaultValue": 0.1
+    },
+    {
+      "id": "NUnit.LOCKED_MORALE_CAP",
+      "category": "NUnit",
+      "key": "LOCKED_MORALE_CAP",
+      "type": "float",
+      "defaultValue": 0.5
+    },
+    {
+      "id": "NUnit.LAND_MERC_COMPANY_RANDOM_NAME_COUNT",
+      "category": "NUnit",
+      "key": "LAND_MERC_COMPANY_RANDOM_NAME_COUNT",
+      "type": "integer",
+      "defaultValue": 20
+    },
+    {
+      "id": "NUnit.NAVAL_MERC_COMPANY_RANDOM_NAME_COUNT",
+      "category": "NUnit",
+      "key": "NAVAL_MERC_COMPANY_RANDOM_NAME_COUNT",
+      "type": "integer",
+      "defaultValue": 4
+    },
+    {
+      "id": "NUnit.LEADER_ASSIGN_MIN_DAYS",
+      "category": "NUnit",
+      "key": "LEADER_ASSIGN_MIN_DAYS",
+      "type": "integer",
+      "defaultValue": 7
+    },
+    {
+      "id": "NUnit.LEADER_ASSIGN_DISTANCE_FACTOR",
+      "category": "NUnit",
+      "key": "LEADER_ASSIGN_DISTANCE_FACTOR",
+      "type": "float",
+      "defaultValue": 0.07
+    },
+    {
+      "id": "NUnit.NAVAL_ATTRITION_CHANCE",
+      "category": "NUnit",
+      "key": "NAVAL_ATTRITION_CHANCE",
+      "type": "float",
+      "defaultValue": 0.1
+    },
+    {
+      "id": "NUnit.NAVAL_ATTRITION_MIN_AT_PORT",
+      "category": "NUnit",
+      "key": "NAVAL_ATTRITION_MIN_AT_PORT",
+      "type": "float",
+      "defaultValue": 0.05
+    },
+    {
+      "id": "NUnit.DAYS_UNTIL_CAN_BE_RANSOMED_AGAIN",
+      "category": "NUnit",
+      "key": "DAYS_UNTIL_CAN_BE_RANSOMED_AGAIN",
+      "type": "integer",
+      "defaultValue": 60
+    },
+    {
+      "id": "NUnit.ATTRITION_DAYS_AT_SEA",
+      "category": "NUnit",
+      "key": "ATTRITION_DAYS_AT_SEA",
+      "type": "float",
+      "defaultValue": 0.02
+    },
+    {
+      "id": "NUnit.OUTSIDE_OF_NAVAL_RANGE_ATTRITION",
+      "category": "NUnit",
+      "key": "OUTSIDE_OF_NAVAL_RANGE_ATTRITION",
+      "type": "float",
+      "defaultValue": 0.5
+    },
+    {
+      "id": "NUnit.FROZEN_ATTRITION",
+      "category": "NUnit",
+      "key": "FROZEN_ATTRITION",
+      "type": "float",
+      "defaultValue": 0.5
+    },
+    {
+      "id": "NUnit.FALLING_THROUGH_ICE_MIN_PROPORTION_TO_ESCAPE",
+      "category": "NUnit",
+      "key": "FALLING_THROUGH_ICE_MIN_PROPORTION_TO_ESCAPE",
+      "type": "float",
+      "defaultValue": 0.5
+    },
+    {
+      "id": "NUnit.DEPOSIT_FOOD_FRACTION",
+      "category": "NUnit",
+      "key": "DEPOSIT_FOOD_FRACTION",
+      "type": "float",
+      "defaultValue": 0.25
+    },
+    {
+      "id": "NUnit.SUPPLY_DEPOT_FOOD_FRACTION",
+      "category": "NUnit",
+      "key": "SUPPLY_DEPOT_FOOD_FRACTION",
+      "type": "float",
+      "defaultValue": 0.1
+    },
+    {
+      "id": "NUnit.DISEMBARK_COST_MULTIPLIER",
+      "category": "NUnit",
+      "key": "DISEMBARK_COST_MULTIPLIER",
+      "type": "float",
+      "defaultValue": 0.5,
+      "comment": "seazones are larger etc, and disembark is not from middle of seazone.."
+    },
+    {
+      "id": "NUnit.LOCATION_SCALE_ON_MOVEMENT_COST",
+      "category": "NUnit",
+      "key": "LOCATION_SCALE_ON_MOVEMENT_COST",
+      "type": "float",
+      "defaultValue": 1.33
+    },
+    {
+      "id": "NUnit.PERCENTAGE_OF_REGIMENTS_WITH_NICKNAME",
+      "category": "NUnit",
+      "key": "PERCENTAGE_OF_REGIMENTS_WITH_NICKNAME",
+      "type": "float",
+      "defaultValue": 0.5,
+      "comment": "What fraction of regiments spawn with a nickname (e.g. 1st 'Sitges' Regiment instead of just 1st Regiment)"
+    }
+  ]
+}

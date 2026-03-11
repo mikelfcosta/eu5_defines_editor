@@ -1,0 +1,687 @@
+{
+  "name": "NCountry",
+  "defines": [
+    {
+      "id": "NCountry.MONTHS_FOR_REBEL_UPRISING_EFFECT",
+      "category": "NCountry",
+      "key": "MONTHS_FOR_REBEL_UPRISING_EFFECT",
+      "type": "integer",
+      "defaultValue": 60
+    },
+    {
+      "id": "NCountry.BASE_ESTATE_POWER_FROM_CABINET",
+      "category": "NCountry",
+      "key": "BASE_ESTATE_POWER_FROM_CABINET",
+      "type": "float",
+      "defaultValue": 0.25
+    },
+    {
+      "id": "NCountry.BASE_ESTATE_POWER_FROM_COMMAND",
+      "category": "NCountry",
+      "key": "BASE_ESTATE_POWER_FROM_COMMAND",
+      "type": "float",
+      "defaultValue": 0.25
+    },
+    {
+      "id": "NCountry.COUNTRIES_GETTING_SCORE",
+      "category": "NCountry",
+      "key": "COUNTRIES_GETTING_SCORE",
+      "type": "integer",
+      "defaultValue": 20
+    },
+    {
+      "id": "NCountry.SCORE_FACTOR",
+      "category": "NCountry",
+      "key": "SCORE_FACTOR",
+      "type": "float",
+      "defaultValue": 0.5
+    },
+    {
+      "id": "NCountry.PEACE_IMPACT_ADM_SCORE",
+      "category": "NCountry",
+      "key": "PEACE_IMPACT_ADM_SCORE",
+      "type": "float",
+      "defaultValue": 0.25
+    },
+    {
+      "id": "NCountry.PEACE_IMPACT_DIP_SCORE",
+      "category": "NCountry",
+      "key": "PEACE_IMPACT_DIP_SCORE",
+      "type": "float",
+      "defaultValue": 0.25
+    },
+    {
+      "id": "NCountry.PEACE_IMPACT_MIL_SCORE",
+      "category": "NCountry",
+      "key": "PEACE_IMPACT_MIL_SCORE",
+      "type": "float",
+      "defaultValue": 0.25
+    },
+    {
+      "id": "NCountry.PEACE_IMPACT_LENGTH_IN_YEARS",
+      "category": "NCountry",
+      "key": "PEACE_IMPACT_LENGTH_IN_YEARS",
+      "type": "integer",
+      "defaultValue": 3
+    },
+    {
+      "id": "NCountry.VICTORY_CARD_DECAY_MONTHS",
+      "category": "NCountry",
+      "key": "VICTORY_CARD_DECAY_MONTHS",
+      "type": "integer",
+      "defaultValue": 120,
+      "comment": "months to lose all score."
+    },
+    {
+      "id": "NCountry.VICTORY_CARD_INCREASE_MONTHS",
+      "category": "NCountry",
+      "key": "VICTORY_CARD_INCREASE_MONTHS",
+      "type": "integer",
+      "defaultValue": 120,
+      "comment": "months to gain all score."
+    },
+    {
+      "id": "NCountry.VICTORY_CARD_BONUS_SCORE",
+      "category": "NCountry",
+      "key": "VICTORY_CARD_BONUS_SCORE",
+      "type": "integer",
+      "defaultValue": 1000,
+      "comment": "score given per level"
+    },
+    {
+      "id": "NCountry.RANDOM_PRIVATEER_SPAWN_POWER",
+      "category": "NCountry",
+      "key": "RANDOM_PRIVATEER_SPAWN_POWER",
+      "type": "float",
+      "defaultValue": 0.2,
+      "comment": "how much power is added to privateers when they appear or get a random boost"
+    },
+    {
+      "id": "NCountry.SOCIAL_VALUE_REQUIREMENT_FOR_REFORM",
+      "category": "NCountry",
+      "key": "SOCIAL_VALUE_REQUIREMENT_FOR_REFORM",
+      "type": "integer",
+      "defaultValue": 50
+    },
+    {
+      "id": "NCountry.SOCIETAL_VALUE_INERTIA_SCALE",
+      "category": "NCountry",
+      "key": "SOCIETAL_VALUE_INERTIA_SCALE",
+      "type": "integer",
+      "defaultValue": 100
+    },
+    {
+      "id": "NCountry.GRANT_PRIVILEGE_SATISFACTION_IMPACT",
+      "category": "NCountry",
+      "key": "GRANT_PRIVILEGE_SATISFACTION_IMPACT",
+      "type": "integer",
+      "defaultValue": 3
+    },
+    {
+      "id": "NCountry.REVOKE_PRIVILEGE_SATISFACTION_BASE",
+      "category": "NCountry",
+      "key": "REVOKE_PRIVILEGE_SATISFACTION_BASE",
+      "type": "float",
+      "defaultValue": -0.25
+    },
+    {
+      "id": "NCountry.REVOKE_PRIVILEGE_SATISFACTION_IMPACT",
+      "category": "NCountry",
+      "key": "REVOKE_PRIVILEGE_SATISFACTION_IMPACT",
+      "type": "integer",
+      "defaultValue": -3
+    },
+    {
+      "id": "NCountry.GRANT_PRIVILEGE_PENALTY_FOR_OTHERS_SCALE",
+      "category": "NCountry",
+      "key": "GRANT_PRIVILEGE_PENALTY_FOR_OTHERS_SCALE",
+      "type": "float",
+      "defaultValue": -0.5
+    },
+    {
+      "id": "NCountry.PARLIAMENT_AGENDA_FOR_OTHERS_SCALE",
+      "category": "NCountry",
+      "key": "PARLIAMENT_AGENDA_FOR_OTHERS_SCALE",
+      "type": "float",
+      "defaultValue": -0.2
+    },
+    {
+      "id": "NCountry.POTENTIAL_MISSION_COUNT",
+      "category": "NCountry",
+      "key": "POTENTIAL_MISSION_COUNT",
+      "type": "integer",
+      "defaultValue": 10
+    },
+    {
+      "id": "NCountry.COUNTRY_PRIMARY_COLOR_LIST",
+      "category": "NCountry",
+      "key": "COUNTRY_PRIMARY_COLOR_LIST",
+      "type": "string",
+      "defaultValue": "normal_colors"
+    },
+    {
+      "id": "NCountry.COUNTRY_SECONDARY_COLOR_LIST",
+      "category": "NCountry",
+      "key": "COUNTRY_SECONDARY_COLOR_LIST",
+      "type": "string",
+      "defaultValue": "metal_colors"
+    },
+    {
+      "id": "NCountry.COUNTRY_TERTIARY_COLOR_LIST",
+      "category": "NCountry",
+      "key": "COUNTRY_TERTIARY_COLOR_LIST",
+      "type": "string",
+      "defaultValue": "normal_colors"
+    },
+    {
+      "id": "NCountry.COUNTRY_MAP_COLOR_LIST",
+      "category": "NCountry",
+      "key": "COUNTRY_MAP_COLOR_LIST",
+      "type": "string",
+      "defaultValue": "normal_colors"
+    },
+    {
+      "id": "NCountry.COUNTRY_COLOR_MIN_SATURATION",
+      "category": "NCountry",
+      "key": "COUNTRY_COLOR_MIN_SATURATION",
+      "type": "float",
+      "defaultValue": 0.35
+    },
+    {
+      "id": "NCountry.COUNTRY_COLOR_MAX_SATURATION",
+      "category": "NCountry",
+      "key": "COUNTRY_COLOR_MAX_SATURATION",
+      "type": "float",
+      "defaultValue": 1
+    },
+    {
+      "id": "NCountry.COUNTRY_COLOR_MIN_VALUE",
+      "category": "NCountry",
+      "key": "COUNTRY_COLOR_MIN_VALUE",
+      "type": "float",
+      "defaultValue": 0.7
+    },
+    {
+      "id": "NCountry.COUNTRY_COLOR_MAX_VALUE",
+      "category": "NCountry",
+      "key": "COUNTRY_COLOR_MAX_VALUE",
+      "type": "float",
+      "defaultValue": 1
+    },
+    {
+      "id": "NCountry.COUNTRY_COLOR_DISTANCE_NEIGHBOUR",
+      "category": "NCountry",
+      "key": "COUNTRY_COLOR_DISTANCE_NEIGHBOUR",
+      "type": "float",
+      "defaultValue": 0.1
+    },
+    {
+      "id": "NCountry.COUNTRY_COLOR_DISTANCE_ORIGIN",
+      "category": "NCountry",
+      "key": "COUNTRY_COLOR_DISTANCE_ORIGIN",
+      "type": "float",
+      "defaultValue": 0.25
+    },
+    {
+      "id": "NCountry.MINIMUM_GOLD",
+      "category": "NCountry",
+      "key": "MINIMUM_GOLD",
+      "type": "integer",
+      "defaultValue": -99999999
+    },
+    {
+      "id": "NCountry.MAXIMUM_GOLD",
+      "category": "NCountry",
+      "key": "MAXIMUM_GOLD",
+      "type": "integer",
+      "defaultValue": 99999999
+    },
+    {
+      "id": "NCountry.MAX_MANPOWER_YEARS",
+      "category": "NCountry",
+      "key": "MAX_MANPOWER_YEARS",
+      "type": "integer",
+      "defaultValue": 5
+    },
+    {
+      "id": "NCountry.MAX_SAILORS_YEARS",
+      "category": "NCountry",
+      "key": "MAX_SAILORS_YEARS",
+      "type": "integer",
+      "defaultValue": 5
+    },
+    {
+      "id": "NCountry.BASE_RESEARCH_COST",
+      "category": "NCountry",
+      "key": "BASE_RESEARCH_COST",
+      "type": "integer",
+      "defaultValue": 25
+    },
+    {
+      "id": "NCountry.AGE_RESEARCH_MODIFIER",
+      "category": "NCountry",
+      "key": "AGE_RESEARCH_MODIFIER",
+      "type": "float",
+      "defaultValue": 0.15,
+      "comment": "multiplied per age.."
+    },
+    {
+      "id": "NCountry.PREVIOUS_AGE_REDUCTION",
+      "category": "NCountry",
+      "key": "PREVIOUS_AGE_REDUCTION",
+      "type": "integer",
+      "defaultValue": -8
+    },
+    {
+      "id": "NCountry.INSTITUTION_MINIMUM_PERCENT",
+      "category": "NCountry",
+      "key": "INSTITUTION_MINIMUM_PERCENT",
+      "type": "float",
+      "defaultValue": 0.2
+    },
+    {
+      "id": "NCountry.INSTITUTION_TRADE_SPREAD_SCALE",
+      "category": "NCountry",
+      "key": "INSTITUTION_TRADE_SPREAD_SCALE",
+      "type": "float",
+      "defaultValue": 0.0075
+    },
+    {
+      "id": "NCountry.CABINET_ACTION_SKILL_MODIFIER",
+      "category": "NCountry",
+      "key": "CABINET_ACTION_SKILL_MODIFIER",
+      "type": "float",
+      "defaultValue": 0.005
+    },
+    {
+      "id": "NCountry.ENSLAVE_AT_OCCUPATION_DAY_COOLDOWN",
+      "category": "NCountry",
+      "key": "ENSLAVE_AT_OCCUPATION_DAY_COOLDOWN",
+      "type": "integer",
+      "defaultValue": 500,
+      "comment": "more than a year, should cover most back&forth shit."
+    },
+    {
+      "id": "NCountry.ENSLAVE_AT_OCCUPATION",
+      "category": "NCountry",
+      "key": "ENSLAVE_AT_OCCUPATION",
+      "type": "float",
+      "defaultValue": 0.1,
+      "comment": "percentage of a pop to enslave on occupying a location"
+    },
+    {
+      "id": "NCountry.ENSLAVE_FROM_PRIVATEERS",
+      "category": "NCountry",
+      "key": "ENSLAVE_FROM_PRIVATEERS",
+      "type": "float",
+      "defaultValue": 0.01
+    },
+    {
+      "id": "NCountry.MONTHLY_PRIVATEER_SLAVE_CHANCE",
+      "category": "NCountry",
+      "key": "MONTHLY_PRIVATEER_SLAVE_CHANCE",
+      "type": "integer",
+      "defaultValue": 25,
+      "comment": "less than this on a d1000"
+    },
+    {
+      "id": "NCountry.ANNEX_MIN_COST",
+      "category": "NCountry",
+      "key": "ANNEX_MIN_COST",
+      "type": "integer",
+      "defaultValue": 50
+    },
+    {
+      "id": "NCountry.ANNEX_COST_PER_LOCATION",
+      "category": "NCountry",
+      "key": "ANNEX_COST_PER_LOCATION",
+      "type": "float",
+      "defaultValue": 20
+    },
+    {
+      "id": "NCountry.ALERT_HIGH_WAR_EXHAUSTION",
+      "category": "NCountry",
+      "key": "ALERT_HIGH_WAR_EXHAUSTION",
+      "type": "integer",
+      "defaultValue": 10
+    },
+    {
+      "id": "NCountry.ALERT_HIGH_DOOM",
+      "category": "NCountry",
+      "key": "ALERT_HIGH_DOOM",
+      "type": "integer",
+      "defaultValue": 90
+    },
+    {
+      "id": "NCountry.ARMY_LEVY_RECRUITMENT_TIME",
+      "category": "NCountry",
+      "key": "ARMY_LEVY_RECRUITMENT_TIME",
+      "type": "integer",
+      "defaultValue": 15
+    },
+    {
+      "id": "NCountry.NAVY_LEVY_RECRUITMENT_TIME",
+      "category": "NCountry",
+      "key": "NAVY_LEVY_RECRUITMENT_TIME",
+      "type": "integer",
+      "defaultValue": 15
+    },
+    {
+      "id": "NCountry.LEVY_RECOVERY_MONTHS",
+      "category": "NCountry",
+      "key": "LEVY_RECOVERY_MONTHS",
+      "type": "integer",
+      "defaultValue": 240
+    },
+    {
+      "id": "NCountry.LEVY_RECRUIT_THRESHOLD",
+      "category": "NCountry",
+      "key": "LEVY_RECRUIT_THRESHOLD",
+      "type": "float",
+      "defaultValue": 0.2
+    },
+    {
+      "id": "NCountry.ESTATE_LEVY_SATISFACTION_THRESHOLD",
+      "category": "NCountry",
+      "key": "ESTATE_LEVY_SATISFACTION_THRESHOLD",
+      "type": "float",
+      "defaultValue": 0.25
+    },
+    {
+      "id": "NCountry.ESTATE_TAX_SATISFACTION_THRESHOLD",
+      "category": "NCountry",
+      "key": "ESTATE_TAX_SATISFACTION_THRESHOLD",
+      "type": "float",
+      "defaultValue": 0.01
+    },
+    {
+      "id": "NCountry.SLAVE_MONTHLY_MAX_DISTRIBUTION",
+      "category": "NCountry",
+      "key": "SLAVE_MONTHLY_MAX_DISTRIBUTION",
+      "type": "float",
+      "defaultValue": 0.25
+    },
+    {
+      "id": "NCountry.TRADE_SLAVE_FACTOR",
+      "category": "NCountry",
+      "key": "TRADE_SLAVE_FACTOR",
+      "type": "float",
+      "defaultValue": 0.2
+    },
+    {
+      "id": "NCountry.COLONIAL_MIGRATION_DISTANCE_FACTOR",
+      "category": "NCountry",
+      "key": "COLONIAL_MIGRATION_DISTANCE_FACTOR",
+      "type": "float",
+      "defaultValue": 0.0001
+    },
+    {
+      "id": "NCountry.COLONIAL_POWER_PROJECTION_THRESHOLD_TO_START",
+      "category": "NCountry",
+      "key": "COLONIAL_POWER_PROJECTION_THRESHOLD_TO_START",
+      "type": "integer",
+      "defaultValue": 25
+    },
+    {
+      "id": "NCountry.COLONIAL_CHARTER_MIN_POPS_TO_TAKE_LOCATION",
+      "category": "NCountry",
+      "key": "COLONIAL_CHARTER_MIN_POPS_TO_TAKE_LOCATION",
+      "type": "integer",
+      "defaultValue": 1,
+      "comment": "1000"
+    },
+    {
+      "id": "NCountry.COLONIAL_CHARTER_MAX_POPS_TO_TAKE_LOCATION",
+      "category": "NCountry",
+      "key": "COLONIAL_CHARTER_MAX_POPS_TO_TAKE_LOCATION",
+      "type": "integer",
+      "defaultValue": 5,
+      "comment": "5000"
+    },
+    {
+      "id": "NCountry.COLONIAL_CHARTER_PP_POP_TARGET_IMPACT",
+      "category": "NCountry",
+      "key": "COLONIAL_CHARTER_PP_POP_TARGET_IMPACT",
+      "type": "float",
+      "defaultValue": 0.04
+    },
+    {
+      "id": "NCountry.CAPITAL_MOVE_BASE_DAYS",
+      "category": "NCountry",
+      "key": "CAPITAL_MOVE_BASE_DAYS",
+      "type": "integer",
+      "defaultValue": 180
+    },
+    {
+      "id": "NCountry.CAPITAL_MOVE_DISTANCE_FACTOR",
+      "category": "NCountry",
+      "key": "CAPITAL_MOVE_DISTANCE_FACTOR",
+      "type": "float",
+      "defaultValue": 0.05
+    },
+    {
+      "id": "NCountry.MERCHANT_DISTANCE_COST_DIVISOR",
+      "category": "NCountry",
+      "key": "MERCHANT_DISTANCE_COST_DIVISOR",
+      "type": "integer",
+      "defaultValue": 2000
+    },
+    {
+      "id": "NCountry.MERCHANT_MAINTENANCE_COST",
+      "category": "NCountry",
+      "key": "MERCHANT_MAINTENANCE_COST",
+      "type": "float",
+      "defaultValue": 0.5
+    },
+    {
+      "id": "NCountry.NEGATIVE_CULTURE_OPINION_ON_COUNTRY",
+      "category": "NCountry",
+      "key": "NEGATIVE_CULTURE_OPINION_ON_COUNTRY",
+      "type": "integer",
+      "defaultValue": 10
+    },
+    {
+      "id": "NCountry.NEGATIVE_RELIGION_OPINION_ON_COUNTRY",
+      "category": "NCountry",
+      "key": "NEGATIVE_RELIGION_OPINION_ON_COUNTRY",
+      "type": "integer",
+      "defaultValue": 10
+    },
+    {
+      "id": "NCountry.POSITIVE_CULTURE_OPINION_ON_COUNTRY",
+      "category": "NCountry",
+      "key": "POSITIVE_CULTURE_OPINION_ON_COUNTRY",
+      "type": "integer",
+      "defaultValue": 5
+    },
+    {
+      "id": "NCountry.POSITIVE_RELIGION_OPINION_ON_COUNTRY",
+      "category": "NCountry",
+      "key": "POSITIVE_RELIGION_OPINION_ON_COUNTRY",
+      "type": "integer",
+      "defaultValue": 5
+    },
+    {
+      "id": "NCountry.POP_SATISFACTION_NUDGE_AFTER_REANNEX",
+      "category": "NCountry",
+      "key": "POP_SATISFACTION_NUDGE_AFTER_REANNEX",
+      "type": "float",
+      "defaultValue": 0.5
+    },
+    {
+      "id": "NCountry.REBEL_MONTHLY_POWER_SCALE",
+      "category": "NCountry",
+      "key": "REBEL_MONTHLY_POWER_SCALE",
+      "type": "float",
+      "defaultValue": 0.01
+    },
+    {
+      "id": "NCountry.NATIONALISM_BASE_PROGRESS",
+      "category": "NCountry",
+      "key": "NATIONALISM_BASE_PROGRESS",
+      "type": "float",
+      "defaultValue": 0.0025
+    },
+    {
+      "id": "NCountry.REBEL_MONTHLY_FOREIGN_SUPPORT_SCALE",
+      "category": "NCountry",
+      "key": "REBEL_MONTHLY_FOREIGN_SUPPORT_SCALE",
+      "type": "float",
+      "defaultValue": 0.01
+    },
+    {
+      "id": "NCountry.REBEL_DYNASTY_SUPPORT",
+      "category": "NCountry",
+      "key": "REBEL_DYNASTY_SUPPORT",
+      "type": "float",
+      "defaultValue": 0.001
+    },
+    {
+      "id": "NCountry.REBEL_ESTATE_INVEST_IMPACT_PER_POP",
+      "category": "NCountry",
+      "key": "REBEL_ESTATE_INVEST_IMPACT_PER_POP",
+      "type": "float",
+      "defaultValue": 0.025
+    },
+    {
+      "id": "NCountry.REBEL_LACK_OF_CONTROL_FACTOR",
+      "category": "NCountry",
+      "key": "REBEL_LACK_OF_CONTROL_FACTOR",
+      "type": "float",
+      "defaultValue": 0.02
+    },
+    {
+      "id": "NCountry.REBEL_ESTATE_POWER_FACTOR",
+      "category": "NCountry",
+      "key": "REBEL_ESTATE_POWER_FACTOR",
+      "type": "float",
+      "defaultValue": 0.01
+    },
+    {
+      "id": "NCountry.REBEL_POPULATION_FRACTION_IMPACT",
+      "category": "NCountry",
+      "key": "REBEL_POPULATION_FRACTION_IMPACT",
+      "type": "float",
+      "defaultValue": 0.01
+    },
+    {
+      "id": "NCountry.REBEL_NON_INTEGRATED_FACTOR",
+      "category": "NCountry",
+      "key": "REBEL_NON_INTEGRATED_FACTOR",
+      "type": "float",
+      "defaultValue": 0.01
+    },
+    {
+      "id": "NCountry.KARMA_NEUTRAL_THRESHOLD",
+      "category": "NCountry",
+      "key": "KARMA_NEUTRAL_THRESHOLD",
+      "type": "integer",
+      "defaultValue": 33
+    },
+    {
+      "id": "NCountry.KARMA_POP_SIZE_CONVERSION_MULTIPLY",
+      "category": "NCountry",
+      "key": "KARMA_POP_SIZE_CONVERSION_MULTIPLY",
+      "type": "integer",
+      "defaultValue": 1
+    },
+    {
+      "id": "NCountry.KARMA_DEVELOPMENT_RELEASED_MULTIPLY",
+      "category": "NCountry",
+      "key": "KARMA_DEVELOPMENT_RELEASED_MULTIPLY",
+      "type": "float",
+      "defaultValue": 0.1
+    },
+    {
+      "id": "NCountry.KARMA_DEVELOPMENT_TAKEN_MULTIPLY",
+      "category": "NCountry",
+      "key": "KARMA_DEVELOPMENT_TAKEN_MULTIPLY",
+      "type": "integer",
+      "defaultValue": -1
+    },
+    {
+      "id": "NCountry.KARMA_ON_DEATH_MULTIPLY",
+      "category": "NCountry",
+      "key": "KARMA_ON_DEATH_MULTIPLY",
+      "type": "float",
+      "defaultValue": 0.25
+    },
+    {
+      "id": "NCountry.REGIONAL_FOOD_BASE_CAPACITY",
+      "category": "NCountry",
+      "key": "REGIONAL_FOOD_BASE_CAPACITY",
+      "type": "integer",
+      "defaultValue": 100
+    },
+    {
+      "id": "NCountry.EXTEND_REGENCY_YEARS",
+      "category": "NCountry",
+      "key": "EXTEND_REGENCY_YEARS",
+      "type": "integer",
+      "defaultValue": 5
+    },
+    {
+      "id": "NCountry.PRIVATEER_MARITIME_IMPACT",
+      "category": "NCountry",
+      "key": "PRIVATEER_MARITIME_IMPACT",
+      "type": "float",
+      "defaultValue": 0.01
+    },
+    {
+      "id": "NCountry.PRIVATEER_NO_SAILORS_DECAY",
+      "category": "NCountry",
+      "key": "PRIVATEER_NO_SAILORS_DECAY",
+      "type": "float",
+      "defaultValue": 0.05
+    },
+    {
+      "id": "NCountry.PRIVATEER_HARASSMENT_IMPACT",
+      "category": "NCountry",
+      "key": "PRIVATEER_HARASSMENT_IMPACT",
+      "type": "float",
+      "defaultValue": -0.005
+    },
+    {
+      "id": "NCountry.PARLIAMENT_DURATION_DAYS",
+      "category": "NCountry",
+      "key": "PARLIAMENT_DURATION_DAYS",
+      "type": "integer",
+      "defaultValue": 180
+    },
+    {
+      "id": "NCountry.PARLIAMENT_ISSUE_THRESHOLD",
+      "category": "NCountry",
+      "key": "PARLIAMENT_ISSUE_THRESHOLD",
+      "type": "float",
+      "defaultValue": 0.5
+    },
+    {
+      "id": "NCountry.PARLIAMENT_AGENDA_REPEAT_FACTOR",
+      "category": "NCountry",
+      "key": "PARLIAMENT_AGENDA_REPEAT_FACTOR",
+      "type": "float",
+      "defaultValue": -0.25
+    },
+    {
+      "id": "NCountry.DURATION_BEFORE_PURGING_INACTIVE_COUNTRIES_IN_DAYS",
+      "category": "NCountry",
+      "key": "DURATION_BEFORE_PURGING_INACTIVE_COUNTRIES_IN_DAYS",
+      "type": "integer",
+      "defaultValue": 365
+    },
+    {
+      "id": "NCountry.PARLIAMENT_COOLDOWN_MONTHS",
+      "category": "NCountry",
+      "key": "PARLIAMENT_COOLDOWN_MONTHS",
+      "type": "integer",
+      "defaultValue": 59
+    },
+    {
+      "id": "NCountry.LOW_CONTROL_THRESHOLD_FOR_BEST_TAX",
+      "category": "NCountry",
+      "key": "LOW_CONTROL_THRESHOLD_FOR_BEST_TAX",
+      "type": "float",
+      "defaultValue": 0.95
+    }
+  ]
+}

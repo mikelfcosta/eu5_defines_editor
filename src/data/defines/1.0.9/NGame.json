@@ -1,0 +1,111 @@
+{
+  "name": "NGame",
+  "defines": [
+    {
+      "id": "NGame.START_DATE",
+      "category": "NGame",
+      "key": "START_DATE",
+      "type": "string",
+      "defaultValue": "1337.4.1"
+    },
+    {
+      "id": "NGame.END_DATE",
+      "category": "NGame",
+      "key": "END_DATE",
+      "type": "string",
+      "defaultValue": "1836.12.31"
+    },
+    {
+      "id": "NGame.HOUR_TICK",
+      "category": "NGame",
+      "key": "HOUR_TICK",
+      "type": "integer",
+      "defaultValue": 2
+    },
+    {
+      "id": "NGame.MORNING_OFFSET",
+      "category": "NGame",
+      "key": "MORNING_OFFSET",
+      "type": "integer",
+      "defaultValue": 8
+    },
+    {
+      "id": "NGame.GAME_SPEED_TICKS",
+      "category": "NGame",
+      "key": "GAME_SPEED_TICKS",
+      "type": "array",
+      "defaultValue": [
+        1,
+        0.5,
+        0.25,
+        0.1,
+        0.05,
+        0.02,
+        0
+      ],
+      "itemTypes": [
+        "integer",
+        "float",
+        "float",
+        "float",
+        "float",
+        "float",
+        "float"
+      ],
+      "comment": "how many seconds should an hour take in every game speed"
+    },
+    {
+      "id": "NGame.GAME_SPEED_SCALES",
+      "category": "NGame",
+      "key": "GAME_SPEED_SCALES",
+      "type": "array",
+      "defaultValue": [
+        0.5,
+        0.75,
+        1,
+        1.25,
+        1.5,
+        1.75,
+        2
+      ],
+      "itemTypes": [
+        "float",
+        "float",
+        "float",
+        "float",
+        "float",
+        "float",
+        "float"
+      ],
+      "comment": "Factors to scale speed"
+    },
+    {
+      "id": "NGame.PAUSED_SPEED_SCALE",
+      "category": "NGame",
+      "key": "PAUSED_SPEED_SCALE",
+      "type": "float",
+      "defaultValue": 0.15
+    },
+    {
+      "id": "NGame.EVENT_MP_TIMEOUT_MONTHS",
+      "category": "NGame",
+      "key": "EVENT_MP_TIMEOUT_MONTHS",
+      "type": "integer",
+      "defaultValue": 3
+    },
+    {
+      "id": "NGame.GAME_SPEED_FOR_MULTI_PLAYERS_WARS",
+      "category": "NGame",
+      "key": "GAME_SPEED_FOR_MULTI_PLAYERS_WARS",
+      "type": "integer",
+      "defaultValue": 3
+    },
+    {
+      "id": "NGame.LOSE_OWNERSHIP_ON_EMPTY_LOCATION",
+      "category": "NGame",
+      "key": "LOSE_OWNERSHIP_ON_EMPTY_LOCATION",
+      "type": "boolean",
+      "defaultValue": false
+    }
+  ]
+}

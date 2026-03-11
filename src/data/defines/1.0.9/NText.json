@@ -1,0 +1,66 @@
+{
+  "name": "NText",
+  "defines": [
+    {
+      "id": "NText.DURATION_SHOW_YEARS_THRESHOLD",
+      "category": "NText",
+      "key": "DURATION_SHOW_YEARS_THRESHOLD",
+      "type": "integer",
+      "defaultValue": 24,
+      "comment": "Duration will show as years if it's at least this many months"
+    },
+    {
+      "id": "NText.DURATION_SHOW_MONTHS_THRESHOLD",
+      "category": "NText",
+      "key": "DURATION_SHOW_MONTHS_THRESHOLD",
+      "type": "integer",
+      "defaultValue": 60,
+      "comment": "Duration will show as months if it's at least this many days"
+    },
+    {
+      "id": "NText.INDENTATION_PER_DEPTH",
+      "category": "NText",
+      "key": "INDENTATION_PER_DEPTH",
+      "type": "integer",
+      "defaultValue": 2
+    },
+    {
+      "id": "NText.EFFECT_BASE_INDENTATION",
+      "category": "NText",
+      "key": "EFFECT_BASE_INDENTATION",
+      "type": "integer",
+      "defaultValue": 0
+    },
+    {
+      "id": "NText.TRIGGER_BASE_INDENTATION",
+      "category": "NText",
+      "key": "TRIGGER_BASE_INDENTATION",
+      "type": "integer",
+      "defaultValue": 0
+    },
+    {
+      "id": "NText.HINTS_MAX_IMPORTANT_MODIFIER_CANDIDATES",
+      "category": "NText",
+      "key": "HINTS_MAX_IMPORTANT_MODIFIER_CANDIDATES",
+      "type": "integer",
+      "defaultValue": 5,
+      "comment": "When hints try to list important modifiers, how many will they show at most?"
+    },
+    {
+      "id": "NText.CHARACTER_NAME_LENGTH",
+      "category": "NText",
+      "key": "CHARACTER_NAME_LENGTH",
+      "type": "integer",
+      "defaultValue": -1,
+      "comment": "debugging tool, set above 0 to test name length"
+    },
+    {
+      "id": "NText.FORMAT_CHARACTER_NAMES",
+      "category": "NText",
+      "key": "FORMAT_CHARACTER_NAMES",
+      "type": "integer",
+      "defaultValue": -1,
+      "comment": "debugging tool, -1 = default behaviour, 0 = always no, 1 = always yes"
+    }
+  ]
+}

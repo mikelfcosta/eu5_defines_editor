@@ -1,0 +1,33 @@
+{
+  "name": "NReligion",
+  "defines": [
+    {
+      "id": "NReligion.RELIGIOUS_FOCUS_COST",
+      "category": "NReligion",
+      "key": "RELIGIOUS_FOCUS_COST",
+      "type": "integer",
+      "defaultValue": 100
+    },
+    {
+      "id": "NReligion.PERIPHORA_DAYS_PER_LOCATION",
+      "category": "NReligion",
+      "key": "PERIPHORA_DAYS_PER_LOCATION",
+      "type": "integer",
+      "defaultValue": 30
+    },
+    {
+      "id": "NReligion.RELIGIOUS_FIGURE_CHANCE_OF_MOVING",
+      "category": "NReligion",
+      "key": "RELIGIOUS_FIGURE_CHANCE_OF_MOVING",
+      "type": "float",
+      "defaultValue": 0.01
+    },
+    {
+      "id": "NReligion.CORE_THRESHOLD",
+      "category": "NReligion",
+      "key": "CORE_THRESHOLD",
+      "type": "float",
+      "defaultValue": 0.5
+    }
+  ]
+}

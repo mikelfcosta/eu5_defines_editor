@@ -1,0 +1,109 @@
+{
+  "name": "NDynasty",
+  "defines": [
+    {
+      "id": "NDynasty.NAME_TEMPLATE_KEYS",
+      "category": "NDynasty",
+      "key": "NAME_TEMPLATE_KEYS",
+      "type": "array",
+      "defaultValue": [
+        "SOMEONE_OF_SOMEWHERE",
+        "SOMEONE_FROM_SOMEWHERE",
+        "SOMEONE_THE_SOMETHING_OF_SOMEWHERE__TYPE",
+        "SOMEONE_THE_SOMEDESC_SOMETHING__ADJ_TYPE",
+        "SOMEONE_THE_SOMELOCALITY_SOMETHING__TYPE",
+        "SOMEONE_THE_SOMENATIONALITY_SOMETHING__TYPE"
+      ],
+      "itemTypes": [
+        "string",
+        "string",
+        "string",
+        "string",
+        "string",
+        "string"
+      ]
+    },
+    {
+      "id": "NDynasty.NAME_ADJECTIVE_KEYS",
+      "category": "NDynasty",
+      "key": "NAME_ADJECTIVE_KEYS",
+      "type": "array",
+      "defaultValue": [
+        "mighty",
+        "courageous",
+        "learned",
+        "expert"
+      ],
+      "itemTypes": [
+        "string",
+        "string",
+        "string",
+        "string"
+      ]
+    },
+    {
+      "id": "NDynasty.NAME_NOUN_KEYS",
+      "category": "NDynasty",
+      "key": "NAME_NOUN_KEYS",
+      "type": "array",
+      "defaultValue": [
+        "scholar",
+        "executioner",
+        "warrior",
+        "knight"
+      ],
+      "itemTypes": [
+        "string",
+        "string",
+        "string",
+        "string"
+      ]
+    },
+    {
+      "id": "NDynasty.LIVING_SIZE_THRESHOLD_FOR_MARRY",
+      "category": "NDynasty",
+      "key": "LIVING_SIZE_THRESHOLD_FOR_MARRY",
+      "type": "integer",
+      "defaultValue": 9
+    },
+    {
+      "id": "NDynasty.LIVING_SIZE_THRESHOLD_FOR_MARRY_IMPORTANT",
+      "category": "NDynasty",
+      "key": "LIVING_SIZE_THRESHOLD_FOR_MARRY_IMPORTANT",
+      "type": "integer",
+      "defaultValue": 21
+    },
+    {
+      "id": "NDynasty.CALC_DYNASTY_HEAD_SCORE_MALE",
+      "category": "NDynasty",
+      "key": "CALC_DYNASTY_HEAD_SCORE_MALE",
+      "type": "integer",
+      "defaultValue": 25,
+      "comment": "Ignore this if country has Gender Equality"
+    },
+    {
+      "id": "NDynasty.CALC_DYNASTY_HEAD_SCORE_RULER",
+      "category": "NDynasty",
+      "key": "CALC_DYNASTY_HEAD_SCORE_RULER",
+      "type": "integer",
+      "defaultValue": 50,
+      "comment": "We also add the Great Power Score of all the countries the character rules"
+    },
+    {
+      "id": "NDynasty.CALC_DYNASTY_HEAD_SCORE_HEIR",
+      "category": "NDynasty",
+      "key": "CALC_DYNASTY_HEAD_SCORE_HEIR",
+      "type": "integer",
+      "defaultValue": 20,
+      "comment": "Only if not also a ruler"
+    },
+    {
+      "id": "NDynasty.CALC_DYNASTY_HEAD_SCORE_ESTATE",
+      "category": "NDynasty",
+      "key": "CALC_DYNASTY_HEAD_SCORE_ESTATE",
+      "type": "integer",
+      "defaultValue": 100,
+      "comment": "if the character's estate type has 'priority_for_dynasty_head = yes'"
+    }
+  ]
+}

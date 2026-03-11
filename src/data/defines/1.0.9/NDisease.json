@@ -1,0 +1,106 @@
+{
+  "name": "NDisease",
+  "defines": [
+    {
+      "id": "NDisease.MAX_DISEASE_PERCENTAGE",
+      "category": "NDisease",
+      "key": "MAX_DISEASE_PERCENTAGE",
+      "type": "integer",
+      "defaultValue": 1
+    },
+    {
+      "id": "NDisease.ESTIMATED_TRAVELLERS_TO_NEIGHBOURING_LOCATIONS",
+      "category": "NDisease",
+      "key": "ESTIMATED_TRAVELLERS_TO_NEIGHBOURING_LOCATIONS",
+      "type": "float",
+      "defaultValue": 0.05
+    },
+    {
+      "id": "NDisease.ESTIMATED_PEOPLE_PER_UNIT_MERCHANT_CAPACITY",
+      "category": "NDisease",
+      "key": "ESTIMATED_PEOPLE_PER_UNIT_MERCHANT_CAPACITY",
+      "type": "float",
+      "defaultValue": 0.01
+    },
+    {
+      "id": "NDisease.ESTIMATED_TRAVELLERS_TO_CAPITAL",
+      "category": "NDisease",
+      "key": "ESTIMATED_TRAVELLERS_TO_CAPITAL",
+      "type": "float",
+      "defaultValue": 0.05
+    },
+    {
+      "id": "NDisease.ESTIMATED_TRAVELLERS_TO_MARKET_CENTRE",
+      "category": "NDisease",
+      "key": "ESTIMATED_TRAVELLERS_TO_MARKET_CENTRE",
+      "type": "float",
+      "defaultValue": 0.05
+    },
+    {
+      "id": "NDisease.ESTIMATED_MIXING_WITH_UNITS",
+      "category": "NDisease",
+      "key": "ESTIMATED_MIXING_WITH_UNITS",
+      "type": "float",
+      "defaultValue": 0.05
+    },
+    {
+      "id": "NDisease.ESTIMATED_MIXING_WITHIN_UNITS",
+      "category": "NDisease",
+      "key": "ESTIMATED_MIXING_WITHIN_UNITS",
+      "type": "float",
+      "defaultValue": 0.3
+    },
+    {
+      "id": "NDisease.PANDEMIC_LOCATIONS",
+      "category": "NDisease",
+      "key": "PANDEMIC_LOCATIONS",
+      "type": "integer",
+      "defaultValue": 1000
+    },
+    {
+      "id": "NDisease.SEVERE_LOCATIONS",
+      "category": "NDisease",
+      "key": "SEVERE_LOCATIONS",
+      "type": "integer",
+      "defaultValue": 500
+    },
+    {
+      "id": "NDisease.MODERATE_LOCATIONS",
+      "category": "NDisease",
+      "key": "MODERATE_LOCATIONS",
+      "type": "integer",
+      "defaultValue": 200
+    },
+    {
+      "id": "NDisease.PANDEMIC_MIN_DEATHS",
+      "category": "NDisease",
+      "key": "PANDEMIC_MIN_DEATHS",
+      "type": "integer",
+      "defaultValue": 50000,
+      "comment": "50M"
+    },
+    {
+      "id": "NDisease.SEVERE_MIN_DEATHS",
+      "category": "NDisease",
+      "key": "SEVERE_MIN_DEATHS",
+      "type": "integer",
+      "defaultValue": 1000,
+      "comment": "1M"
+    },
+    {
+      "id": "NDisease.MODERATE_MIN_DEATHS",
+      "category": "NDisease",
+      "key": "MODERATE_MIN_DEATHS",
+      "type": "integer",
+      "defaultValue": 50,
+      "comment": "50k"
+    },
+    {
+      "id": "NDisease.MAX_ACCEPTABLE_PERCENTAGE_DIFFERENCE_TO_AMALGAMATE_POPS",
+      "category": "NDisease",
+      "key": "MAX_ACCEPTABLE_PERCENTAGE_DIFFERENCE_TO_AMALGAMATE_POPS",
+      "type": "float",
+      "defaultValue": 0.05
+    }
+  ]
+}

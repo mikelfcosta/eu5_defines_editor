@@ -1,0 +1,130 @@
+{
+  "name": "NMercenary",
+  "defines": [
+    {
+      "id": "NMercenary.MERCENARY_MOBILIZATION_TIME_BASE",
+      "category": "NMercenary",
+      "key": "MERCENARY_MOBILIZATION_TIME_BASE",
+      "type": "integer",
+      "defaultValue": 2
+    },
+    {
+      "id": "NMercenary.MERCENARY_GATHERING_TIME_BASE",
+      "category": "NMercenary",
+      "key": "MERCENARY_GATHERING_TIME_BASE",
+      "type": "integer",
+      "defaultValue": 14
+    },
+    {
+      "id": "NMercenary.MERCENARY_RECRUITMENT_DISTANCE_FACTOR",
+      "category": "NMercenary",
+      "key": "MERCENARY_RECRUITMENT_DISTANCE_FACTOR",
+      "type": "float",
+      "defaultValue": 0.025
+    },
+    {
+      "id": "NMercenary.MERCENARY_MAX_DURATION_IN_MONTHS",
+      "category": "NMercenary",
+      "key": "MERCENARY_MAX_DURATION_IN_MONTHS",
+      "type": "integer",
+      "defaultValue": 120
+    },
+    {
+      "id": "NMercenary.MERCENARY_DEFAULT_DURATION_IN_MONTHS",
+      "category": "NMercenary",
+      "key": "MERCENARY_DEFAULT_DURATION_IN_MONTHS",
+      "type": "integer",
+      "defaultValue": 24
+    },
+    {
+      "id": "NMercenary.MERCENARY_CONTRACT_ALERT_MONTHS",
+      "category": "NMercenary",
+      "key": "MERCENARY_CONTRACT_ALERT_MONTHS",
+      "type": "integer",
+      "defaultValue": 3
+    },
+    {
+      "id": "NMercenary.MERCENARY_MANPOWER_REPLENISH_TIME_MONTHS",
+      "category": "NMercenary",
+      "key": "MERCENARY_MANPOWER_REPLENISH_TIME_MONTHS",
+      "type": "integer",
+      "defaultValue": 240,
+      "comment": "how many months to fully restock mercs in an area"
+    },
+    {
+      "id": "NMercenary.MERCENARY_ARMY_UNIT_MAX_SIZE",
+      "category": "NMercenary",
+      "key": "MERCENARY_ARMY_UNIT_MAX_SIZE",
+      "type": "integer",
+      "defaultValue": 150
+    },
+    {
+      "id": "NMercenary.MERCENARY_NAVY_UNIT_MAX_SIZE",
+      "category": "NMercenary",
+      "key": "MERCENARY_NAVY_UNIT_MAX_SIZE",
+      "type": "integer",
+      "defaultValue": 25
+    },
+    {
+      "id": "NMercenary.MERCENARY_PRISONER_MONTHLY_MAINTENANCE_MULTIPLIER",
+      "category": "NMercenary",
+      "key": "MERCENARY_PRISONER_MONTHLY_MAINTENANCE_MULTIPLIER",
+      "type": "float",
+      "defaultValue": 0.25
+    },
+    {
+      "id": "NMercenary.MERCENARY_PRISONER_MAX_MORALE",
+      "category": "NMercenary",
+      "key": "MERCENARY_PRISONER_MAX_MORALE",
+      "type": "float",
+      "defaultValue": 0.6
+    },
+    {
+      "id": "NMercenary.MERCENARY_SUBUNITS_AVAILABLE_PER_ADM_POINT",
+      "category": "NMercenary",
+      "key": "MERCENARY_SUBUNITS_AVAILABLE_PER_ADM_POINT",
+      "type": "float",
+      "defaultValue": 0.25,
+      "comment": "leaders with better adm can lead bigger armies"
+    },
+    {
+      "id": "NMercenary.MERCENARY_LEADER_BASE_PRICE",
+      "category": "NMercenary",
+      "key": "MERCENARY_LEADER_BASE_PRICE",
+      "type": "integer",
+      "defaultValue": 50
+    },
+    {
+      "id": "NMercenary.MERCENARY_LEADER_ABILITY_WEIGHT",
+      "category": "NMercenary",
+      "key": "MERCENARY_LEADER_ABILITY_WEIGHT",
+      "type": "integer",
+      "defaultValue": 50,
+      "comment": "multiplied by an exponential number in range 0..8 based on char ability (so better ones are a lot more expensive than worse ones, less difference between lower ability characters)"
+    },
+    {
+      "id": "NMercenary.MERCENARY_LEADER_CULTURE_OPINION_MULTIPLIER",
+      "category": "NMercenary",
+      "key": "MERCENARY_LEADER_CULTURE_OPINION_MULTIPLIER",
+      "type": "float",
+      "defaultValue": -0.07,
+      "comment": "same or friendly culture leaders will work for less for you"
+    },
+    {
+      "id": "NMercenary.MERCENARY_LEADER_RELIGION_OPINION_MULTIPLIER",
+      "category": "NMercenary",
+      "key": "MERCENARY_LEADER_RELIGION_OPINION_MULTIPLIER",
+      "type": "float",
+      "defaultValue": -0.07,
+      "comment": "same or friendly religion leaders will work for less for you"
+    },
+    {
+      "id": "NMercenary.MERCENARY_LEADER_DISTANCE_MULTIPLIER",
+      "category": "NMercenary",
+      "key": "MERCENARY_LEADER_DISTANCE_MULTIPLIER",
+      "type": "float",
+      "defaultValue": 0.0005,
+      "comment": "Mileage allowance, paid by employer. Must be nice."
+    }
+  ]
+}

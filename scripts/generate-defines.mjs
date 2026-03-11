@@ -22,9 +22,29 @@ async function generate() {
     const text = await fs.readFile(fullPath, "utf8");
     const parsed = parseDefinesText(text, version);
 
+    // Create a subdirectory per version
+    const versionDir = path.join(outputDir, version);
+    await fs.mkdir(versionDir, { recursive: true });
+
+    // Write one file per category
+    for (const category of parsed.categories) {
+      await fs.writeFile(
+        path.join(versionDir, `${category.name}.json`),
+        `${JSON.stringify(category, null, 2)}\n`,
+        "utf8"
+      );
+    }
+
+    // Write a version index that references category names and metadata
+    const index = {
+      version: parsed.version,
+      generatedAt: parsed.generatedAt,
+      totalDefines: parsed.totalDefines,
+      categories: parsed.categories.map((c) => c.name),
+    };
     await fs.writeFile(
-      path.join(outputDir, `${version}.json`),
-      `${JSON.stringify(parsed, null, 2)}\n`,
+      path.join(versionDir, "index.json"),
+      `${JSON.stringify(index, null, 2)}\n`,
       "utf8"
     );
 

@@ -14,6 +14,7 @@ export function DefineRow({ entry, value, isModified, error, onUpdate, onReset }
   const infoText = [
     `Type: ${entry.type}`,
     `Default: ${Array.isArray(entry.defaultValue) ? entry.defaultValue.join(", ") : String(entry.defaultValue)}`,
+    entry.aiComment ? `AI: ${entry.aiComment}` : null,
     entry.comment ? `Comment: ${entry.comment}` : null
   ]
     .filter((line): line is string => Boolean(line))

@@ -1,0 +1,43 @@
+{
+  "name": "NWeather",
+  "defines": [
+    {
+      "id": "NWeather.FRONT_DEGRADATION_DISTANCE_FOR_TOPOGRAPHY",
+      "category": "NWeather",
+      "key": "FRONT_DEGRADATION_DISTANCE_FOR_TOPOGRAPHY",
+      "type": "integer",
+      "defaultValue": 125,
+      "comment": "every FRONT_DEGRADATION_DISTANCE_FOR_TOPOGRAPHY pixels moved, the strength of the weather front changes by weather_front_strength_change_percent on locations underneath the front"
+    },
+    {
+      "id": "NWeather.CYCLONE_DEGRADATION_DISTANCE_FOR_TOPOGRAPHY",
+      "category": "NWeather",
+      "key": "CYCLONE_DEGRADATION_DISTANCE_FOR_TOPOGRAPHY",
+      "type": "integer",
+      "defaultValue": 125,
+      "comment": "every CYCLONE_DEGRADATION_DISTANCE_FOR_TOPOGRAPHY pixels moved, the strength of the cyclone changes by weather_cyclone_strength_change_percent on locations underneath the cyclone"
+    },
+    {
+      "id": "NWeather.TORNADO_DEGRADATION_DISTANCE_FOR_TOPOGRAPHY",
+      "category": "NWeather",
+      "key": "TORNADO_DEGRADATION_DISTANCE_FOR_TOPOGRAPHY",
+      "type": "integer",
+      "defaultValue": 125,
+      "comment": "every TORNADO_DEGRADATION_DISTANCE_FOR_TOPOGRAPHY pixels moved, the strength of the tornado changes by weather_tornado_strength_change_percent on locations underneath the tornado"
+    },
+    {
+      "id": "NWeather.PIXEL_COUNT_FOR_AVERAGE_LOCATION",
+      "category": "NWeather",
+      "key": "PIXEL_COUNT_FOR_AVERAGE_LOCATION",
+      "type": "integer",
+      "defaultValue": 1600
+    },
+    {
+      "id": "NWeather.PERCENT_DIFFERENCE_BETWEEN_GOOD_AND_BAD_SIDE_OF_CYCLONE",
+      "category": "NWeather",
+      "key": "PERCENT_DIFFERENCE_BETWEEN_GOOD_AND_BAD_SIDE_OF_CYCLONE",
+      "type": "integer",
+      "defaultValue": 50
+    }
+  ]
+}

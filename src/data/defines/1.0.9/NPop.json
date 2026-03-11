@@ -1,0 +1,270 @@
+{
+  "name": "NPop",
+  "defines": [
+    {
+      "id": "NPop.MIN_REBEL_POP_SIZE_THRESHOLD",
+      "category": "NPop",
+      "key": "MIN_REBEL_POP_SIZE_THRESHOLD",
+      "type": "integer",
+      "defaultValue": 5,
+      "comment": "rebels need to have at least these amount of pop support to be a real revolt. (in thousand)"
+    },
+    {
+      "id": "NPop.PRODUCED_IN_MARKET_DEMAND",
+      "category": "NPop",
+      "key": "PRODUCED_IN_MARKET_DEMAND",
+      "type": "float",
+      "defaultValue": 0.1
+    },
+    {
+      "id": "NPop.STARVING_ON_FOOD_DEMAND",
+      "category": "NPop",
+      "key": "STARVING_ON_FOOD_DEMAND",
+      "type": "float",
+      "defaultValue": 1.5
+    },
+    {
+      "id": "NPop.NEGATIVE_FOOD_ON_FOOD_DEMAND",
+      "category": "NPop",
+      "key": "NEGATIVE_FOOD_ON_FOOD_DEMAND",
+      "type": "float",
+      "defaultValue": 0.5
+    },
+    {
+      "id": "NPop.DEVELOPMENT_SCALE_ON_DEMAND",
+      "category": "NPop",
+      "key": "DEVELOPMENT_SCALE_ON_DEMAND",
+      "type": "float",
+      "defaultValue": 0.05
+    },
+    {
+      "id": "NPop.KNOWN_GOODS_FOR_DEMAND_THRESHOLD",
+      "category": "NPop",
+      "key": "KNOWN_GOODS_FOR_DEMAND_THRESHOLD",
+      "type": "integer",
+      "defaultValue": 50
+    },
+    {
+      "id": "NPop.POP_NEEDS_INCOME_SCALE",
+      "category": "NPop",
+      "key": "POP_NEEDS_INCOME_SCALE",
+      "type": "float",
+      "defaultValue": 1.33
+    },
+    {
+      "id": "NPop.DISPLAY_SIZE",
+      "category": "NPop",
+      "key": "DISPLAY_SIZE",
+      "type": "integer",
+      "defaultValue": 1000
+    },
+    {
+      "id": "NPop.GARRISON_MANPOWER_LOSS_IMPACT",
+      "category": "NPop",
+      "key": "GARRISON_MANPOWER_LOSS_IMPACT",
+      "type": "float",
+      "defaultValue": 0.5
+    },
+    {
+      "id": "NPop.ARMY_MANPOWER_LOSS_IMPACT",
+      "category": "NPop",
+      "key": "ARMY_MANPOWER_LOSS_IMPACT",
+      "type": "float",
+      "defaultValue": 1
+    },
+    {
+      "id": "NPop.NAVY_SAILOR_LOSS_IMPACT",
+      "category": "NPop",
+      "key": "NAVY_SAILOR_LOSS_IMPACT",
+      "type": "float",
+      "defaultValue": 1
+    },
+    {
+      "id": "NPop.ARMY_LEVY_SIZE_IMPACT_SUPPORT",
+      "category": "NPop",
+      "key": "ARMY_LEVY_SIZE_IMPACT_SUPPORT",
+      "type": "integer",
+      "defaultValue": 1
+    },
+    {
+      "id": "NPop.NAVY_LEVY_SIZE_IMPACT_SUPPORT",
+      "category": "NPop",
+      "key": "NAVY_LEVY_SIZE_IMPACT_SUPPORT",
+      "type": "integer",
+      "defaultValue": 1
+    },
+    {
+      "id": "NPop.BASE_SATISFACTION",
+      "category": "NPop",
+      "key": "BASE_SATISFACTION",
+      "type": "float",
+      "defaultValue": 0.2
+    },
+    {
+      "id": "NPop.ESTATE_SATISFACTION_OFFSET",
+      "category": "NPop",
+      "key": "ESTATE_SATISFACTION_OFFSET",
+      "type": "float",
+      "defaultValue": 0.5
+    },
+    {
+      "id": "NPop.ESTATE_SATISFACTION_SCALE",
+      "category": "NPop",
+      "key": "ESTATE_SATISFACTION_SCALE",
+      "type": "float",
+      "defaultValue": 2
+    },
+    {
+      "id": "NPop.SCALE_ESTATE_NON_ACCEPTED",
+      "category": "NPop",
+      "key": "SCALE_ESTATE_NON_ACCEPTED",
+      "type": "float",
+      "defaultValue": 0.5
+    },
+    {
+      "id": "NPop.GOODS_PRICE_SATISFACTION_SCALE",
+      "category": "NPop",
+      "key": "GOODS_PRICE_SATISFACTION_SCALE",
+      "type": "float",
+      "defaultValue": -0.1
+    },
+    {
+      "id": "NPop.LACK_OF_GOODS_SATISFACTION_SCALE",
+      "category": "NPop",
+      "key": "LACK_OF_GOODS_SATISFACTION_SCALE",
+      "type": "float",
+      "defaultValue": -0.5
+    },
+    {
+      "id": "NPop.ESTATE_LOSING_MONEY_SCALE_ON_GOODS_PRICE",
+      "category": "NPop",
+      "key": "ESTATE_LOSING_MONEY_SCALE_ON_GOODS_PRICE",
+      "type": "float",
+      "defaultValue": 2
+    },
+    {
+      "id": "NPop.CULTURE_OPINION_SATISFACTION",
+      "category": "NPop",
+      "key": "CULTURE_OPINION_SATISFACTION",
+      "type": "float",
+      "defaultValue": 0.05
+    },
+    {
+      "id": "NPop.RELIGION_OPINION_SATISFACTION",
+      "category": "NPop",
+      "key": "RELIGION_OPINION_SATISFACTION",
+      "type": "float",
+      "defaultValue": 0.05
+    },
+    {
+      "id": "NPop.DIFFERENT_RELIGION_BASE_SATISFACTION",
+      "category": "NPop",
+      "key": "DIFFERENT_RELIGION_BASE_SATISFACTION",
+      "type": "float",
+      "defaultValue": -0.05
+    },
+    {
+      "id": "NPop.TOLERANCE_ON_SATISFACTION_SCALE",
+      "category": "NPop",
+      "key": "TOLERANCE_ON_SATISFACTION_SCALE",
+      "type": "float",
+      "defaultValue": 0.05
+    },
+    {
+      "id": "NPop.PRIMARY_CULTURE_SATISFACTION",
+      "category": "NPop",
+      "key": "PRIMARY_CULTURE_SATISFACTION",
+      "type": "float",
+      "defaultValue": 0.25
+    },
+    {
+      "id": "NPop.ACCEPTED_CULTURE_SATISFACTION",
+      "category": "NPop",
+      "key": "ACCEPTED_CULTURE_SATISFACTION",
+      "type": "float",
+      "defaultValue": 0.1
+    },
+    {
+      "id": "NPop.TOLERATED_CULTURE_SATISFACTION",
+      "category": "NPop",
+      "key": "TOLERATED_CULTURE_SATISFACTION",
+      "type": "float",
+      "defaultValue": 0.05
+    },
+    {
+      "id": "NPop.MIN_SIZE_TO_BLOCK_PROMOTION",
+      "category": "NPop",
+      "key": "MIN_SIZE_TO_BLOCK_PROMOTION",
+      "type": "float",
+      "defaultValue": 0.5
+    },
+    {
+      "id": "NPop.POP_JOB_SURPLUS_SCALE_CAP",
+      "category": "NPop",
+      "key": "POP_JOB_SURPLUS_SCALE_CAP",
+      "type": "integer",
+      "defaultValue": 10
+    },
+    {
+      "id": "NPop.REBEL_JOIN_MIN_THRESHOLD",
+      "category": "NPop",
+      "key": "REBEL_JOIN_MIN_THRESHOLD",
+      "type": "float",
+      "defaultValue": 0.05
+    },
+    {
+      "id": "NPop.REBEL_LEAVE_MIN_THRESHOLD",
+      "category": "NPop",
+      "key": "REBEL_LEAVE_MIN_THRESHOLD",
+      "type": "float",
+      "defaultValue": 0.1
+    },
+    {
+      "id": "NPop.REBEL_DANGER_THRESHOLD",
+      "category": "NPop",
+      "key": "REBEL_DANGER_THRESHOLD",
+      "type": "float",
+      "defaultValue": 0.95
+    },
+    {
+      "id": "NPop.PERFORMANCE_UPDATE_DEMANDS_MIN",
+      "category": "NPop",
+      "key": "PERFORMANCE_UPDATE_DEMANDS_MIN",
+      "type": "integer",
+      "defaultValue": 0,
+      "comment": "We try to update all pop demands within a year, but this sets a minimum of pops per day"
+    },
+    {
+      "id": "NPop.PERFORMANCE_UPDATE_DEMANDS_MAX",
+      "category": "NPop",
+      "key": "PERFORMANCE_UPDATE_DEMANDS_MAX",
+      "type": "integer",
+      "defaultValue": 100,
+      "comment": "We try to update all pop demands within a year, but this sets a maximum of pops per day"
+    },
+    {
+      "id": "NPop.POP_MINORITY_SIMILAR_THRESHOLD",
+      "category": "NPop",
+      "key": "POP_MINORITY_SIMILAR_THRESHOLD",
+      "type": "integer",
+      "defaultValue": 4,
+      "comment": "if more or equal of this of pops of type in location, join either same culture or religion"
+    },
+    {
+      "id": "NPop.POP_MINORITY_JUST_MERGE_THRESHOLD",
+      "category": "NPop",
+      "key": "POP_MINORITY_JUST_MERGE_THRESHOLD",
+      "type": "integer",
+      "defaultValue": 8,
+      "comment": "if more or equal of this of pops of type in location, join largest"
+    },
+    {
+      "id": "NPop.YEARLY_POP_SATISFACTION_FROM_EVENTS_DECAY",
+      "category": "NPop",
+      "key": "YEARLY_POP_SATISFACTION_FROM_EVENTS_DECAY",
+      "type": "float",
+      "defaultValue": 0.01,
+      "comment": "percentage, will display as value * 100"
+    }
+  ]
+}

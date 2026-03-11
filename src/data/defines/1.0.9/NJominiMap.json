@@ -1,0 +1,47 @@
+{
+  "name": "NJominiMap",
+  "defines": [
+    {
+      "id": "NJominiMap.@world_height",
+      "category": "NJominiMap",
+      "key": "@world_height",
+      "type": "integer",
+      "defaultValue": 32
+    },
+    {
+      "id": "NJominiMap.@water_level_percentage",
+      "category": "NJominiMap",
+      "key": "@water_level_percentage",
+      "type": "float",
+      "defaultValue": 0.08340625
+    },
+    {
+      "id": "NJominiMap.WORLD_EXTENTS_X",
+      "category": "NJominiMap",
+      "key": "WORLD_EXTENTS_X",
+      "type": "integer",
+      "defaultValue": 16384
+    },
+    {
+      "id": "NJominiMap.WORLD_EXTENTS_Y",
+      "category": "NJominiMap",
+      "key": "WORLD_EXTENTS_Y",
+      "type": "variable",
+      "defaultValue": "@world_height"
+    },
+    {
+      "id": "NJominiMap.WORLD_EXTENTS_Z",
+      "category": "NJominiMap",
+      "key": "WORLD_EXTENTS_Z",
+      "type": "integer",
+      "defaultValue": 8192
+    },
+    {
+      "id": "NJominiMap.WATERLEVEL",
+      "category": "NJominiMap",
+      "key": "WATERLEVEL",
+      "type": "expression",
+      "defaultValue": "@[ world_height * water_level_percentage ]"
+    }
+  ]
+}

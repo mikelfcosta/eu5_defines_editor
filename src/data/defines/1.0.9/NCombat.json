@@ -1,0 +1,533 @@
+{
+  "name": "NCombat",
+  "defines": [
+    {
+      "id": "NCombat.NAVAL_LEVY_IMPACT",
+      "category": "NCombat",
+      "key": "NAVAL_LEVY_IMPACT",
+      "type": "float",
+      "defaultValue": 0.05
+    },
+    {
+      "id": "NCombat.RETREAT_STRENGTH_DAMAGE",
+      "category": "NCombat",
+      "key": "RETREAT_STRENGTH_DAMAGE",
+      "type": "float",
+      "defaultValue": 0.1
+    },
+    {
+      "id": "NCombat.GARRISON_AFTER_OCCUPATION",
+      "category": "NCombat",
+      "key": "GARRISON_AFTER_OCCUPATION",
+      "type": "float",
+      "defaultValue": 0.01
+    },
+    {
+      "id": "NCombat.MORALE_COLLAPSE_THRESHOLD",
+      "category": "NCombat",
+      "key": "MORALE_COLLAPSE_THRESHOLD",
+      "type": "float",
+      "defaultValue": 0.05
+    },
+    {
+      "id": "NCombat.MINIMUM_COMBAT_DURATION",
+      "category": "NCombat",
+      "key": "MINIMUM_COMBAT_DURATION",
+      "type": "integer",
+      "defaultValue": 24
+    },
+    {
+      "id": "NCombat.BOMBARD_BASE_CHANCE",
+      "category": "NCombat",
+      "key": "BOMBARD_BASE_CHANCE",
+      "type": "float",
+      "defaultValue": 0.2
+    },
+    {
+      "id": "NCombat.BOMBARD_HOURS",
+      "category": "NCombat",
+      "key": "BOMBARD_HOURS",
+      "type": "integer",
+      "defaultValue": 5
+    },
+    {
+      "id": "NCombat.HOURS_PER_PHASE",
+      "category": "NCombat",
+      "key": "HOURS_PER_PHASE",
+      "type": "integer",
+      "defaultValue": 5
+    },
+    {
+      "id": "NCombat.COMBAT_DICE_SIDE",
+      "category": "NCombat",
+      "key": "COMBAT_DICE_SIDE",
+      "type": "integer",
+      "defaultValue": 10
+    },
+    {
+      "id": "NCombat.COMBAT_BASE",
+      "category": "NCombat",
+      "key": "COMBAT_BASE",
+      "type": "integer",
+      "defaultValue": 5
+    },
+    {
+      "id": "NCombat.COMBAT_MAX",
+      "category": "NCombat",
+      "key": "COMBAT_MAX",
+      "type": "integer",
+      "defaultValue": 15
+    },
+    {
+      "id": "NCombat.COMBAT_DAMAGE_MULT",
+      "category": "NCombat",
+      "key": "COMBAT_DAMAGE_MULT",
+      "type": "float",
+      "defaultValue": 0.01
+    },
+    {
+      "id": "NCombat.COMBAT_HOURLY_MORALE_TICK",
+      "category": "NCombat",
+      "key": "COMBAT_HOURLY_MORALE_TICK",
+      "type": "float",
+      "defaultValue": 0.01
+    },
+    {
+      "id": "NCombat.COMBAT_IMPRISONED_UNIT_DEATH_RATE",
+      "category": "NCombat",
+      "key": "COMBAT_IMPRISONED_UNIT_DEATH_RATE",
+      "type": "float",
+      "defaultValue": 0.4
+    },
+    {
+      "id": "NCombat.STRAIT_CROSSING_DICE",
+      "category": "NCombat",
+      "key": "STRAIT_CROSSING_DICE",
+      "type": "integer",
+      "defaultValue": -2
+    },
+    {
+      "id": "NCombat.RIVER_CROSSING_DICE",
+      "category": "NCombat",
+      "key": "RIVER_CROSSING_DICE",
+      "type": "integer",
+      "defaultValue": -1
+    },
+    {
+      "id": "NCombat.SEA_LANDING_DICE",
+      "category": "NCombat",
+      "key": "SEA_LANDING_DICE",
+      "type": "integer",
+      "defaultValue": -1
+    },
+    {
+      "id": "NCombat.FOOD_PERCENTAGE_LOST_AT_OCCUPATION",
+      "category": "NCombat",
+      "key": "FOOD_PERCENTAGE_LOST_AT_OCCUPATION",
+      "type": "float",
+      "defaultValue": 0.9,
+      "comment": "lost 90% at occupation.."
+    },
+    {
+      "id": "NCombat.MAX_FRONTAGE_OVERSTACKING",
+      "category": "NCombat",
+      "key": "MAX_FRONTAGE_OVERSTACKING",
+      "type": "float",
+      "defaultValue": 1.25,
+      "comment": "25% overstack in flanks."
+    },
+    {
+      "id": "NCombat.LAND_LEVY_COMBAT_IMPACT",
+      "category": "NCombat",
+      "key": "LAND_LEVY_COMBAT_IMPACT",
+      "type": "float",
+      "defaultValue": 0.5
+    },
+    {
+      "id": "NCombat.INITIATIVE_BASE_CHANCE",
+      "category": "NCombat",
+      "key": "INITIATIVE_BASE_CHANCE",
+      "type": "float",
+      "defaultValue": 0.1,
+      "comment": "base chance each tick"
+    },
+    {
+      "id": "NCombat.INITIATIVE_CHANCE_EACH",
+      "category": "NCombat",
+      "key": "INITIATIVE_CHANCE_EACH",
+      "type": "float",
+      "defaultValue": 0.02,
+      "comment": "Chance to engage per point of initiative"
+    },
+    {
+      "id": "NCombat.INITIATIVE_CHANCE_HOURS",
+      "category": "NCombat",
+      "key": "INITIATIVE_CHANCE_HOURS",
+      "type": "float",
+      "defaultValue": 0.01,
+      "comment": "Chance to engage per hour passed (adds with INITIATIVE_CHANCE_EACH)"
+    },
+    {
+      "id": "NCombat.COMBAT_SPEED_SCALE",
+      "category": "NCombat",
+      "key": "COMBAT_SPEED_SCALE",
+      "type": "float",
+      "defaultValue": 0.05
+    },
+    {
+      "id": "NCombat.NAVAL_EXPERIENCE_DAMAGE_REDUCTION",
+      "category": "NCombat",
+      "key": "NAVAL_EXPERIENCE_DAMAGE_REDUCTION",
+      "type": "float",
+      "defaultValue": 0.5
+    },
+    {
+      "id": "NCombat.LAND_EXPERIENCE_DAMAGE_REDUCTION",
+      "category": "NCombat",
+      "key": "LAND_EXPERIENCE_DAMAGE_REDUCTION",
+      "type": "float",
+      "defaultValue": 0.5
+    },
+    {
+      "id": "NCombat.LAND_STRENGTH_DAMAGE_MODIFIER",
+      "category": "NCombat",
+      "key": "LAND_STRENGTH_DAMAGE_MODIFIER",
+      "type": "float",
+      "defaultValue": 0.2
+    },
+    {
+      "id": "NCombat.NAVAL_STRENGTH_DAMAGE_MODIFIER",
+      "category": "NCombat",
+      "key": "NAVAL_STRENGTH_DAMAGE_MODIFIER",
+      "type": "float",
+      "defaultValue": 0.05
+    },
+    {
+      "id": "NCombat.LAND_MORALE_DAMAGE_MODIFIER",
+      "category": "NCombat",
+      "key": "LAND_MORALE_DAMAGE_MODIFIER",
+      "type": "float",
+      "defaultValue": 1
+    },
+    {
+      "id": "NCombat.NAVAL_MORALE_DAMAGE_MODIFIER",
+      "category": "NCombat",
+      "key": "NAVAL_MORALE_DAMAGE_MODIFIER",
+      "type": "float",
+      "defaultValue": 0.2
+    },
+    {
+      "id": "NCombat.NOT_ENGAGED_STRENGTH_DAMAGE_MODIFIER",
+      "category": "NCombat",
+      "key": "NOT_ENGAGED_STRENGTH_DAMAGE_MODIFIER",
+      "type": "float",
+      "defaultValue": 1.1
+    },
+    {
+      "id": "NCombat.NOT_ENGAGED_MORALE_DAMAGE_MODIFIER",
+      "category": "NCombat",
+      "key": "NOT_ENGAGED_MORALE_DAMAGE_MODIFIER",
+      "type": "float",
+      "defaultValue": 1.2
+    },
+    {
+      "id": "NCombat.NAVY_OVERRUN_EXTRA_CAPTURE_CHANCE",
+      "category": "NCombat",
+      "key": "NAVY_OVERRUN_EXTRA_CAPTURE_CHANCE",
+      "type": "float",
+      "defaultValue": 0.15
+    },
+    {
+      "id": "NCombat.NAVAL_COMBAT_DAMAGED_SHIP_EXTRA_CAPTURE_SCALE",
+      "category": "NCombat",
+      "key": "NAVAL_COMBAT_DAMAGED_SHIP_EXTRA_CAPTURE_SCALE",
+      "type": "float",
+      "defaultValue": 0.01
+    },
+    {
+      "id": "NCombat.NAVAL_COMBAT_SHIP_STR_SINK_THRESHOLD",
+      "category": "NCombat",
+      "key": "NAVAL_COMBAT_SHIP_STR_SINK_THRESHOLD",
+      "type": "float",
+      "defaultValue": 0.1,
+      "comment": "ships below this % have a chance of sinking when retreating."
+    },
+    {
+      "id": "NCombat.NAVAL_COMBAT_DAMAGED_SHIP_SINK_CHANCE",
+      "category": "NCombat",
+      "key": "NAVAL_COMBAT_DAMAGED_SHIP_SINK_CHANCE",
+      "type": "integer",
+      "defaultValue": 10,
+      "comment": "chance vs (1-100) dice to sink when retreating at below threshold"
+    },
+    {
+      "id": "NCombat.NAVAL_RETREAT_DAMAGE_THRESHOLD",
+      "category": "NCombat",
+      "key": "NAVAL_RETREAT_DAMAGE_THRESHOLD",
+      "type": "float",
+      "defaultValue": 0.5,
+      "comment": "if below this % strength, check chance to retreat."
+    },
+    {
+      "id": "NCombat.NAVAL_RETREAT_CHANCE",
+      "category": "NCombat",
+      "key": "NAVAL_RETREAT_CHANCE",
+      "type": "integer",
+      "defaultValue": 10,
+      "comment": "out of 100 if below\tthe damage threshold, it will retreat ..  combat speed increases it."
+    },
+    {
+      "id": "NCombat.BASE_MORALE_DAMAGE",
+      "category": "NCombat",
+      "key": "BASE_MORALE_DAMAGE",
+      "type": "float",
+      "defaultValue": 1
+    },
+    {
+      "id": "NCombat.FOOD_PERCENTAGE_LOST_AT_RETREAT",
+      "category": "NCombat",
+      "key": "FOOD_PERCENTAGE_LOST_AT_RETREAT",
+      "type": "float",
+      "defaultValue": 0.5
+    },
+    {
+      "id": "NCombat.EXPERIENCE_GAIN",
+      "category": "NCombat",
+      "key": "EXPERIENCE_GAIN",
+      "type": "integer",
+      "defaultValue": 30
+    },
+    {
+      "id": "NCombat.LAND_WAR_EXHAUSTION_FROM_LOSSES",
+      "category": "NCombat",
+      "key": "LAND_WAR_EXHAUSTION_FROM_LOSSES",
+      "type": "integer",
+      "defaultValue": 100
+    },
+    {
+      "id": "NCombat.NAVAL_WAR_EXHAUSTION_FROM_LOSSES",
+      "category": "NCombat",
+      "key": "NAVAL_WAR_EXHAUSTION_FROM_LOSSES",
+      "type": "float",
+      "defaultValue": 1.5,
+      "comment": "Multiplier on losses"
+    },
+    {
+      "id": "NCombat.MAX_WAR_EXHAUSTION_FROM_BATTLE",
+      "category": "NCombat",
+      "key": "MAX_WAR_EXHAUSTION_FROM_BATTLE",
+      "type": "float",
+      "defaultValue": 10
+    },
+    {
+      "id": "NCombat.TRADITION_GAIN_LAND",
+      "category": "NCombat",
+      "key": "TRADITION_GAIN_LAND",
+      "type": "integer",
+      "defaultValue": 10
+    },
+    {
+      "id": "NCombat.TRADITION_GAIN_NAVAL",
+      "category": "NCombat",
+      "key": "TRADITION_GAIN_NAVAL",
+      "type": "integer",
+      "defaultValue": 20
+    },
+    {
+      "id": "NCombat.PRESTIGE_FROM_LAND",
+      "category": "NCombat",
+      "key": "PRESTIGE_FROM_LAND",
+      "type": "float",
+      "defaultValue": 0.5
+    },
+    {
+      "id": "NCombat.PRESTIGE_FROM_NAVAL",
+      "category": "NCombat",
+      "key": "PRESTIGE_FROM_NAVAL",
+      "type": "float",
+      "defaultValue": 0.5
+    },
+    {
+      "id": "NCombat.DAYS_PER_SIEGE_PHASE",
+      "category": "NCombat",
+      "key": "DAYS_PER_SIEGE_PHASE",
+      "type": "integer",
+      "defaultValue": 30
+    },
+    {
+      "id": "NCombat.MIN_DAYS_PER_SIEGE_PHASE",
+      "category": "NCombat",
+      "key": "MIN_DAYS_PER_SIEGE_PHASE",
+      "type": "integer",
+      "defaultValue": 7
+    },
+    {
+      "id": "NCombat.DAYS_PER_SIEGE_PHASE_WITHOUT_FORT",
+      "category": "NCombat",
+      "key": "DAYS_PER_SIEGE_PHASE_WITHOUT_FORT",
+      "type": "integer",
+      "defaultValue": 15
+    },
+    {
+      "id": "NCombat.SIEGE_DISEASE_IMPACT",
+      "category": "NCombat",
+      "key": "SIEGE_DISEASE_IMPACT",
+      "type": "float",
+      "defaultValue": 0.05
+    },
+    {
+      "id": "NCombat.SIEGE_MAX_FORT_LIMIT_BONUS",
+      "category": "NCombat",
+      "key": "SIEGE_MAX_FORT_LIMIT_BONUS",
+      "type": "integer",
+      "defaultValue": 8
+    },
+    {
+      "id": "NCombat.SIEGE_REGIMENTS_FOR_ARTILLERY",
+      "category": "NCombat",
+      "key": "SIEGE_REGIMENTS_FOR_ARTILLERY",
+      "type": "integer",
+      "defaultValue": 3
+    },
+    {
+      "id": "NCombat.SIEGE_MEMORY",
+      "category": "NCombat",
+      "key": "SIEGE_MEMORY",
+      "type": "integer",
+      "defaultValue": 11
+    },
+    {
+      "id": "NCombat.SIEGE_WIN",
+      "category": "NCombat",
+      "key": "SIEGE_WIN",
+      "type": "integer",
+      "defaultValue": 20
+    },
+    {
+      "id": "NCombat.MAX_BREACH",
+      "category": "NCombat",
+      "key": "MAX_BREACH",
+      "type": "integer",
+      "defaultValue": 3
+    },
+    {
+      "id": "NCombat.SIEGE_SUPPLY_SHORTAGE_LOSS",
+      "category": "NCombat",
+      "key": "SIEGE_SUPPLY_SHORTAGE_LOSS",
+      "type": "float",
+      "defaultValue": 0.02
+    },
+    {
+      "id": "NCombat.SIEGE_SUPPLY_SHORTAGE_IMPACT",
+      "category": "NCombat",
+      "key": "SIEGE_SUPPLY_SHORTAGE_IMPACT",
+      "type": "integer",
+      "defaultValue": 1
+    },
+    {
+      "id": "NCombat.SIEGE_FOOD_SHORTAGE_LOSS",
+      "category": "NCombat",
+      "key": "SIEGE_FOOD_SHORTAGE_LOSS",
+      "type": "float",
+      "defaultValue": 0.03
+    },
+    {
+      "id": "NCombat.SIEGE_FOOD_SHORTAGE_IMPACT",
+      "category": "NCombat",
+      "key": "SIEGE_FOOD_SHORTAGE_IMPACT",
+      "type": "integer",
+      "defaultValue": 2
+    },
+    {
+      "id": "NCombat.SIEGE_WATER_SHORTAGE_LOSS",
+      "category": "NCombat",
+      "key": "SIEGE_WATER_SHORTAGE_LOSS",
+      "type": "float",
+      "defaultValue": 0.05
+    },
+    {
+      "id": "NCombat.SIEGE_WATER_SHORTAGE_IMPACT",
+      "category": "NCombat",
+      "key": "SIEGE_WATER_SHORTAGE_IMPACT",
+      "type": "integer",
+      "defaultValue": 3
+    },
+    {
+      "id": "NCombat.SIEGE_DEFENDER_DESERTION_LOSS",
+      "category": "NCombat",
+      "key": "SIEGE_DEFENDER_DESERTION_LOSS",
+      "type": "float",
+      "defaultValue": 0.1
+    },
+    {
+      "id": "NCombat.SIEGE_DEFENDER_DESERTION_IMPACT",
+      "category": "NCombat",
+      "key": "SIEGE_DEFENDER_DESERTION_IMPACT",
+      "type": "integer",
+      "defaultValue": 2
+    },
+    {
+      "id": "NCombat.SIEGE_BREACH_LOSS",
+      "category": "NCombat",
+      "key": "SIEGE_BREACH_LOSS",
+      "type": "float",
+      "defaultValue": 0.05
+    },
+    {
+      "id": "NCombat.SIEGE_BREACH_IMPACT",
+      "category": "NCombat",
+      "key": "SIEGE_BREACH_IMPACT",
+      "type": "integer",
+      "defaultValue": 2
+    },
+    {
+      "id": "NCombat.SIEGE_DAYS_PER_PHASE",
+      "category": "NCombat",
+      "key": "SIEGE_DAYS_PER_PHASE",
+      "type": "integer",
+      "defaultValue": 5
+    },
+    {
+      "id": "NCombat.ASSAULT_ATTACKER_LOSS",
+      "category": "NCombat",
+      "key": "ASSAULT_ATTACKER_LOSS",
+      "type": "float",
+      "defaultValue": 2.5
+    },
+    {
+      "id": "NCombat.ASSAULT_ATTACKER_MORALE_LOSS",
+      "category": "NCombat",
+      "key": "ASSAULT_ATTACKER_MORALE_LOSS",
+      "type": "float",
+      "defaultValue": 3
+    },
+    {
+      "id": "NCombat.ASSAULT_DEFENDER_LOSS",
+      "category": "NCombat",
+      "key": "ASSAULT_DEFENDER_LOSS",
+      "type": "float",
+      "defaultValue": 0.025
+    },
+    {
+      "id": "NCombat.ASSAULT_DEFENDER_MORALE_LOSS",
+      "category": "NCombat",
+      "key": "ASSAULT_DEFENDER_MORALE_LOSS",
+      "type": "float",
+      "defaultValue": 0.25
+    },
+    {
+      "id": "NCombat.ASSAULT_DICE_MODIFIER",
+      "category": "NCombat",
+      "key": "ASSAULT_DICE_MODIFIER",
+      "type": "integer",
+      "defaultValue": 5
+    },
+    {
+      "id": "NCombat.ASSAULT_WIDTH_LIMIT",
+      "category": "NCombat",
+      "key": "ASSAULT_WIDTH_LIMIT",
+      "type": "integer",
+      "defaultValue": 1
+    }
+  ]
+}

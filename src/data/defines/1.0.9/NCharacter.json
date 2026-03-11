@@ -1,0 +1,290 @@
+{
+  "name": "NCharacter",
+  "defines": [
+    {
+      "id": "NCharacter.BASE_AMOUNT_FOR_COUNTRY",
+      "category": "NCharacter",
+      "key": "BASE_AMOUNT_FOR_COUNTRY",
+      "type": "float",
+      "defaultValue": 1.25,
+      "comment": "multiply with cabinet size."
+    },
+    {
+      "id": "NCharacter.MAX_INFANT_AGE",
+      "category": "NCharacter",
+      "key": "MAX_INFANT_AGE",
+      "type": "integer",
+      "defaultValue": 2
+    },
+    {
+      "id": "NCharacter.MAX_CHILD_AGE",
+      "category": "NCharacter",
+      "key": "MAX_CHILD_AGE",
+      "type": "integer",
+      "defaultValue": 10
+    },
+    {
+      "id": "NCharacter.MAX_ADOLESCENT_AGE",
+      "category": "NCharacter",
+      "key": "MAX_ADOLESCENT_AGE",
+      "type": "integer",
+      "defaultValue": 15
+    },
+    {
+      "id": "NCharacter.ADULT_AGE",
+      "category": "NCharacter",
+      "key": "ADULT_AGE",
+      "type": "integer",
+      "defaultValue": 16
+    },
+    {
+      "id": "NCharacter.AI_MIN_MARRIAGE_AGE",
+      "category": "NCharacter",
+      "key": "AI_MIN_MARRIAGE_AGE",
+      "type": "integer",
+      "defaultValue": 19
+    },
+    {
+      "id": "NCharacter.AI_MAX_FEMALE_MARRIAGE_AGE",
+      "category": "NCharacter",
+      "key": "AI_MAX_FEMALE_MARRIAGE_AGE",
+      "type": "integer",
+      "defaultValue": 30
+    },
+    {
+      "id": "NCharacter.OLD_AGE_MONTH_CHANCE",
+      "category": "NCharacter",
+      "key": "OLD_AGE_MONTH_CHANCE",
+      "type": "float",
+      "defaultValue": 3,
+      "comment": "100 is dice roll"
+    },
+    {
+      "id": "NCharacter.MAX_PREGNANCY_AGE",
+      "category": "NCharacter",
+      "key": "MAX_PREGNANCY_AGE",
+      "type": "integer",
+      "defaultValue": 40,
+      "comment": "blocked above this"
+    },
+    {
+      "id": "NCharacter.PREGNANCY_AGE_THRESHOLD",
+      "category": "NCharacter",
+      "key": "PREGNANCY_AGE_THRESHOLD",
+      "type": "integer",
+      "defaultValue": 35
+    },
+    {
+      "id": "NCharacter.PREGNANCY_CHANCE",
+      "category": "NCharacter",
+      "key": "PREGNANCY_CHANCE",
+      "type": "integer",
+      "defaultValue": 170,
+      "comment": "1000 is diceroll"
+    },
+    {
+      "id": "NCharacter.PREGNANCY_FERTILITY_MIN_REDUCTION",
+      "category": "NCharacter",
+      "key": "PREGNANCY_FERTILITY_MIN_REDUCTION",
+      "type": "integer",
+      "defaultValue": 12
+    },
+    {
+      "id": "NCharacter.PREGNANCY_FERTILITY_MAX_REDUCTION",
+      "category": "NCharacter",
+      "key": "PREGNANCY_FERTILITY_MAX_REDUCTION",
+      "type": "integer",
+      "defaultValue": 25
+    },
+    {
+      "id": "NCharacter.MONTHLY_STAT_INCREASE_CHANCE_FOR_CHILD",
+      "category": "NCharacter",
+      "key": "MONTHLY_STAT_INCREASE_CHANCE_FOR_CHILD",
+      "type": "integer",
+      "defaultValue": 55,
+      "comment": "<= on 1d100"
+    },
+    {
+      "id": "NCharacter.MAX_ABILITY_VALUE",
+      "category": "NCharacter",
+      "key": "MAX_ABILITY_VALUE",
+      "type": "integer",
+      "defaultValue": 100
+    },
+    {
+      "id": "NCharacter.EXPLORER_EXTRA_LIFE",
+      "category": "NCharacter",
+      "key": "EXPLORER_EXTRA_LIFE",
+      "type": "integer",
+      "defaultValue": 15
+    },
+    {
+      "id": "NCharacter.DYNASTY_HEAD_MARRY_AGE",
+      "category": "NCharacter",
+      "key": "DYNASTY_HEAD_MARRY_AGE",
+      "type": "integer",
+      "defaultValue": 25
+    },
+    {
+      "id": "NCharacter.DYNASTY_HEAD_MARRY_TARGET_MIN_AGE",
+      "category": "NCharacter",
+      "key": "DYNASTY_HEAD_MARRY_TARGET_MIN_AGE",
+      "type": "integer",
+      "defaultValue": 20
+    },
+    {
+      "id": "NCharacter.DYNASTY_HEAD_MARRY_TARGET_MAX_AGE",
+      "category": "NCharacter",
+      "key": "DYNASTY_HEAD_MARRY_TARGET_MAX_AGE",
+      "type": "integer",
+      "defaultValue": 32
+    },
+    {
+      "id": "NCharacter.CHILD_TRAIT_AGE",
+      "category": "NCharacter",
+      "key": "CHILD_TRAIT_AGE",
+      "type": "integer",
+      "defaultValue": 3
+    },
+    {
+      "id": "NCharacter.YEARS_OF_RULING_FIRST_TRAIT",
+      "category": "NCharacter",
+      "key": "YEARS_OF_RULING_FIRST_TRAIT",
+      "type": "integer",
+      "defaultValue": 1
+    },
+    {
+      "id": "NCharacter.YEARS_OF_RULING_SECOND_TRAIT",
+      "category": "NCharacter",
+      "key": "YEARS_OF_RULING_SECOND_TRAIT",
+      "type": "integer",
+      "defaultValue": 10
+    },
+    {
+      "id": "NCharacter.YEARS_OF_RULING_THIRD_TRAIT",
+      "category": "NCharacter",
+      "key": "YEARS_OF_RULING_THIRD_TRAIT",
+      "type": "integer",
+      "defaultValue": 25
+    },
+    {
+      "id": "NCharacter.LEADER_COMBAT_TRAIT_GAIN_CHANCE",
+      "category": "NCharacter",
+      "key": "LEADER_COMBAT_TRAIT_GAIN_CHANCE",
+      "type": "float",
+      "defaultValue": 0.2
+    },
+    {
+      "id": "NCharacter.EDUCATION_AGE",
+      "category": "NCharacter",
+      "key": "EDUCATION_AGE",
+      "type": "integer",
+      "defaultValue": 3
+    },
+    {
+      "id": "NCharacter.MAX_AGE_SETUP_ERROR_LOG",
+      "category": "NCharacter",
+      "key": "MAX_AGE_SETUP_ERROR_LOG",
+      "type": "integer",
+      "defaultValue": 100
+    },
+    {
+      "id": "NCharacter.INCOMPETENT_TOTAL_ABILITY_THRESHOLD",
+      "category": "NCharacter",
+      "key": "INCOMPETENT_TOTAL_ABILITY_THRESHOLD",
+      "type": "integer",
+      "defaultValue": 50,
+      "comment": "If all the ability scores are added together and are still lower than this, the character is considered Incompetent and it will give you an Alert"
+    },
+    {
+      "id": "NCharacter.INCOMPETENT_AGE_THRESHOLD",
+      "category": "NCharacter",
+      "key": "INCOMPETENT_AGE_THRESHOLD",
+      "type": "integer",
+      "defaultValue": 10,
+      "comment": "you won't get Alert until the Ruler/Heir is this age"
+    },
+    {
+      "id": "NCharacter.RULER_ATTRIBUTE_IMPORTANCE",
+      "category": "NCharacter",
+      "key": "RULER_ATTRIBUTE_IMPORTANCE",
+      "type": "integer",
+      "defaultValue": 1
+    },
+    {
+      "id": "NCharacter.HEIR_ATTRIBUTE_IMPORTANCE",
+      "category": "NCharacter",
+      "key": "HEIR_ATTRIBUTE_IMPORTANCE",
+      "type": "float",
+      "defaultValue": 0.9
+    },
+    {
+      "id": "NCharacter.RULER_OTHER_CHILD_ATTRIBUTE_IMPORTANCE",
+      "category": "NCharacter",
+      "key": "RULER_OTHER_CHILD_ATTRIBUTE_IMPORTANCE",
+      "type": "float",
+      "defaultValue": 0.8
+    },
+    {
+      "id": "NCharacter.HEIR_OTHER_CHILD_ATTRIBUTE_IMPORTANCE",
+      "category": "NCharacter",
+      "key": "HEIR_OTHER_CHILD_ATTRIBUTE_IMPORTANCE",
+      "type": "float",
+      "defaultValue": 0.7
+    },
+    {
+      "id": "NCharacter.OTHER_CHARACTER_ATTRIBUTE_IMPORTANCE",
+      "category": "NCharacter",
+      "key": "OTHER_CHARACTER_ATTRIBUTE_IMPORTANCE",
+      "type": "float",
+      "defaultValue": 0.5
+    },
+    {
+      "id": "NCharacter.ATTRIBUTE_IMPORTANCE_MULTIPLIER",
+      "category": "NCharacter",
+      "key": "ATTRIBUTE_IMPORTANCE_MULTIPLIER",
+      "type": "integer",
+      "defaultValue": 4
+    },
+    {
+      "id": "NCharacter.RANDOM_CHARACTER_CHANCE_PRIMARY_CULTURE_MULTIPLIER",
+      "category": "NCharacter",
+      "key": "RANDOM_CHARACTER_CHANCE_PRIMARY_CULTURE_MULTIPLIER",
+      "type": "integer",
+      "defaultValue": 80,
+      "comment": "n-times more likely to select a Primary Culture pop"
+    },
+    {
+      "id": "NCharacter.RANDOM_CHARACTER_CHANCE_ACCEPTED_CULTURE_MULTIPLIER",
+      "category": "NCharacter",
+      "key": "RANDOM_CHARACTER_CHANCE_ACCEPTED_CULTURE_MULTIPLIER",
+      "type": "integer",
+      "defaultValue": 50,
+      "comment": "n-times more likely to select an Accepted Culture Culture pop"
+    },
+    {
+      "id": "NCharacter.RANDOM_CHARACTER_CHANCE_TOLERATED_CULTURE_MULTIPLIER",
+      "category": "NCharacter",
+      "key": "RANDOM_CHARACTER_CHANCE_TOLERATED_CULTURE_MULTIPLIER",
+      "type": "integer",
+      "defaultValue": 20,
+      "comment": "n-times more likely to select an Tolerated Culture Culture pop"
+    },
+    {
+      "id": "NCharacter.RANDOM_CHARACTER_CHANCE_CULTURE_OPINION_MULTIPLIER",
+      "category": "NCharacter",
+      "key": "RANDOM_CHARACTER_CHANCE_CULTURE_OPINION_MULTIPLIER",
+      "type": "integer",
+      "defaultValue": 1,
+      "comment": "multiplies with primary culture's opinion of a pop's culture, e.g. if it was 10, Kindred 3 becomes 30. Same culture is treated as Kindred"
+    },
+    {
+      "id": "NCharacter.RANDOM_CHARACTER_CHANCE_RELIGION_OPINION_MULTIPLIER",
+      "category": "NCharacter",
+      "key": "RANDOM_CHARACTER_CHANCE_RELIGION_OPINION_MULTIPLIER",
+      "type": "integer",
+      "defaultValue": 1,
+      "comment": "multiplies with primary religion's opinion of a pop's religion, e.g. if it was 10, Kindred 3 becomes 30"
+    }
+  ]
+}

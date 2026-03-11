@@ -1,0 +1,33 @@
+{
+  "name": "NInternationalOrganization",
+  "defines": [
+    {
+      "id": "NInternationalOrganization.PARLIAMENT_REQUEST_ISSUE_SUPPORT_NEEDED",
+      "category": "NInternationalOrganization",
+      "key": "PARLIAMENT_REQUEST_ISSUE_SUPPORT_NEEDED",
+      "type": "float",
+      "defaultValue": 0.5
+    },
+    {
+      "id": "NInternationalOrganization.PARLIAMENT_ISSUE_THRESHOLD",
+      "category": "NInternationalOrganization",
+      "key": "PARLIAMENT_ISSUE_THRESHOLD",
+      "type": "float",
+      "defaultValue": 0.5
+    },
+    {
+      "id": "NInternationalOrganization.PARLIAMENT_DURATION_DAYS",
+      "category": "NInternationalOrganization",
+      "key": "PARLIAMENT_DURATION_DAYS",
+      "type": "integer",
+      "defaultValue": 365
+    },
+    {
+      "id": "NInternationalOrganization.PARLIAMENT_AVAILABLE_AGENDAS",
+      "category": "NInternationalOrganization",
+      "key": "PARLIAMENT_AVAILABLE_AGENDAS",
+      "type": "integer",
+      "defaultValue": 5
+    }
+  ]
+}

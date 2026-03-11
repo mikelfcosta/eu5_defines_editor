@@ -1,0 +1,307 @@
+{
+  "name": "NWar",
+  "defines": [
+    {
+      "id": "NWar.MAX_WAR_SCORE",
+      "category": "NWar",
+      "key": "MAX_WAR_SCORE",
+      "type": "integer",
+      "defaultValue": 100
+    },
+    {
+      "id": "NWar.PARTICIPATION_SCORE_BLOCKADE",
+      "category": "NWar",
+      "key": "PARTICIPATION_SCORE_BLOCKADE",
+      "type": "float",
+      "defaultValue": 0.001,
+      "comment": "Per development & ship, once each month"
+    },
+    {
+      "id": "NWar.PARTICIPATION_SCORE_BATTLE",
+      "category": "NWar",
+      "key": "PARTICIPATION_SCORE_BATTLE",
+      "type": "float",
+      "defaultValue": 0.03,
+      "comment": "Per regiment or ship engaged in battle"
+    },
+    {
+      "id": "NWar.PARTICIPATION_SCORE_SIEGE",
+      "category": "NWar",
+      "key": "PARTICIPATION_SCORE_SIEGE",
+      "type": "float",
+      "defaultValue": 0.01,
+      "comment": "Per regiment engaged in sieges that are able to progress"
+    },
+    {
+      "id": "NWar.PARTICIPATION_SCORE_OVERSEAS_MULT",
+      "category": "NWar",
+      "key": "PARTICIPATION_SCORE_OVERSEAS_MULT",
+      "type": "float",
+      "defaultValue": 0.25,
+      "comment": "How much less participation do you get if fighting overseas from war leader?"
+    },
+    {
+      "id": "NWar.PARTICIPATION_SCORE_MERC_MULT",
+      "category": "NWar",
+      "key": "PARTICIPATION_SCORE_MERC_MULT",
+      "type": "float",
+      "defaultValue": 0.5,
+      "comment": "How much less participation do you get from mercs?"
+    },
+    {
+      "id": "NWar.PARTICIPATION_SCORE_UNFORTIFIED_MULT",
+      "category": "NWar",
+      "key": "PARTICIPATION_SCORE_UNFORTIFIED_MULT",
+      "type": "float",
+      "defaultValue": 0.1,
+      "comment": "How much less participation do you get from besieging unfortified provinces?"
+    },
+    {
+      "id": "NWar.ATTACKER_WAR_COST_POWER_PROJECTION_SCALE",
+      "category": "NWar",
+      "key": "ATTACKER_WAR_COST_POWER_PROJECTION_SCALE",
+      "type": "float",
+      "defaultValue": 0.01,
+      "comment": "Declare war cost multiplier = 1 - ( Power projection difference between attacker and defender x this )"
+    },
+    {
+      "id": "NWar.PARTICIPATION_SCORE_TO_FAVOURS_MULTIPLIER_BLOCKADE",
+      "category": "NWar",
+      "key": "PARTICIPATION_SCORE_TO_FAVOURS_MULTIPLIER_BLOCKADE",
+      "type": "integer",
+      "defaultValue": 1,
+      "comment": "these will tick up your favours to whoever you're helping as the war goes on"
+    },
+    {
+      "id": "NWar.PARTICIPATION_SCORE_TO_FAVOURS_MULTIPLIER_COMBAT",
+      "category": "NWar",
+      "key": "PARTICIPATION_SCORE_TO_FAVOURS_MULTIPLIER_COMBAT",
+      "type": "integer",
+      "defaultValue": 1,
+      "comment": "these will tick up your favours to whoever you're helping as the war goes on"
+    },
+    {
+      "id": "NWar.PARTICIPATION_SCORE_TO_FAVOURS_MULTIPLIER_SIEGE",
+      "category": "NWar",
+      "key": "PARTICIPATION_SCORE_TO_FAVOURS_MULTIPLIER_SIEGE",
+      "type": "integer",
+      "defaultValue": 1,
+      "comment": "these will tick up your favours to whoever you're helping as the war goes on"
+    },
+    {
+      "id": "NWar.PARTICIPATION_SCORE_TO_FAVOURS_MULTIPLIER_JOINING_WAR",
+      "category": "NWar",
+      "key": "PARTICIPATION_SCORE_TO_FAVOURS_MULTIPLIER_JOINING_WAR",
+      "type": "integer",
+      "defaultValue": 20,
+      "comment": "one-off favours boost"
+    },
+    {
+      "id": "NWar.WAR_WORTH_BASE",
+      "category": "NWar",
+      "key": "WAR_WORTH_BASE",
+      "type": "integer",
+      "defaultValue": 2
+    },
+    {
+      "id": "NWar.WAR_WORTH_TAX_BASE_SCALE",
+      "category": "NWar",
+      "key": "WAR_WORTH_TAX_BASE_SCALE",
+      "type": "float",
+      "defaultValue": 0.2
+    },
+    {
+      "id": "NWar.WAR_WORTH_BUILDING_SCALE",
+      "category": "NWar",
+      "key": "WAR_WORTH_BUILDING_SCALE",
+      "type": "float",
+      "defaultValue": 0.025
+    },
+    {
+      "id": "NWar.WAR_WORTH_BUILDING_CAP",
+      "category": "NWar",
+      "key": "WAR_WORTH_BUILDING_CAP",
+      "type": "integer",
+      "defaultValue": 10
+    },
+    {
+      "id": "NWar.WAR_WORTH_POPULATION_SCALE",
+      "category": "NWar",
+      "key": "WAR_WORTH_POPULATION_SCALE",
+      "type": "float",
+      "defaultValue": 0.02
+    },
+    {
+      "id": "NWar.WAR_WORTH_POPULATION_CAP",
+      "category": "NWar",
+      "key": "WAR_WORTH_POPULATION_CAP",
+      "type": "integer",
+      "defaultValue": 4
+    },
+    {
+      "id": "NWar.WAR_WORTH_COUNTRY_CAPITAL",
+      "category": "NWar",
+      "key": "WAR_WORTH_COUNTRY_CAPITAL",
+      "type": "integer",
+      "defaultValue": 5
+    },
+    {
+      "id": "NWar.WAR_WORTH_PROVINCE_CAPITAL",
+      "category": "NWar",
+      "key": "WAR_WORTH_PROVINCE_CAPITAL",
+      "type": "integer",
+      "defaultValue": 1
+    },
+    {
+      "id": "NWar.WAR_WORTH_PORT",
+      "category": "NWar",
+      "key": "WAR_WORTH_PORT",
+      "type": "integer",
+      "defaultValue": 1
+    },
+    {
+      "id": "NWar.WAR_WORTH_FORT_BASE",
+      "category": "NWar",
+      "key": "WAR_WORTH_FORT_BASE",
+      "type": "float",
+      "defaultValue": 0.5
+    },
+    {
+      "id": "NWar.WAR_WORTH_FORT_LEVEL_SCALE",
+      "category": "NWar",
+      "key": "WAR_WORTH_FORT_LEVEL_SCALE",
+      "type": "float",
+      "defaultValue": 0.25
+    },
+    {
+      "id": "NWar.WAR_WORTH_DEVELOPMENT_SCALE",
+      "category": "NWar",
+      "key": "WAR_WORTH_DEVELOPMENT_SCALE",
+      "type": "float",
+      "defaultValue": 0.05,
+      "comment": "scaled to (this location's development - average development of taker)"
+    },
+    {
+      "id": "NWar.WAR_WORTH_DEVELOPMENT_MIN",
+      "category": "NWar",
+      "key": "WAR_WORTH_DEVELOPMENT_MIN",
+      "type": "integer",
+      "defaultValue": -1
+    },
+    {
+      "id": "NWar.WAR_WORTH_DEVELOPMENT_MAX",
+      "category": "NWar",
+      "key": "WAR_WORTH_DEVELOPMENT_MAX",
+      "type": "integer",
+      "defaultValue": 5
+    },
+    {
+      "id": "NWar.FAVOR_GAIN_WARSCORE_FACTOR",
+      "category": "NWar",
+      "key": "FAVOR_GAIN_WARSCORE_FACTOR",
+      "type": "integer",
+      "defaultValue": 20,
+      "comment": "Favors gained for giving land is scaled relative to this actual warscore cost (so more favors for bigger chunks of land)"
+    },
+    {
+      "id": "NWar.FAVOR_GAIN_FOR_LAND",
+      "category": "NWar",
+      "key": "FAVOR_GAIN_FOR_LAND",
+      "type": "integer",
+      "defaultValue": 10,
+      "comment": "Favors gained for giving land (scales with how much they actually got relative to participation)"
+    },
+    {
+      "id": "NWar.TRUST_PENALTY_FOR_NO_LAND",
+      "category": "NWar",
+      "key": "TRUST_PENALTY_FOR_NO_LAND",
+      "type": "integer",
+      "defaultValue": 20,
+      "comment": "Trust penalty for not being given as much land as they expected in peace deal (scales with how much they actually got relative to participation)"
+    },
+    {
+      "id": "NWar.BROKE_LAND_PROMISE_YEARS",
+      "category": "NWar",
+      "key": "BROKE_LAND_PROMISE_YEARS",
+      "type": "integer",
+      "defaultValue": 30
+    },
+    {
+      "id": "NWar.OPINION_PENALTY_FOR_NO_LAND",
+      "category": "NWar",
+      "key": "OPINION_PENALTY_FOR_NO_LAND",
+      "type": "integer",
+      "defaultValue": 1
+    },
+    {
+      "id": "NWar.PENALTY_FOR_NO_LAND_NOT_PROMISED_MULT",
+      "category": "NWar",
+      "key": "PENALTY_FOR_NO_LAND_NOT_PROMISED_MULT",
+      "type": "float",
+      "defaultValue": 0.5
+    },
+    {
+      "id": "NWar.MINIMUM_CONTRIBUTION_NOT_PROMISED_LAND",
+      "category": "NWar",
+      "key": "MINIMUM_CONTRIBUTION_NOT_PROMISED_LAND",
+      "type": "float",
+      "defaultValue": 0.2
+    },
+    {
+      "id": "NWar.MINIMUM_CONTRIBUTION_PROMISED_LAND",
+      "category": "NWar",
+      "key": "MINIMUM_CONTRIBUTION_PROMISED_LAND",
+      "type": "integer",
+      "defaultValue": 0
+    },
+    {
+      "id": "NWar.EXPECTED_GAINS_PROMISED_LAND",
+      "category": "NWar",
+      "key": "EXPECTED_GAINS_PROMISED_LAND",
+      "type": "float",
+      "defaultValue": 0.75
+    },
+    {
+      "id": "NWar.EXPECTED_GAINS_NOT_PROMISED_LAND",
+      "category": "NWar",
+      "key": "EXPECTED_GAINS_NOT_PROMISED_LAND",
+      "type": "float",
+      "defaultValue": 0.5
+    },
+    {
+      "id": "NWar.DURATION_BEFORE_PURGING_WARS_IN_DAYS",
+      "category": "NWar",
+      "key": "DURATION_BEFORE_PURGING_WARS_IN_DAYS",
+      "type": "integer",
+      "defaultValue": 365
+    },
+    {
+      "id": "NWar.YEARS_SINCE_LAST_WAR_ACTION_BEFORE_WHITE_PEACE",
+      "category": "NWar",
+      "key": "YEARS_SINCE_LAST_WAR_ACTION_BEFORE_WHITE_PEACE",
+      "type": "integer",
+      "defaultValue": 3
+    },
+    {
+      "id": "NWar.YEARS_BEFORE_WHITE_PEACE_ALERT_ADVANCE",
+      "category": "NWar",
+      "key": "YEARS_BEFORE_WHITE_PEACE_ALERT_ADVANCE",
+      "type": "integer",
+      "defaultValue": 1
+    },
+    {
+      "id": "NWar.PEACE_REVOKE_CORE_MULT",
+      "category": "NWar",
+      "key": "PEACE_REVOKE_CORE_MULT",
+      "type": "float",
+      "defaultValue": 0.25
+    },
+    {
+      "id": "NWar.PEACE_RETURN_CORE_MULT",
+      "category": "NWar",
+      "key": "PEACE_RETURN_CORE_MULT",
+      "type": "float",
+      "defaultValue": 0.5
+    }
+  ]
+}

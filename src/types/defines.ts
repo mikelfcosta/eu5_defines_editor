@@ -17,6 +17,7 @@ export interface DefineEntry {
   defaultValue: DefineValue;
   itemTypes?: string[];
   comment?: string;
+  aiComment?: string;
 }
 
 export interface DefineCategory {

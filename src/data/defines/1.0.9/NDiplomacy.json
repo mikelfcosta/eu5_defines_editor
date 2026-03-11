@@ -1,0 +1,1796 @@
+{
+  "name": "NDiplomacy",
+  "defines": [
+    {
+      "id": "NDiplomacy.AUTO_TIME_OUT_MONTHS",
+      "category": "NDiplomacy",
+      "key": "AUTO_TIME_OUT_MONTHS",
+      "type": "integer",
+      "defaultValue": 2
+    },
+    {
+      "id": "NDiplomacy.SEND_GIFT_COOLDOWN",
+      "category": "NDiplomacy",
+      "key": "SEND_GIFT_COOLDOWN",
+      "type": "integer",
+      "defaultValue": 120,
+      "comment": "months"
+    },
+    {
+      "id": "NDiplomacy.REMOVE_RIVAL_COOLDOWN",
+      "category": "NDiplomacy",
+      "key": "REMOVE_RIVAL_COOLDOWN",
+      "type": "integer",
+      "defaultValue": 60,
+      "comment": "months"
+    },
+    {
+      "id": "NDiplomacy.BASE_THREAT",
+      "category": "NDiplomacy",
+      "key": "BASE_THREAT",
+      "type": "float",
+      "defaultValue": 0.1
+    },
+    {
+      "id": "NDiplomacy.THREAT_DISTANCE_FACTOR_FOR_RIVAL",
+      "category": "NDiplomacy",
+      "key": "THREAT_DISTANCE_FACTOR_FOR_RIVAL",
+      "type": "float",
+      "defaultValue": 0.002
+    },
+    {
+      "id": "NDiplomacy.THREAT_BORDER_PERCENTAGE_FACTOR_FOR_RIVAL",
+      "category": "NDiplomacy",
+      "key": "THREAT_BORDER_PERCENTAGE_FACTOR_FOR_RIVAL",
+      "type": "float",
+      "defaultValue": 0.1
+    },
+    {
+      "id": "NDiplomacy.THREAT_FACTOR_WHEN_REDUCING",
+      "category": "NDiplomacy",
+      "key": "THREAT_FACTOR_WHEN_REDUCING",
+      "type": "float",
+      "defaultValue": 0.25
+    },
+    {
+      "id": "NDiplomacy.PROFESS_TRUST_REPUTATION_COST",
+      "category": "NDiplomacy",
+      "key": "PROFESS_TRUST_REPUTATION_COST",
+      "type": "integer",
+      "defaultValue": 3
+    },
+    {
+      "id": "NDiplomacy.MULTIPLE_ANNEX_PENALTY",
+      "category": "NDiplomacy",
+      "key": "MULTIPLE_ANNEX_PENALTY",
+      "type": "float",
+      "defaultValue": -0.5
+    },
+    {
+      "id": "NDiplomacy.SUBJECTS_STRENGTH_THRESHOLD",
+      "category": "NDiplomacy",
+      "key": "SUBJECTS_STRENGTH_THRESHOLD",
+      "type": "float",
+      "defaultValue": 0.25
+    },
+    {
+      "id": "NDiplomacy.SUBJECTS_STRENGTH_SCALE",
+      "category": "NDiplomacy",
+      "key": "SUBJECTS_STRENGTH_SCALE",
+      "type": "integer",
+      "defaultValue": -2,
+      "comment": "default value"
+    },
+    {
+      "id": "NDiplomacy.GOOD_RELATION_THRESHOLD_FOR_BUILDINGS",
+      "category": "NDiplomacy",
+      "key": "GOOD_RELATION_THRESHOLD_FOR_BUILDINGS",
+      "type": "integer",
+      "defaultValue": 100
+    },
+    {
+      "id": "NDiplomacy.RIVAL_OPINION_THRESHOLD",
+      "category": "NDiplomacy",
+      "key": "RIVAL_OPINION_THRESHOLD",
+      "type": "integer",
+      "defaultValue": 100
+    },
+    {
+      "id": "NDiplomacy.FRIENDLY_CULTURE_SCALE_ON_SHARED_BORDER",
+      "category": "NDiplomacy",
+      "key": "FRIENDLY_CULTURE_SCALE_ON_SHARED_BORDER",
+      "type": "float",
+      "defaultValue": 0.1
+    },
+    {
+      "id": "NDiplomacy.MAKE_SUBJECT_PEACE_POP_NATION",
+      "category": "NDiplomacy",
+      "key": "MAKE_SUBJECT_PEACE_POP_NATION",
+      "type": "integer",
+      "defaultValue": 25
+    },
+    {
+      "id": "NDiplomacy.PEACE_BUILD_LEVEL_SCALE",
+      "category": "NDiplomacy",
+      "key": "PEACE_BUILD_LEVEL_SCALE",
+      "type": "float",
+      "defaultValue": 0.2
+    },
+    {
+      "id": "NDiplomacy.PEACE_BUILD_CAP",
+      "category": "NDiplomacy",
+      "key": "PEACE_BUILD_CAP",
+      "type": "integer",
+      "defaultValue": 90
+    },
+    {
+      "id": "NDiplomacy.SUBJECT_UPKEEP_BASE",
+      "category": "NDiplomacy",
+      "key": "SUBJECT_UPKEEP_BASE",
+      "type": "float",
+      "defaultValue": 0.1
+    },
+    {
+      "id": "NDiplomacy.SUBJECT_UPKEEP_ECONOMY_RATIO_SCALE",
+      "category": "NDiplomacy",
+      "key": "SUBJECT_UPKEEP_ECONOMY_RATIO_SCALE",
+      "type": "float",
+      "defaultValue": 2
+    },
+    {
+      "id": "NDiplomacy.SUBJECT_UPKEEP_ECONOMY_MIN",
+      "category": "NDiplomacy",
+      "key": "SUBJECT_UPKEEP_ECONOMY_MIN",
+      "type": "float",
+      "defaultValue": 0.1
+    },
+    {
+      "id": "NDiplomacy.SUBJECT_UPKEEP_RANK_SCALE",
+      "category": "NDiplomacy",
+      "key": "SUBJECT_UPKEEP_RANK_SCALE",
+      "type": "float",
+      "defaultValue": 0.2
+    },
+    {
+      "id": "NDiplomacy.SUBJECT_UPKEEP_COMMON_DIALECT",
+      "category": "NDiplomacy",
+      "key": "SUBJECT_UPKEEP_COMMON_DIALECT",
+      "type": "float",
+      "defaultValue": -0.1
+    },
+    {
+      "id": "NDiplomacy.SUBJECT_UPKEEP_COMMON_LANGUAGE",
+      "category": "NDiplomacy",
+      "key": "SUBJECT_UPKEEP_COMMON_LANGUAGE",
+      "type": "float",
+      "defaultValue": -0.05
+    },
+    {
+      "id": "NDiplomacy.SUBJECT_UPKEEP_COMMON_RELIGION",
+      "category": "NDiplomacy",
+      "key": "SUBJECT_UPKEEP_COMMON_RELIGION",
+      "type": "float",
+      "defaultValue": -0.1
+    },
+    {
+      "id": "NDiplomacy.SUBJECT_UPKEEP_COMMON_GROUP",
+      "category": "NDiplomacy",
+      "key": "SUBJECT_UPKEEP_COMMON_GROUP",
+      "type": "float",
+      "defaultValue": -0.05
+    },
+    {
+      "id": "NDiplomacy.TOO_DISLOYAL_THRESHOLD",
+      "category": "NDiplomacy",
+      "key": "TOO_DISLOYAL_THRESHOLD",
+      "type": "integer",
+      "defaultValue": 50
+    },
+    {
+      "id": "NDiplomacy.DISLOYAL_REVENUE_SCALE",
+      "category": "NDiplomacy",
+      "key": "DISLOYAL_REVENUE_SCALE",
+      "type": "float",
+      "defaultValue": -0.02
+    },
+    {
+      "id": "NDiplomacy.CALL_FOR_PEACE_THRESHOLD_MONTHS",
+      "category": "NDiplomacy",
+      "key": "CALL_FOR_PEACE_THRESHOLD_MONTHS",
+      "type": "integer",
+      "defaultValue": 60
+    },
+    {
+      "id": "NDiplomacy.CALL_FOR_PEACE_WARSCORE_LIMIT",
+      "category": "NDiplomacy",
+      "key": "CALL_FOR_PEACE_WARSCORE_LIMIT",
+      "type": "integer",
+      "defaultValue": 67
+    },
+    {
+      "id": "NDiplomacy.STABILITY_BLOCK_THRESHOLD",
+      "category": "NDiplomacy",
+      "key": "STABILITY_BLOCK_THRESHOLD",
+      "type": "integer",
+      "defaultValue": -50
+    },
+    {
+      "id": "NDiplomacy.STAB_HIT_GOOD_PEACE",
+      "category": "NDiplomacy",
+      "key": "STAB_HIT_GOOD_PEACE",
+      "type": "integer",
+      "defaultValue": -10
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_BASE_PER_LOCATION",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_BASE_PER_LOCATION",
+      "type": "float",
+      "defaultValue": 0.4,
+      "comment": "fixed for any location"
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_BASE_PER_LOCATION_DEVELOPMENT",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_BASE_PER_LOCATION_DEVELOPMENT",
+      "type": "float",
+      "defaultValue": 0.04,
+      "comment": "multiplied by dev"
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_BASE_PER_LOCATION_LOG_DEVELOPMENT",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_BASE_PER_LOCATION_LOG_DEVELOPMENT",
+      "type": "float",
+      "defaultValue": 0.4,
+      "comment": "multiplied by a log2 scale of dev"
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_BASE_ATTACKER_GREAT_POWER_SCORE_MULTIPLIER",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_BASE_ATTACKER_GREAT_POWER_SCORE_MULTIPLIER",
+      "type": "float",
+      "defaultValue": 0.01,
+      "comment": "+50% cap, multiplied by attacker's GP score to provide antagonism increase"
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_BASE_DEFENDER_GREAT_POWER_SCORE_MULTIPLIER",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_BASE_DEFENDER_GREAT_POWER_SCORE_MULTIPLIER",
+      "type": "float",
+      "defaultValue": 0.01,
+      "comment": "-50% cap, multiplied by defender's GP score to provide antagonism reduction"
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_BASE_AE_INCREASE_FOR_NON_TARGET_MODIFIER",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_BASE_AE_INCREASE_FOR_NON_TARGET_MODIFIER",
+      "type": "float",
+      "defaultValue": 0.33,
+      "comment": "AE increase for countries that are not main targets of the war"
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_BASE_MODIFIER_WE_ARE_OVERLORD",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_BASE_MODIFIER_WE_ARE_OVERLORD",
+      "type": "float",
+      "defaultValue": 0.9
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_BASE_MODIFIER_WE_ARE_THE_TARGET",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_BASE_MODIFIER_WE_ARE_THE_TARGET",
+      "type": "float",
+      "defaultValue": 0.5
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_BASE_MODIFIER_EPICENTRE_DISTANCE_FACTOR",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_BASE_MODIFIER_EPICENTRE_DISTANCE_FACTOR",
+      "type": "float",
+      "defaultValue": 0.75,
+      "comment": "0.75 per 100 distance"
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_ADDITIONAL_MODIFIER_SAME_OVERLORD",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_ADDITIONAL_MODIFIER_SAME_OVERLORD",
+      "type": "float",
+      "defaultValue": 0.5
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_ADDITIONAL_MODIFIER_SAME_CULTURE",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_ADDITIONAL_MODIFIER_SAME_CULTURE",
+      "type": "float",
+      "defaultValue": 0.4
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_ADDITIONAL_MODIFIER_SAME_CULTURE_GROUP",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_ADDITIONAL_MODIFIER_SAME_CULTURE_GROUP",
+      "type": "float",
+      "defaultValue": 0.2
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_ADDITIONAL_MODIFIER_INFIDEL_CONQUEST",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_ADDITIONAL_MODIFIER_INFIDEL_CONQUEST",
+      "type": "float",
+      "defaultValue": 0.4,
+      "comment": "different religion group conquered same religion province"
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_ADDITIONAL_MODIFIER_SAME_RELIGION",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_ADDITIONAL_MODIFIER_SAME_RELIGION",
+      "type": "float",
+      "defaultValue": 0.35
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_ADDITIONAL_MODIFIER_SAME_RELIGION_GROUP",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_ADDITIONAL_MODIFIER_SAME_RELIGION_GROUP",
+      "type": "float",
+      "defaultValue": 0
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_ADDITIONAL_MODIFIER_DIFFERENT_RELIGION",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_ADDITIONAL_MODIFIER_DIFFERENT_RELIGION",
+      "type": "float",
+      "defaultValue": -0.35,
+      "comment": "we don't care about those heathens"
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_ADDITIONAL_MODIFIER_SAME_GOVERNMENT_TYPE",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_ADDITIONAL_MODIFIER_SAME_GOVERNMENT_TYPE",
+      "type": "float",
+      "defaultValue": 0.05
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_ADDITIONAL_MODIFIER_DIFFERENT_GOVERNMENT_TYPE",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_ADDITIONAL_MODIFIER_DIFFERENT_GOVERNMENT_TYPE",
+      "type": "float",
+      "defaultValue": -0.05
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_ADDITIONAL_MODIFIER_DIPLOMATIC_REPUTATION",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_ADDITIONAL_MODIFIER_DIPLOMATIC_REPUTATION",
+      "type": "float",
+      "defaultValue": -0.04,
+      "comment": "reduces antagonism"
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_ADDITIONAL_MODIFIER_SAME_DIALECT",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_ADDITIONAL_MODIFIER_SAME_DIALECT",
+      "type": "float",
+      "defaultValue": 0.25
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_ADDITIONAL_MODIFIER_SAME_LANGUAGE",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_ADDITIONAL_MODIFIER_SAME_LANGUAGE",
+      "type": "float",
+      "defaultValue": 0.2
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_ADDITIONAL_MODIFIER_SAME_LANGUAGE_FAMILY",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_ADDITIONAL_MODIFIER_SAME_LANGUAGE_FAMILY",
+      "type": "float",
+      "defaultValue": 0.05
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_ADDITIONAL_MODIFIER_PENALTY_PRE_EXISTING_ANTAGONISM",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_ADDITIONAL_MODIFIER_PENALTY_PRE_EXISTING_ANTAGONISM",
+      "type": "float",
+      "defaultValue": 0,
+      "comment": "how much any existing antagonism impacts future antagonism gains"
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_ADDITIONAL_MODIFIER_PERCENT_ABOVE_GP_SCORE_FOR_DONT_CARE",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_ADDITIONAL_MODIFIER_PERCENT_ABOVE_GP_SCORE_FOR_DONT_CARE",
+      "type": "float",
+      "defaultValue": 1.5,
+      "comment": "if we're at least 2.5x as powerful as them, we don't care so much about what they do"
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_ADDITIONAL_MODIFIER_GP_SCORE_MULTIPLIER_MAX",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_ADDITIONAL_MODIFIER_GP_SCORE_MULTIPLIER_MAX",
+      "type": "float",
+      "defaultValue": 0.25,
+      "comment": "max amount of extra antagonism for being close in gp score"
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_ADDITIONAL_MODIFIER_GP_SCORE_MULTIPLIER_MIN",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_ADDITIONAL_MODIFIER_GP_SCORE_MULTIPLIER_MIN",
+      "type": "float",
+      "defaultValue": -0.25,
+      "comment": "min amount of extra antagonism for being close in gp score"
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_ADDITIONAL_MODIFIER_PEACE_SUBJECT_REDUCTION",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_ADDITIONAL_MODIFIER_PEACE_SUBJECT_REDUCTION",
+      "type": "float",
+      "defaultValue": -0.5,
+      "comment": "AE reduction if it is taken for a subject"
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_ADDITIONAL_MODIFIER_SUBJECT_OF_AGGRESSOR",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_ADDITIONAL_MODIFIER_SUBJECT_OF_AGGRESSOR",
+      "type": "float",
+      "defaultValue": -0.8
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_STATIC_SAME_CULTURE",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_STATIC_SAME_CULTURE",
+      "type": "integer",
+      "defaultValue": -2
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_STATIC_SAME_CULTURE_GROUP",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_STATIC_SAME_CULTURE_GROUP",
+      "type": "integer",
+      "defaultValue": 0
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_STATIC_DIFFERENT_CULTURE_GROUP",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_STATIC_DIFFERENT_CULTURE_GROUP",
+      "type": "integer",
+      "defaultValue": 4
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_STATIC_SAME_RELIGION",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_STATIC_SAME_RELIGION",
+      "type": "integer",
+      "defaultValue": -2
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_STATIC_SAME_RELIGION_GROUP",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_STATIC_SAME_RELIGION_GROUP",
+      "type": "integer",
+      "defaultValue": 0
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_STATIC_DIFFERENT_RELIGION",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_STATIC_DIFFERENT_RELIGION",
+      "type": "integer",
+      "defaultValue": 10
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_STATIC_SAME_GOVERNMENT_TYPE",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_STATIC_SAME_GOVERNMENT_TYPE",
+      "type": "integer",
+      "defaultValue": -1
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_STATIC_DIFFERENT_GOVERNMENT_TYPE",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_STATIC_DIFFERENT_GOVERNMENT_TYPE",
+      "type": "integer",
+      "defaultValue": 1
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_STATIC_DIFFERING_SOCIETAL_VALUES",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_STATIC_DIFFERING_SOCIETAL_VALUES",
+      "type": "integer",
+      "defaultValue": 25,
+      "comment": "multiplied by how different they are"
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_STATIC_SAME_DIALECT",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_STATIC_SAME_DIALECT",
+      "type": "integer",
+      "defaultValue": -2
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_STATIC_SAME_LANGUAGE",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_STATIC_SAME_LANGUAGE",
+      "type": "integer",
+      "defaultValue": -1
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_STATIC_SAME_LANGUAGE_FAMILY",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_STATIC_SAME_LANGUAGE_FAMILY",
+      "type": "integer",
+      "defaultValue": 0
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_STATIC_FOREIGN_LANGUAGE_FAMILY",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_STATIC_FOREIGN_LANGUAGE_FAMILY",
+      "type": "integer",
+      "defaultValue": 2
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_FOR_COALITION_WARNING",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_FOR_COALITION_WARNING",
+      "type": "integer",
+      "defaultValue": 40
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_FOR_COALITION",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_FOR_COALITION",
+      "type": "integer",
+      "defaultValue": 50
+    },
+    {
+      "id": "NDiplomacy.PEACE_AUTO_ENFORCE_BASE_DAYS",
+      "category": "NDiplomacy",
+      "key": "PEACE_AUTO_ENFORCE_BASE_DAYS",
+      "type": "integer",
+      "defaultValue": 365
+    },
+    {
+      "id": "NDiplomacy.PEACE_AUTO_ENFORCE_RANK_DAY",
+      "category": "NDiplomacy",
+      "key": "PEACE_AUTO_ENFORCE_RANK_DAY",
+      "type": "integer",
+      "defaultValue": 180
+    },
+    {
+      "id": "NDiplomacy.MIN_WARSCORE_TO_DEMAND",
+      "category": "NDiplomacy",
+      "key": "MIN_WARSCORE_TO_DEMAND",
+      "type": "integer",
+      "defaultValue": 10
+    },
+    {
+      "id": "NDiplomacy.PEACE_SEPERATE_BLOCK_MONTHS",
+      "category": "NDiplomacy",
+      "key": "PEACE_SEPERATE_BLOCK_MONTHS",
+      "type": "integer",
+      "defaultValue": 12
+    },
+    {
+      "id": "NDiplomacy.PEACE_COST_MODIFIER_FOR_REVOLT_WAR",
+      "category": "NDiplomacy",
+      "key": "PEACE_COST_MODIFIER_FOR_REVOLT_WAR",
+      "type": "float",
+      "defaultValue": -0.95,
+      "comment": "Applied against a revolt war opponent"
+    },
+    {
+      "id": "NDiplomacy.PEACE_COST_MODIFIER_UNOCCUPIED_FORT",
+      "category": "NDiplomacy",
+      "key": "PEACE_COST_MODIFIER_UNOCCUPIED_FORT",
+      "type": "float",
+      "defaultValue": 1
+    },
+    {
+      "id": "NDiplomacy.PEACE_COST_MODIFIER_FOR_NON_TARGET",
+      "category": "NDiplomacy",
+      "key": "PEACE_COST_MODIFIER_FOR_NON_TARGET",
+      "type": "float",
+      "defaultValue": 0.66,
+      "comment": "Applied for countries that are not the main targets of the war"
+    },
+    {
+      "id": "NDiplomacy.PEACE_COST_MODIFIER_FOR_SAME_CULTURE",
+      "category": "NDiplomacy",
+      "key": "PEACE_COST_MODIFIER_FOR_SAME_CULTURE",
+      "type": "float",
+      "defaultValue": -0.1,
+      "comment": "Applied if dominant culture in location is the same as taker's primary culture"
+    },
+    {
+      "id": "NDiplomacy.PEACE_COST_MODIFIER_FOR_SAME_RELIGION",
+      "category": "NDiplomacy",
+      "key": "PEACE_COST_MODIFIER_FOR_SAME_RELIGION",
+      "type": "float",
+      "defaultValue": -0.1,
+      "comment": "Applied if dominant religion in location is the same as taker's religion"
+    },
+    {
+      "id": "NDiplomacy.PEACE_COST_MODIFIER_FOR_POWER_PROJECTION_DIFFERENCE",
+      "category": "NDiplomacy",
+      "key": "PEACE_COST_MODIFIER_FOR_POWER_PROJECTION_DIFFERENCE",
+      "type": "float",
+      "defaultValue": 0.001,
+      "comment": "modifies the cost of taking a location through power projection difference"
+    },
+    {
+      "id": "NDiplomacy.PEACE_LOAN_SIZE_MULTIPLIER_FOR_MAX_WARSCORE_GOLD",
+      "category": "NDiplomacy",
+      "key": "PEACE_LOAN_SIZE_MULTIPLIER_FOR_MAX_WARSCORE_GOLD",
+      "type": "integer",
+      "defaultValue": 5,
+      "comment": "how many times the country's loan size can be taken for the max war score amount"
+    },
+    {
+      "id": "NDiplomacy.PEACE_MAX_WARSCORE_FOR_GOLD",
+      "category": "NDiplomacy",
+      "key": "PEACE_MAX_WARSCORE_FOR_GOLD",
+      "type": "integer",
+      "defaultValue": 25,
+      "comment": "most war score that can be used to take gold"
+    },
+    {
+      "id": "NDiplomacy.PEACE_GOLD_AI_DESIRE",
+      "category": "NDiplomacy",
+      "key": "PEACE_GOLD_AI_DESIRE",
+      "type": "float",
+      "defaultValue": 0.1,
+      "comment": "Per war score used"
+    },
+    {
+      "id": "NDiplomacy.INFLATION_FROM_PEACE_GOLD",
+      "category": "NDiplomacy",
+      "key": "INFLATION_FROM_PEACE_GOLD",
+      "type": "float",
+      "defaultValue": 0.0002,
+      "comment": "inflation per month of income taken in peace (also applied to location sales)"
+    },
+    {
+      "id": "NDiplomacy.PEACE_MAX_NOBLES_SACRIFICED_PERCENT",
+      "category": "NDiplomacy",
+      "key": "PEACE_MAX_NOBLES_SACRIFICED_PERCENT",
+      "type": "float",
+      "defaultValue": 0.25
+    },
+    {
+      "id": "NDiplomacy.PEACE_MAX_WARSCORE_FOR_SACRIFICE",
+      "category": "NDiplomacy",
+      "key": "PEACE_MAX_WARSCORE_FOR_SACRIFICE",
+      "type": "integer",
+      "defaultValue": 25,
+      "comment": "most war score that can be used to sacrifice nobles"
+    },
+    {
+      "id": "NDiplomacy.PEACE_NOBLES_SACRIFICED_PER_DOOM_POINT",
+      "category": "NDiplomacy",
+      "key": "PEACE_NOBLES_SACRIFICED_PER_DOOM_POINT",
+      "type": "float",
+      "defaultValue": 0.01,
+      "comment": "pop size is 1/1000 per actual person"
+    },
+    {
+      "id": "NDiplomacy.PEACE_SACRIFICE_AI_DESIRE",
+      "category": "NDiplomacy",
+      "key": "PEACE_SACRIFICE_AI_DESIRE",
+      "type": "float",
+      "defaultValue": 2
+    },
+    {
+      "id": "NDiplomacy.INTERVENE_OPINION_THRESHOLD",
+      "category": "NDiplomacy",
+      "key": "INTERVENE_OPINION_THRESHOLD",
+      "type": "integer",
+      "defaultValue": 100
+    },
+    {
+      "id": "NDiplomacy.EXECUTION_RELATION_MODIFIER",
+      "category": "NDiplomacy",
+      "key": "EXECUTION_RELATION_MODIFIER",
+      "type": "integer",
+      "defaultValue": -200
+    },
+    {
+      "id": "NDiplomacy.BASE_CHARACTER_SPY_CHANCE",
+      "category": "NDiplomacy",
+      "key": "BASE_CHARACTER_SPY_CHANCE",
+      "type": "float",
+      "defaultValue": 0.5
+    },
+    {
+      "id": "NDiplomacy.BASE_SPY_DISCOVERY_CHANCE_PER_YEAR",
+      "category": "NDiplomacy",
+      "key": "BASE_SPY_DISCOVERY_CHANCE_PER_YEAR",
+      "type": "float",
+      "defaultValue": 0.25
+    },
+    {
+      "id": "NDiplomacy.MIN_SPY_NETWORK_SIZE_FOR_DISCOVERY",
+      "category": "NDiplomacy",
+      "key": "MIN_SPY_NETWORK_SIZE_FOR_DISCOVERY",
+      "type": "integer",
+      "defaultValue": 25
+    },
+    {
+      "id": "NDiplomacy.SPY_DISCOVERY_COOLDOWN_MONTHS",
+      "category": "NDiplomacy",
+      "key": "SPY_DISCOVERY_COOLDOWN_MONTHS",
+      "type": "integer",
+      "defaultValue": 12
+    },
+    {
+      "id": "NDiplomacy.OPINION_MIN",
+      "category": "NDiplomacy",
+      "key": "OPINION_MIN",
+      "type": "integer",
+      "defaultValue": -200
+    },
+    {
+      "id": "NDiplomacy.OPINION_MAX",
+      "category": "NDiplomacy",
+      "key": "OPINION_MAX",
+      "type": "integer",
+      "defaultValue": 200
+    },
+    {
+      "id": "NDiplomacy.TRUST_MIN",
+      "category": "NDiplomacy",
+      "key": "TRUST_MIN",
+      "type": "integer",
+      "defaultValue": -100
+    },
+    {
+      "id": "NDiplomacy.TRUST_MAX",
+      "category": "NDiplomacy",
+      "key": "TRUST_MAX",
+      "type": "integer",
+      "defaultValue": 100
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_MIN",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_MIN",
+      "type": "integer",
+      "defaultValue": 0
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_BIAS_MIN",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_BIAS_MIN",
+      "type": "integer",
+      "defaultValue": -100
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_MAX",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_MAX",
+      "type": "integer",
+      "defaultValue": 1000
+    },
+    {
+      "id": "NDiplomacy.FAVORS_MAX",
+      "category": "NDiplomacy",
+      "key": "FAVORS_MAX",
+      "type": "integer",
+      "defaultValue": 100
+    },
+    {
+      "id": "NDiplomacy.TRAVEL_DAYS",
+      "category": "NDiplomacy",
+      "key": "TRAVEL_DAYS",
+      "type": "integer",
+      "defaultValue": 30
+    },
+    {
+      "id": "NDiplomacy.MAX_ANNEX_SIZE",
+      "category": "NDiplomacy",
+      "key": "MAX_ANNEX_SIZE",
+      "type": "integer",
+      "defaultValue": 2
+    },
+    {
+      "id": "NDiplomacy.MAX_TRIBUTE_TREASURY_DEFICIT",
+      "category": "NDiplomacy",
+      "key": "MAX_TRIBUTE_TREASURY_DEFICIT",
+      "type": "float",
+      "defaultValue": -100
+    },
+    {
+      "id": "NDiplomacy.DEFAULT_ANNEX_MIN_RELATION",
+      "category": "NDiplomacy",
+      "key": "DEFAULT_ANNEX_MIN_RELATION",
+      "type": "integer",
+      "defaultValue": 190
+    },
+    {
+      "id": "NDiplomacy.DEFAULT_INTERNATIONAL_ORGANIZATION_ANNEX_MIN_RELATION",
+      "category": "NDiplomacy",
+      "key": "DEFAULT_INTERNATIONAL_ORGANIZATION_ANNEX_MIN_RELATION",
+      "type": "integer",
+      "defaultValue": 150
+    },
+    {
+      "id": "NDiplomacy.DEFAULT_ANNEX_MIN_YEARS",
+      "category": "NDiplomacy",
+      "key": "DEFAULT_ANNEX_MIN_YEARS",
+      "type": "integer",
+      "defaultValue": 10
+    },
+    {
+      "id": "NDiplomacy.MONTHS_BEFORE_TOTAL_OCCUPATION",
+      "category": "NDiplomacy",
+      "key": "MONTHS_BEFORE_TOTAL_OCCUPATION",
+      "type": "integer",
+      "defaultValue": 60,
+      "comment": "Before this many months have passed in the war, you cannot gain 100% warscore by just occupying the warleader"
+    },
+    {
+      "id": "NDiplomacy.WAR_DEC_LEVY_RECRUIT_SPEED_FOR_MONTHS",
+      "category": "NDiplomacy",
+      "key": "WAR_DEC_LEVY_RECRUIT_SPEED_FOR_MONTHS",
+      "type": "integer",
+      "defaultValue": 6
+    },
+    {
+      "id": "NDiplomacy.DEFAULT_WARGOAL_TICKINGWARSCORE_BONUS",
+      "category": "NDiplomacy",
+      "key": "DEFAULT_WARGOAL_TICKINGWARSCORE_BONUS",
+      "type": "integer",
+      "defaultValue": 2,
+      "comment": "Amount of warscore per month since attacker/defender started getting the bonus for completing war goal"
+    },
+    {
+      "id": "NDiplomacy.WARGOAL_MAX_TICKING_WAR_SCORE",
+      "category": "NDiplomacy",
+      "key": "WARGOAL_MAX_TICKING_WAR_SCORE",
+      "type": "integer",
+      "defaultValue": 25
+    },
+    {
+      "id": "NDiplomacy.WARGOAL_MAX_BONUS",
+      "category": "NDiplomacy",
+      "key": "WARGOAL_MAX_BONUS",
+      "type": "integer",
+      "defaultValue": 50
+    },
+    {
+      "id": "NDiplomacy.DEFAULT_WARGOAL_BATTLESCORE_BONUS",
+      "category": "NDiplomacy",
+      "key": "DEFAULT_WARGOAL_BATTLESCORE_BONUS",
+      "type": "integer",
+      "defaultValue": 3,
+      "comment": "Battle score bonus from winning battles"
+    },
+    {
+      "id": "NDiplomacy.SUPERIORITY_WARGOAL_WARSCORE_THRESHOLD",
+      "category": "NDiplomacy",
+      "key": "SUPERIORITY_WARGOAL_WARSCORE_THRESHOLD",
+      "type": "integer",
+      "defaultValue": 10,
+      "comment": "Needed battle score for getting ticking war score for war goal superiority"
+    },
+    {
+      "id": "NDiplomacy.WARSCORE_MAX_FROM_BATTLES",
+      "category": "NDiplomacy",
+      "key": "WARSCORE_MAX_FROM_BATTLES",
+      "type": "integer",
+      "defaultValue": 50,
+      "comment": "maximum amount to get from a battles ."
+    },
+    {
+      "id": "NDiplomacy.BATTLE_RESULT_SCALE",
+      "category": "NDiplomacy",
+      "key": "BATTLE_RESULT_SCALE",
+      "type": "integer",
+      "defaultValue": 25
+    },
+    {
+      "id": "NDiplomacy.BATTLE_RESULT_CAP",
+      "category": "NDiplomacy",
+      "key": "BATTLE_RESULT_CAP",
+      "type": "integer",
+      "defaultValue": 25
+    },
+    {
+      "id": "NDiplomacy.TRUCE_YEARS",
+      "category": "NDiplomacy",
+      "key": "TRUCE_YEARS",
+      "type": "integer",
+      "defaultValue": 3
+    },
+    {
+      "id": "NDiplomacy.SCALED_TRUCE_YEARS",
+      "category": "NDiplomacy",
+      "key": "SCALED_TRUCE_YEARS",
+      "type": "integer",
+      "defaultValue": 5
+    },
+    {
+      "id": "NDiplomacy.REVANCHISM_MONTHLY_DECAY",
+      "category": "NDiplomacy",
+      "key": "REVANCHISM_MONTHLY_DECAY",
+      "type": "float",
+      "defaultValue": 0.833
+    },
+    {
+      "id": "NDiplomacy.CASUS_BELLI_MONTHS",
+      "category": "NDiplomacy",
+      "key": "CASUS_BELLI_MONTHS",
+      "type": "integer",
+      "defaultValue": 60
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_IMPACT_ON_OPINION",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_IMPACT_ON_OPINION",
+      "type": "integer",
+      "defaultValue": -4
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_NEIGHBOR_MODIFIER_IMPACT_ON_OPINION",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_NEIGHBOR_MODIFIER_IMPACT_ON_OPINION",
+      "type": "float",
+      "defaultValue": -0.33
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_OUT_OF_RANGE_MODIFIER_IMPACT_ON_OPINION",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_OUT_OF_RANGE_MODIFIER_IMPACT_ON_OPINION",
+      "type": "float",
+      "defaultValue": -0.25
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_DEPENDENCY_MODIFIER_IMPACT_ON_OPINION",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_DEPENDENCY_MODIFIER_IMPACT_ON_OPINION",
+      "type": "float",
+      "defaultValue": -0.9
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_UNION_MODIFIER_IMPACT_ON_OPINION",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_UNION_MODIFIER_IMPACT_ON_OPINION",
+      "type": "float",
+      "defaultValue": -0.9
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_SAME_SIDE_IN_WAR_MODIFIER_IMPACT_ON_OPINION",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_SAME_SIDE_IN_WAR_MODIFIER_IMPACT_ON_OPINION",
+      "type": "float",
+      "defaultValue": -0.8
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_GETTING_DEFENSIVE_SUPPORT_MODIFIER_IMPACT_ON_OPINION",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_GETTING_DEFENSIVE_SUPPORT_MODIFIER_IMPACT_ON_OPINION",
+      "type": "float",
+      "defaultValue": -0.75
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_ROYAL_MARRIAGE_MODIFIER_IMPACT_ON_OPINION",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_ROYAL_MARRIAGE_MODIFIER_IMPACT_ON_OPINION",
+      "type": "float",
+      "defaultValue": -0.2
+    },
+    {
+      "id": "NDiplomacy.ANTAGONISM_MUTUAL_IO_MODIFIER_IMPACT_ON_OPINION",
+      "category": "NDiplomacy",
+      "key": "ANTAGONISM_MUTUAL_IO_MODIFIER_IMPACT_ON_OPINION",
+      "type": "float",
+      "defaultValue": -0.2
+    },
+    {
+      "id": "NDiplomacy.PEACE_GOLD_MIN_ECONOMY",
+      "category": "NDiplomacy",
+      "key": "PEACE_GOLD_MIN_ECONOMY",
+      "type": "integer",
+      "defaultValue": 20
+    },
+    {
+      "id": "NDiplomacy.PEACE_GOLD_COST_PER_MONTHLY_INCOME",
+      "category": "NDiplomacy",
+      "key": "PEACE_GOLD_COST_PER_MONTHLY_INCOME",
+      "type": "integer",
+      "defaultValue": 1
+    },
+    {
+      "id": "NDiplomacy.PEACE_GOLD_MAX_YEARLY_INCOMES",
+      "category": "NDiplomacy",
+      "key": "PEACE_GOLD_MAX_YEARLY_INCOMES",
+      "type": "integer",
+      "defaultValue": 2
+    },
+    {
+      "id": "NDiplomacy.PEACE_GOLD_STEP",
+      "category": "NDiplomacy",
+      "key": "PEACE_GOLD_STEP",
+      "type": "integer",
+      "defaultValue": 1
+    },
+    {
+      "id": "NDiplomacy.PEACE_RELEASE_NATION_FACTOR",
+      "category": "NDiplomacy",
+      "key": "PEACE_RELEASE_NATION_FACTOR",
+      "type": "float",
+      "defaultValue": -0.05
+    },
+    {
+      "id": "NDiplomacy.PEACE_CANCEL_SUBJECT_FACTOR",
+      "category": "NDiplomacy",
+      "key": "PEACE_CANCEL_SUBJECT_FACTOR",
+      "type": "float",
+      "defaultValue": -0.2
+    },
+    {
+      "id": "NDiplomacy.PEACE_TRANSFER_SUBJECT_FACTOR",
+      "category": "NDiplomacy",
+      "key": "PEACE_TRANSFER_SUBJECT_FACTOR",
+      "type": "float",
+      "defaultValue": -0.1
+    },
+    {
+      "id": "NDiplomacy.PEACE_BECOME_SUBJECT_FACTOR",
+      "category": "NDiplomacy",
+      "key": "PEACE_BECOME_SUBJECT_FACTOR",
+      "type": "float",
+      "defaultValue": -0.1
+    },
+    {
+      "id": "NDiplomacy.PEACE_JUNIOR_PARTNER",
+      "category": "NDiplomacy",
+      "key": "PEACE_JUNIOR_PARTNER",
+      "type": "integer",
+      "defaultValue": 60
+    },
+    {
+      "id": "NDiplomacy.PEACE_NON_UNION_ANTAGONISM_FACTOR",
+      "category": "NDiplomacy",
+      "key": "PEACE_NON_UNION_ANTAGONISM_FACTOR",
+      "type": "float",
+      "defaultValue": 0.33
+    },
+    {
+      "id": "NDiplomacy.PEACE_GRANT_INDEPENDENCE",
+      "category": "NDiplomacy",
+      "key": "PEACE_GRANT_INDEPENDENCE",
+      "type": "integer",
+      "defaultValue": 60
+    },
+    {
+      "id": "NDiplomacy.OPINION_GOOD_RELATIONS",
+      "category": "NDiplomacy",
+      "key": "OPINION_GOOD_RELATIONS",
+      "type": "integer",
+      "defaultValue": 50,
+      "comment": "Threshold for good relations -1 stab hit."
+    },
+    {
+      "id": "NDiplomacy.OPINION_GREAT_RELATIONS",
+      "category": "NDiplomacy",
+      "key": "OPINION_GREAT_RELATIONS",
+      "type": "integer",
+      "defaultValue": 100,
+      "comment": "Threshold for great relations -2 stab hit."
+    },
+    {
+      "id": "NDiplomacy.OPINION_NO_WAR",
+      "category": "NDiplomacy",
+      "key": "OPINION_NO_WAR",
+      "type": "integer",
+      "defaultValue": 150,
+      "comment": "Threshold for AI, being unable to declare war because one's own opinion of enemy is too high."
+    },
+    {
+      "id": "NDiplomacy.LOYALTY_FROM_OPINION",
+      "category": "NDiplomacy",
+      "key": "LOYALTY_FROM_OPINION",
+      "type": "float",
+      "defaultValue": 0.15,
+      "comment": "how much subject loyalty we get from opinion of overlord"
+    },
+    {
+      "id": "NDiplomacy.IMPROVE_RELATION_SUBJECT_FACTOR",
+      "category": "NDiplomacy",
+      "key": "IMPROVE_RELATION_SUBJECT_FACTOR",
+      "type": "integer",
+      "defaultValue": 2,
+      "comment": "Subjects have a maximum this times higher."
+    },
+    {
+      "id": "NDiplomacy.MAX_WARSCORE_REDUCTION",
+      "category": "NDiplomacy",
+      "key": "MAX_WARSCORE_REDUCTION",
+      "type": "float",
+      "defaultValue": -0.99,
+      "comment": "Warscore reduction cannot go below -95%"
+    },
+    {
+      "id": "NDiplomacy.CULTURE_WAR_IMPACT",
+      "category": "NDiplomacy",
+      "key": "CULTURE_WAR_IMPACT",
+      "type": "integer",
+      "defaultValue": 10
+    },
+    {
+      "id": "NDiplomacy.FAVORS_DECAY",
+      "category": "NDiplomacy",
+      "key": "FAVORS_DECAY",
+      "type": "float",
+      "defaultValue": 0
+    },
+    {
+      "id": "NDiplomacy.CURRY_FAVORS",
+      "category": "NDiplomacy",
+      "key": "CURRY_FAVORS",
+      "type": "float",
+      "defaultValue": 0.5
+    },
+    {
+      "id": "NDiplomacy.CURRY_FAVORS_RELATION_REQUIRED",
+      "category": "NDiplomacy",
+      "key": "CURRY_FAVORS_RELATION_REQUIRED",
+      "type": "integer",
+      "defaultValue": 10
+    },
+    {
+      "id": "NDiplomacy.CURRY_FAVORS_MAX_FAVORS",
+      "category": "NDiplomacy",
+      "key": "CURRY_FAVORS_MAX_FAVORS",
+      "type": "float",
+      "defaultValue": 25
+    },
+    {
+      "id": "NDiplomacy.FAVORS_REJECTED_TRUST_LOSS",
+      "category": "NDiplomacy",
+      "key": "FAVORS_REJECTED_TRUST_LOSS",
+      "type": "float",
+      "defaultValue": 0.25,
+      "comment": "Proportion of favors used"
+    },
+    {
+      "id": "NDiplomacy.FAVORS_REJECTED_DIP_REP_LOSS",
+      "category": "NDiplomacy",
+      "key": "FAVORS_REJECTED_DIP_REP_LOSS",
+      "type": "float",
+      "defaultValue": 0.005,
+      "comment": "Propotion of favors used times actor's trust in recipient"
+    },
+    {
+      "id": "NDiplomacy.FAVORS_REJECTED_DIP_REP_MONTHS",
+      "category": "NDiplomacy",
+      "key": "FAVORS_REJECTED_DIP_REP_MONTHS",
+      "type": "integer",
+      "defaultValue": 24,
+      "comment": "Duration per point of diplo rep"
+    },
+    {
+      "id": "NDiplomacy.SPY_NETWORK_DECAY",
+      "category": "NDiplomacy",
+      "key": "SPY_NETWORK_DECAY",
+      "type": "integer",
+      "defaultValue": -1
+    },
+    {
+      "id": "NDiplomacy.SPY_NETWORK_SIEGE_EFFECT",
+      "category": "NDiplomacy",
+      "key": "SPY_NETWORK_SIEGE_EFFECT",
+      "type": "float",
+      "defaultValue": 0.2
+    },
+    {
+      "id": "NDiplomacy.SPY_NETWORK_AE_EFFECT",
+      "category": "NDiplomacy",
+      "key": "SPY_NETWORK_AE_EFFECT",
+      "type": "float",
+      "defaultValue": -0.1
+    },
+    {
+      "id": "NDiplomacy.MONTHLY_SPYNETWORK",
+      "category": "NDiplomacy",
+      "key": "MONTHLY_SPYNETWORK",
+      "type": "integer",
+      "defaultValue": 1
+    },
+    {
+      "id": "NDiplomacy.INFILTRATE_ADMINISTRATION_DURATION",
+      "category": "NDiplomacy",
+      "key": "INFILTRATE_ADMINISTRATION_DURATION",
+      "type": "integer",
+      "defaultValue": 24
+    },
+    {
+      "id": "NDiplomacy.BASE_GREAT_POWER",
+      "category": "NDiplomacy",
+      "key": "BASE_GREAT_POWER",
+      "type": "integer",
+      "defaultValue": 4
+    },
+    {
+      "id": "NDiplomacy.MIN_TOTAL_RANKS_PER_GREAT_POWER",
+      "category": "NDiplomacy",
+      "key": "MIN_TOTAL_RANKS_PER_GREAT_POWER",
+      "type": "integer",
+      "defaultValue": 400
+    },
+    {
+      "id": "NDiplomacy.MAX_TOTAL_RANKS_PER_GREAT_POWER",
+      "category": "NDiplomacy",
+      "key": "MAX_TOTAL_RANKS_PER_GREAT_POWER",
+      "type": "integer",
+      "defaultValue": 800
+    },
+    {
+      "id": "NDiplomacy.GREAT_POWER_GAIN_PERCENTAGE",
+      "category": "NDiplomacy",
+      "key": "GREAT_POWER_GAIN_PERCENTAGE",
+      "type": "float",
+      "defaultValue": 0.7
+    },
+    {
+      "id": "NDiplomacy.GREAT_POWER_DROP_PERCENTAGE",
+      "category": "NDiplomacy",
+      "key": "GREAT_POWER_DROP_PERCENTAGE",
+      "type": "float",
+      "defaultValue": 0.65
+    },
+    {
+      "id": "NDiplomacy.MONTHS_OF_TEETERING_BEFORE_GP_STATUS_LOST",
+      "category": "NDiplomacy",
+      "key": "MONTHS_OF_TEETERING_BEFORE_GP_STATUS_LOST",
+      "type": "integer",
+      "defaultValue": 12,
+      "comment": "1 year of grace period when you are about to lose great power status"
+    },
+    {
+      "id": "NDiplomacy.HEGEMONY_LOST_MONTHS",
+      "category": "NDiplomacy",
+      "key": "HEGEMONY_LOST_MONTHS",
+      "type": "integer",
+      "defaultValue": 120
+    },
+    {
+      "id": "NDiplomacy.HEGEMONY_GRACE_PERIOD",
+      "category": "NDiplomacy",
+      "key": "HEGEMONY_GRACE_PERIOD",
+      "type": "integer",
+      "defaultValue": 12,
+      "comment": "1 year of grace period when someone is contesting you in the hegemony"
+    },
+    {
+      "id": "NDiplomacy.HEGEMONY_ACTIVE_UNTIL_REPLACED",
+      "category": "NDiplomacy",
+      "key": "HEGEMONY_ACTIVE_UNTIL_REPLACED",
+      "type": "boolean",
+      "defaultValue": true,
+      "comment": "if set to no, the hegemony will immediately lose this status once the grace period is over instead of having to wait for a competing country to replace them"
+    },
+    {
+      "id": "NDiplomacy.HEGEMONY_MONTHLY_PROGRESS",
+      "category": "NDiplomacy",
+      "key": "HEGEMONY_MONTHLY_PROGRESS",
+      "type": "integer",
+      "defaultValue": 1
+    },
+    {
+      "id": "NDiplomacy.RANK_PEACE_COST_TIER_DIFF",
+      "category": "NDiplomacy",
+      "key": "RANK_PEACE_COST_TIER_DIFF",
+      "type": "float",
+      "defaultValue": 0.1
+    },
+    {
+      "id": "NDiplomacy.ROYAL_MARRIAGE_BASE",
+      "category": "NDiplomacy",
+      "key": "ROYAL_MARRIAGE_BASE",
+      "type": "integer",
+      "defaultValue": 2
+    },
+    {
+      "id": "NDiplomacy.ROYAL_MARRIAGE_PRESTIGE_DIFF_FACTOR",
+      "category": "NDiplomacy",
+      "key": "ROYAL_MARRIAGE_PRESTIGE_DIFF_FACTOR",
+      "type": "float",
+      "defaultValue": 0.01
+    },
+    {
+      "id": "NDiplomacy.ROYAL_MARRIAGE_RANK_PRESTIGE_DIFF_FACTOR",
+      "category": "NDiplomacy",
+      "key": "ROYAL_MARRIAGE_RANK_PRESTIGE_DIFF_FACTOR",
+      "type": "float",
+      "defaultValue": 0.25
+    },
+    {
+      "id": "NDiplomacy.ROYAL_MARRIAGE_SUBSEQUENT_SPOUSE_PRESTIGE_MULTIPLIER",
+      "category": "NDiplomacy",
+      "key": "ROYAL_MARRIAGE_SUBSEQUENT_SPOUSE_PRESTIGE_MULTIPLIER",
+      "type": "float",
+      "defaultValue": 0.5,
+      "comment": "each subsequent spouse gets a x% prestige gain hit over the previous in a royal marriage"
+    },
+    {
+      "id": "NDiplomacy.ROYAL_MARRIAGE_RULER_IMPORTANCE_MULTIPLIER",
+      "category": "NDiplomacy",
+      "key": "ROYAL_MARRIAGE_RULER_IMPORTANCE_MULTIPLIER",
+      "type": "integer",
+      "defaultValue": 2
+    },
+    {
+      "id": "NDiplomacy.ROYAL_MARRIAGE_NTH_IN_LINE_IMPORTANCE_MULTIPLIER",
+      "category": "NDiplomacy",
+      "key": "ROYAL_MARRIAGE_NTH_IN_LINE_IMPORTANCE_MULTIPLIER",
+      "type": "float",
+      "defaultValue": 0.2,
+      "comment": "each step away.."
+    },
+    {
+      "id": "NDiplomacy.PRESTIGE_FACTOR_FROM_TAKING_ON_DEBT",
+      "category": "NDiplomacy",
+      "key": "PRESTIGE_FACTOR_FROM_TAKING_ON_DEBT",
+      "type": "float",
+      "defaultValue": 0.2
+    },
+    {
+      "id": "NDiplomacy.GIFT_FAVORS",
+      "category": "NDiplomacy",
+      "key": "GIFT_FAVORS",
+      "type": "integer",
+      "defaultValue": 5
+    },
+    {
+      "id": "NDiplomacy.LIBERTY_DESIRE_MONTHLY_DECAY",
+      "category": "NDiplomacy",
+      "key": "LIBERTY_DESIRE_MONTHLY_DECAY",
+      "type": "float",
+      "defaultValue": -0.5
+    },
+    {
+      "id": "NDiplomacy.LIBERTY_DESIRE_FROM_FORCED_IN_WAR",
+      "category": "NDiplomacy",
+      "key": "LIBERTY_DESIRE_FROM_FORCED_IN_WAR",
+      "type": "integer",
+      "defaultValue": 50
+    },
+    {
+      "id": "NDiplomacy.PEACE_TREATY_FOOD_ACCESS",
+      "category": "NDiplomacy",
+      "key": "PEACE_TREATY_FOOD_ACCESS",
+      "type": "integer",
+      "defaultValue": 0
+    },
+    {
+      "id": "NDiplomacy.PEACE_TREATY_MILITARY_ACCESS",
+      "category": "NDiplomacy",
+      "key": "PEACE_TREATY_MILITARY_ACCESS",
+      "type": "integer",
+      "defaultValue": 0
+    },
+    {
+      "id": "NDiplomacy.PEACE_TREATY_FLEET_BASING",
+      "category": "NDiplomacy",
+      "key": "PEACE_TREATY_FLEET_BASING",
+      "type": "integer",
+      "defaultValue": 0
+    },
+    {
+      "id": "NDiplomacy.PEACE_TREATY_ANTI_PIRACY",
+      "category": "NDiplomacy",
+      "key": "PEACE_TREATY_ANTI_PIRACY",
+      "type": "integer",
+      "defaultValue": 10
+    },
+    {
+      "id": "NDiplomacy.PEACE_TREATY_WAR_REPARATIONS",
+      "category": "NDiplomacy",
+      "key": "PEACE_TREATY_WAR_REPARATIONS",
+      "type": "integer",
+      "defaultValue": 10
+    },
+    {
+      "id": "NDiplomacy.WAR_REPARATIONS_FACTOR",
+      "category": "NDiplomacy",
+      "key": "WAR_REPARATIONS_FACTOR",
+      "type": "float",
+      "defaultValue": 0.1
+    },
+    {
+      "id": "NDiplomacy.WAR_REPARATIONS_YEARS",
+      "category": "NDiplomacy",
+      "key": "WAR_REPARATIONS_YEARS",
+      "type": "integer",
+      "defaultValue": 10
+    },
+    {
+      "id": "NDiplomacy.PEACE_TREATY_ANNUL_ALL_TREATIES",
+      "category": "NDiplomacy",
+      "key": "PEACE_TREATY_ANNUL_ALL_TREATIES",
+      "type": "integer",
+      "defaultValue": 10
+    },
+    {
+      "id": "NDiplomacy.ANNUL_DURATION_MONTHS",
+      "category": "NDiplomacy",
+      "key": "ANNUL_DURATION_MONTHS",
+      "type": "integer",
+      "defaultValue": 120
+    },
+    {
+      "id": "NDiplomacy.PEACE_TREATY_PROVINCE_BONUS",
+      "category": "NDiplomacy",
+      "key": "PEACE_TREATY_PROVINCE_BONUS",
+      "type": "float",
+      "defaultValue": 1.5
+    },
+    {
+      "id": "NDiplomacy.PEACE_TREATY_AREA_BONUS",
+      "category": "NDiplomacy",
+      "key": "PEACE_TREATY_AREA_BONUS",
+      "type": "integer",
+      "defaultValue": 2
+    },
+    {
+      "id": "NDiplomacy.PEACE_TREATY_ANNEX_REVOLTER_MAX_COST",
+      "category": "NDiplomacy",
+      "key": "PEACE_TREATY_ANNEX_REVOLTER_MAX_COST",
+      "type": "integer",
+      "defaultValue": 70
+    },
+    {
+      "id": "NDiplomacy.PEACE_TREATY_REVOLTER_SURVIVES_MAX_COST",
+      "category": "NDiplomacy",
+      "key": "PEACE_TREATY_REVOLTER_SURVIVES_MAX_COST",
+      "type": "integer",
+      "defaultValue": 70
+    },
+    {
+      "id": "NDiplomacy.PEACE_TREATY_FORCE_MIGRATE_COST",
+      "category": "NDiplomacy",
+      "key": "PEACE_TREATY_FORCE_MIGRATE_COST",
+      "type": "integer",
+      "defaultValue": 10
+    },
+    {
+      "id": "NDiplomacy.PEACE_TREATY_FORCE_MIGRATE_AE",
+      "category": "NDiplomacy",
+      "key": "PEACE_TREATY_FORCE_MIGRATE_AE",
+      "type": "integer",
+      "defaultValue": 0
+    },
+    {
+      "id": "NDiplomacy.PEACE_TREATY_FORCE_MIGRATE_SIZE",
+      "category": "NDiplomacy",
+      "key": "PEACE_TREATY_FORCE_MIGRATE_SIZE",
+      "type": "float",
+      "defaultValue": 0.25
+    },
+    {
+      "id": "NDiplomacy.PEACE_TREATY_FORCE_MIGRATE_MONTHS",
+      "category": "NDiplomacy",
+      "key": "PEACE_TREATY_FORCE_MIGRATE_MONTHS",
+      "type": "integer",
+      "defaultValue": 120
+    },
+    {
+      "id": "NDiplomacy.PEACE_TREATY_RETURN_CORE_ANTAGONISM_PERCENT_REDUCTION",
+      "category": "NDiplomacy",
+      "key": "PEACE_TREATY_RETURN_CORE_ANTAGONISM_PERCENT_REDUCTION",
+      "type": "float",
+      "defaultValue": 0.75
+    },
+    {
+      "id": "NDiplomacy.PEACE_MAX_MONTHS_AT_WAR_BEFORE_START_DATE",
+      "category": "NDiplomacy",
+      "key": "PEACE_MAX_MONTHS_AT_WAR_BEFORE_START_DATE",
+      "type": "integer",
+      "defaultValue": 12
+    },
+    {
+      "id": "NDiplomacy.WAR_ENTHUSIASM_BASE",
+      "category": "NDiplomacy",
+      "key": "WAR_ENTHUSIASM_BASE",
+      "type": "float",
+      "defaultValue": 0.5
+    },
+    {
+      "id": "NDiplomacy.WAR_ENTHUSIASM_ATTACKING_SIEGE",
+      "category": "NDiplomacy",
+      "key": "WAR_ENTHUSIASM_ATTACKING_SIEGE",
+      "type": "float",
+      "defaultValue": 0.25
+    },
+    {
+      "id": "NDiplomacy.WAR_ENTHUSIASM_DEFENDING_SIEGE",
+      "category": "NDiplomacy",
+      "key": "WAR_ENTHUSIASM_DEFENDING_SIEGE",
+      "type": "float",
+      "defaultValue": -0.5
+    },
+    {
+      "id": "NDiplomacy.WAR_ENTHUSIASM_CALL_FOR_PEACE",
+      "category": "NDiplomacy",
+      "key": "WAR_ENTHUSIASM_CALL_FOR_PEACE",
+      "type": "float",
+      "defaultValue": -0.01
+    },
+    {
+      "id": "NDiplomacy.WAR_ENTHUSIASM_WAR_EXHAUSTION",
+      "category": "NDiplomacy",
+      "key": "WAR_ENTHUSIASM_WAR_EXHAUSTION",
+      "type": "float",
+      "defaultValue": -0.02
+    },
+    {
+      "id": "NDiplomacy.WAR_ENTHUSIASM_UNIT_BALANCE",
+      "category": "NDiplomacy",
+      "key": "WAR_ENTHUSIASM_UNIT_BALANCE",
+      "type": "float",
+      "defaultValue": 0.5
+    },
+    {
+      "id": "NDiplomacy.WAR_ENTHUSIASM_REBEL_THREAT",
+      "category": "NDiplomacy",
+      "key": "WAR_ENTHUSIASM_REBEL_THREAT",
+      "type": "float",
+      "defaultValue": -0.2
+    },
+    {
+      "id": "NDiplomacy.WAR_ENTHUSIASM_ONGOING_BATTLES",
+      "category": "NDiplomacy",
+      "key": "WAR_ENTHUSIASM_ONGOING_BATTLES",
+      "type": "integer",
+      "defaultValue": 10
+    },
+    {
+      "id": "NDiplomacy.WAR_ENTHUSIASM_CAPITAL",
+      "category": "NDiplomacy",
+      "key": "WAR_ENTHUSIASM_CAPITAL",
+      "type": "float",
+      "defaultValue": 0.05
+    },
+    {
+      "id": "NDiplomacy.WAR_ENTHUSIASM_WAR_GOAL",
+      "category": "NDiplomacy",
+      "key": "WAR_ENTHUSIASM_WAR_GOAL",
+      "type": "float",
+      "defaultValue": 0.05
+    },
+    {
+      "id": "NDiplomacy.WAR_ENTHUSIASM_INDEPENDENCE",
+      "category": "NDiplomacy",
+      "key": "WAR_ENTHUSIASM_INDEPENDENCE",
+      "type": "float",
+      "defaultValue": 0.05
+    },
+    {
+      "id": "NDiplomacy.WAR_ENTHUSIASM_MEN_LOSSES",
+      "category": "NDiplomacy",
+      "key": "WAR_ENTHUSIASM_MEN_LOSSES",
+      "type": "float",
+      "defaultValue": -2.5
+    },
+    {
+      "id": "NDiplomacy.WAR_ENTHUSIASM_SHIP_LOSSES",
+      "category": "NDiplomacy",
+      "key": "WAR_ENTHUSIASM_SHIP_LOSSES",
+      "type": "float",
+      "defaultValue": -4
+    },
+    {
+      "id": "NDiplomacy.WAR_ENTHUSIASM_TIME_MONTHS",
+      "category": "NDiplomacy",
+      "key": "WAR_ENTHUSIASM_TIME_MONTHS",
+      "type": "integer",
+      "defaultValue": 24,
+      "comment": "Months of additional AI stubbornness in a war"
+    },
+    {
+      "id": "NDiplomacy.WAR_ENTHUSIASM_TIME_EARLY_FACTOR",
+      "category": "NDiplomacy",
+      "key": "WAR_ENTHUSIASM_TIME_EARLY_FACTOR",
+      "type": "float",
+      "defaultValue": 0.0075,
+      "comment": "During months of stubbornness the effect of time passed is multiplied by this"
+    },
+    {
+      "id": "NDiplomacy.WAR_ENTHUSIASM_TIME_LATE_FACTOR",
+      "category": "NDiplomacy",
+      "key": "WAR_ENTHUSIASM_TIME_LATE_FACTOR",
+      "type": "float",
+      "defaultValue": 0.01,
+      "comment": "After months of stubbornness the effect of time passed is multiplied by this (only applied to positive war enthusiasm)"
+    },
+    {
+      "id": "NDiplomacy.WAR_ENTHUSIASM_WAR_DIRECTION_FACTOR",
+      "category": "NDiplomacy",
+      "key": "WAR_ENTHUSIASM_WAR_DIRECTION_FACTOR",
+      "type": "float",
+      "defaultValue": 0.005,
+      "comment": "AI willingness to peace based on who's making gains in the war"
+    },
+    {
+      "id": "NDiplomacy.WAR_ENTHUSIASM_WAR_DIRECTION_WINNING_MULT",
+      "category": "NDiplomacy",
+      "key": "WAR_ENTHUSIASM_WAR_DIRECTION_WINNING_MULT",
+      "type": "float",
+      "defaultValue": 5,
+      "comment": "Multiplies AI emphasis on war direction if it's the one making gains"
+    },
+    {
+      "id": "NDiplomacy.WAR_ENTHUSIASM_MILITARY_STRENGTH_FACTOR",
+      "category": "NDiplomacy",
+      "key": "WAR_ENTHUSIASM_MILITARY_STRENGTH_FACTOR",
+      "type": "float",
+      "defaultValue": 0.1,
+      "comment": "AI unwillingness to peace based on manpower & forcelimits"
+    },
+    {
+      "id": "NDiplomacy.WAR_ENTHUSIASM_SEPERATE_PEACE",
+      "category": "NDiplomacy",
+      "key": "WAR_ENTHUSIASM_SEPERATE_PEACE",
+      "type": "float",
+      "defaultValue": -0.1
+    },
+    {
+      "id": "NDiplomacy.WAR_ENTHUSIASM_COALITION_FACTOR",
+      "category": "NDiplomacy",
+      "key": "WAR_ENTHUSIASM_COALITION_FACTOR",
+      "type": "float",
+      "defaultValue": 0.3,
+      "comment": "AI unwillingness to peace based on being in a coalition war"
+    },
+    {
+      "id": "NDiplomacy.WAR_ENTHUSIASM_ALLY_MULT",
+      "category": "NDiplomacy",
+      "key": "WAR_ENTHUSIASM_ALLY_MULT",
+      "type": "float",
+      "defaultValue": 0.5
+    },
+    {
+      "id": "NDiplomacy.WAR_ENTHUSIASM_DESPERATION",
+      "category": "NDiplomacy",
+      "key": "WAR_ENTHUSIASM_DESPERATION",
+      "type": "float",
+      "defaultValue": -0.75
+    },
+    {
+      "id": "NDiplomacy.WAR_ENTHUSIASM_ALLY_BASE_RELUCTANCE_MULT",
+      "category": "NDiplomacy",
+      "key": "WAR_ENTHUSIASM_ALLY_BASE_RELUCTANCE_MULT",
+      "type": "float",
+      "defaultValue": 1.5
+    },
+    {
+      "id": "NDiplomacy.WAR_ENTHUSIASM_ALLY_WAR_EXHAUSTION_MULT",
+      "category": "NDiplomacy",
+      "key": "WAR_ENTHUSIASM_ALLY_WAR_EXHAUSTION_MULT",
+      "type": "integer",
+      "defaultValue": 1
+    },
+    {
+      "id": "NDiplomacy.WAR_ENTHUSIASM_ALLY_TIME_MULT",
+      "category": "NDiplomacy",
+      "key": "WAR_ENTHUSIASM_ALLY_TIME_MULT",
+      "type": "integer",
+      "defaultValue": 1
+    },
+    {
+      "id": "NDiplomacy.WAR_ENTHUSIASM_ALLY_WAR_DIRECTION_MULT",
+      "category": "NDiplomacy",
+      "key": "WAR_ENTHUSIASM_ALLY_WAR_DIRECTION_MULT",
+      "type": "integer",
+      "defaultValue": 0
+    },
+    {
+      "id": "NDiplomacy.WAR_ENTHUSIASM_ALLY_FORCE_BALANCE_MULT",
+      "category": "NDiplomacy",
+      "key": "WAR_ENTHUSIASM_ALLY_FORCE_BALANCE_MULT",
+      "type": "integer",
+      "defaultValue": 0
+    },
+    {
+      "id": "NDiplomacy.WAR_ENTHUSIASM_ALLY_WARGOAL_MULT",
+      "category": "NDiplomacy",
+      "key": "WAR_ENTHUSIASM_ALLY_WARGOAL_MULT",
+      "type": "integer",
+      "defaultValue": 0
+    },
+    {
+      "id": "NDiplomacy.WAR_ENTHUSIASM_ALLY_CAPITAL_MULT",
+      "category": "NDiplomacy",
+      "key": "WAR_ENTHUSIASM_ALLY_CAPITAL_MULT",
+      "type": "integer",
+      "defaultValue": 1
+    },
+    {
+      "id": "NDiplomacy.WAR_ENTHUSIASM_ALLY_DESPERATION_MULT",
+      "category": "NDiplomacy",
+      "key": "WAR_ENTHUSIASM_ALLY_DESPERATION_MULT",
+      "type": "integer",
+      "defaultValue": 1
+    },
+    {
+      "id": "NDiplomacy.WAR_ENTHUSIASM_ALLY_REBELS_MULT",
+      "category": "NDiplomacy",
+      "key": "WAR_ENTHUSIASM_ALLY_REBELS_MULT",
+      "type": "integer",
+      "defaultValue": 1
+    },
+    {
+      "id": "NDiplomacy.WAR_ENTHUSIASM_ALLY_MILITARY_STRENGTH_MULT",
+      "category": "NDiplomacy",
+      "key": "WAR_ENTHUSIASM_ALLY_MILITARY_STRENGTH_MULT",
+      "type": "integer",
+      "defaultValue": 2
+    },
+    {
+      "id": "NDiplomacy.WAR_ENFORCE_DEMANDS_MAX_WARSCORE_FRACTION",
+      "category": "NDiplomacy",
+      "key": "WAR_ENFORCE_DEMANDS_MAX_WARSCORE_FRACTION",
+      "type": "float",
+      "defaultValue": 0.5,
+      "comment": "How much warscore is needed to enforce demands in general"
+    },
+    {
+      "id": "NDiplomacy.WAR_ENFORCE_DEMANDS_WARSCORE_COST_NEEDED",
+      "category": "NDiplomacy",
+      "key": "WAR_ENFORCE_DEMANDS_WARSCORE_COST_NEEDED",
+      "type": "integer",
+      "defaultValue": 2,
+      "comment": "How many times more warscore do we need to have than the cost of an offer to enforce demands,"
+    },
+    {
+      "id": "NDiplomacy.RANGE_MULTIPLIER_FOR_RIVALRY",
+      "category": "NDiplomacy",
+      "key": "RANGE_MULTIPLIER_FOR_RIVALRY",
+      "type": "float",
+      "defaultValue": 0.5,
+      "comment": "Countries needs to be in this range to be valid"
+    },
+    {
+      "id": "NDiplomacy.SETUP_NUM_RELATIONS_OVER_LIMIT_ERROR",
+      "category": "NDiplomacy",
+      "key": "SETUP_NUM_RELATIONS_OVER_LIMIT_ERROR",
+      "type": "float",
+      "defaultValue": 0.5,
+      "comment": "If setup country has this % of diplomatic relations over the limit, throw an error"
+    },
+    {
+      "id": "NDiplomacy.LIBERATE_SLAVES_BASE_COST",
+      "category": "NDiplomacy",
+      "key": "LIBERATE_SLAVES_BASE_COST",
+      "type": "integer",
+      "defaultValue": 5
+    },
+    {
+      "id": "NDiplomacy.LIBERATE_SLAVES_MAX_COST",
+      "category": "NDiplomacy",
+      "key": "LIBERATE_SLAVES_MAX_COST",
+      "type": "integer",
+      "defaultValue": 25
+    },
+    {
+      "id": "NDiplomacy.LIBERATE_SLAVES_POPULATION_DIVISOR",
+      "category": "NDiplomacy",
+      "key": "LIBERATE_SLAVES_POPULATION_DIVISOR",
+      "type": "integer",
+      "defaultValue": 10000
+    },
+    {
+      "id": "NDiplomacy.ASK_FOR_MONEY_ALERT_ADVANCE_MONTHS",
+      "category": "NDiplomacy",
+      "key": "ASK_FOR_MONEY_ALERT_ADVANCE_MONTHS",
+      "type": "integer",
+      "defaultValue": 60,
+      "comment": "How many months in advance to notify that action will be available. Negative number disables the alert entirely"
+    },
+    {
+      "id": "NDiplomacy.POSITIVE_OPINION_FROM_ENFORCED_PEACE_WARSCORE",
+      "category": "NDiplomacy",
+      "key": "POSITIVE_OPINION_FROM_ENFORCED_PEACE_WARSCORE",
+      "type": "integer",
+      "defaultValue": -10,
+      "comment": "If the country protected with enforced peace had lower warscore than this, actor will get positive opinion from their side"
+    }
+  ]
+}

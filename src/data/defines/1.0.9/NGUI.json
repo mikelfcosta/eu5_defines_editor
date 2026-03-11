@@ -1,0 +1,208 @@
+{
+  "name": "NGUI",
+  "defines": [
+    {
+      "id": "NGUI.VALUE_LIMIT_SHOW_K",
+      "category": "NGUI",
+      "key": "VALUE_LIMIT_SHOW_K",
+      "type": "integer",
+      "defaultValue": 100000,
+      "comment": "army values greater that this will be shown as 50K"
+    },
+    {
+      "id": "NGUI.RENAME_MAX_LENGTH",
+      "category": "NGUI",
+      "key": "RENAME_MAX_LENGTH",
+      "type": "integer",
+      "defaultValue": 40,
+      "comment": "How long can names and such be when renaming things (E.G., characters, titles, dynasties)"
+    },
+    {
+      "id": "NGUI.MAX_BREAKDOWN_ENTRIES",
+      "category": "NGUI",
+      "key": "MAX_BREAKDOWN_ENTRIES",
+      "type": "integer",
+      "defaultValue": 10,
+      "comment": "Used to limit the number of entries in some breakdowns (E.G., tax from vassals)"
+    },
+    {
+      "id": "NGUI.CONFIRM_MOUSE_HOLD_TIME",
+      "category": "NGUI",
+      "key": "CONFIRM_MOUSE_HOLD_TIME",
+      "type": "float",
+      "defaultValue": 0.5,
+      "comment": "how long you have to hold the mouse button down to get an action"
+    },
+    {
+      "id": "NGUI.SIDEMENU_VERTICAL_OFFSET",
+      "category": "NGUI",
+      "key": "SIDEMENU_VERTICAL_OFFSET",
+      "type": "float",
+      "defaultValue": 10
+    },
+    {
+      "id": "NGUI.SIDEMENU_TOP_MARGIN",
+      "category": "NGUI",
+      "key": "SIDEMENU_TOP_MARGIN",
+      "type": "float",
+      "defaultValue": 180
+    },
+    {
+      "id": "NGUI.SIDEMENU_BOTTOM_MARGIN",
+      "category": "NGUI",
+      "key": "SIDEMENU_BOTTOM_MARGIN",
+      "type": "float",
+      "defaultValue": 110
+    },
+    {
+      "id": "NGUI.SIDEMENU_SCROLLAREA_HEIGHT_OFFSET",
+      "category": "NGUI",
+      "key": "SIDEMENU_SCROLLAREA_HEIGHT_OFFSET",
+      "type": "float",
+      "defaultValue": 50
+    },
+    {
+      "id": "NGUI.VERY_LOW_FOOD_ALERT_THRESHOLD",
+      "category": "NGUI",
+      "key": "VERY_LOW_FOOD_ALERT_THRESHOLD",
+      "type": "float",
+      "defaultValue": 0.25
+    },
+    {
+      "id": "NGUI.LOW_FOOD_ALERT_THRESHOLD",
+      "category": "NGUI",
+      "key": "LOW_FOOD_ALERT_THRESHOLD",
+      "type": "float",
+      "defaultValue": 0.6
+    },
+    {
+      "id": "NGUI.RGO_QUEUE_CTRL_CLICK",
+      "category": "NGUI",
+      "key": "RGO_QUEUE_CTRL_CLICK",
+      "type": "integer",
+      "defaultValue": 5
+    },
+    {
+      "id": "NGUI.BUILDINGS_QUEUE_CTRL_CLICK",
+      "category": "NGUI",
+      "key": "BUILDINGS_QUEUE_CTRL_CLICK",
+      "type": "integer",
+      "defaultValue": 5
+    },
+    {
+      "id": "NGUI.ARMIES_QUEUE_CTRL_CLICK",
+      "category": "NGUI",
+      "key": "ARMIES_QUEUE_CTRL_CLICK",
+      "type": "integer",
+      "defaultValue": 5
+    },
+    {
+      "id": "NGUI.UNIT_TEMPLATES_LOCATON_STEPS_CONSTRUCTION",
+      "category": "NGUI",
+      "key": "UNIT_TEMPLATES_LOCATON_STEPS_CONSTRUCTION",
+      "type": "integer",
+      "defaultValue": 20
+    },
+    {
+      "id": "NGUI.CANCEL_CONSTRUCTION_QUEUE_CTRL_CLICK",
+      "category": "NGUI",
+      "key": "CANCEL_CONSTRUCTION_QUEUE_CTRL_CLICK",
+      "type": "integer",
+      "defaultValue": 5,
+      "comment": "Armies and buildings"
+    },
+    {
+      "id": "NGUI.REDUCE_RGO_QUEUE_CTRL_CLICK",
+      "category": "NGUI",
+      "key": "REDUCE_RGO_QUEUE_CTRL_CLICK",
+      "type": "integer",
+      "defaultValue": 5
+    },
+    {
+      "id": "NGUI.DESTROY_BUILDINGS_QUEUE_CTRL_CLICK",
+      "category": "NGUI",
+      "key": "DESTROY_BUILDINGS_QUEUE_CTRL_CLICK",
+      "type": "integer",
+      "defaultValue": 5
+    },
+    {
+      "id": "NGUI.TAKE_LOANS_CTRL_CLICK",
+      "category": "NGUI",
+      "key": "TAKE_LOANS_CTRL_CLICK",
+      "type": "integer",
+      "defaultValue": 5
+    },
+    {
+      "id": "NGUI.ROADS_QUEUE_CTRL_CLICK",
+      "category": "NGUI",
+      "key": "ROADS_QUEUE_CTRL_CLICK",
+      "type": "integer",
+      "defaultValue": 5
+    },
+    {
+      "id": "NGUI.SHOWN_ROAD_UPGRADES_COUNT",
+      "category": "NGUI",
+      "key": "SHOWN_ROAD_UPGRADES_COUNT",
+      "type": "integer",
+      "defaultValue": 10
+    },
+    {
+      "id": "NGUI.SHOW_SCROLLBAR_EVENT_OPTIONS_NUMBER",
+      "category": "NGUI",
+      "key": "SHOW_SCROLLBAR_EVENT_OPTIONS_NUMBER",
+      "type": "integer",
+      "defaultValue": 5
+    },
+    {
+      "id": "NGUI.TUTORIAL_STEP_INSTRUCTION_BUTTON_ID",
+      "category": "NGUI",
+      "key": "TUTORIAL_STEP_INSTRUCTION_BUTTON_ID",
+      "type": "string",
+      "defaultValue": "next"
+    },
+    {
+      "id": "NGUI.HINT_CAROUSEL_TIME",
+      "category": "NGUI",
+      "key": "HINT_CAROUSEL_TIME",
+      "type": "integer",
+      "defaultValue": 10,
+      "comment": "Time for each hint displayed."
+    },
+    {
+      "id": "NGUI.PURGE_COA_SEARCH_COUNT",
+      "category": "NGUI",
+      "key": "PURGE_COA_SEARCH_COUNT",
+      "type": "integer",
+      "defaultValue": 100,
+      "comment": "How many COA entries we will search through in a frame for purging"
+    },
+    {
+      "id": "NGUI.DARK_COLOR_THRESHOLD",
+      "category": "NGUI",
+      "key": "DARK_COLOR_THRESHOLD",
+      "type": "float",
+      "defaultValue": 0.6
+    },
+    {
+      "id": "NGUI.SIGNIFICANT_AMOUNT_FOR_NEGATIVE_INCOME",
+      "category": "NGUI",
+      "key": "SIGNIFICANT_AMOUNT_FOR_NEGATIVE_INCOME",
+      "type": "float",
+      "defaultValue": 0.01
+    },
+    {
+      "id": "NGUI.GOVERNMENT_REFORM_SOCIETAL_VALUE_REQUIREMENT_FORECAST_IN_MONTHS",
+      "category": "NGUI",
+      "key": "GOVERNMENT_REFORM_SOCIETAL_VALUE_REQUIREMENT_FORECAST_IN_MONTHS",
+      "type": "integer",
+      "defaultValue": 12
+    },
+    {
+      "id": "NGUI.GOVERNMENT_REFORM_SOCIETAL_VALUE_REQUIREMENT_FORECAST_CUTOFF_IN_MONTHS",
+      "category": "NGUI",
+      "key": "GOVERNMENT_REFORM_SOCIETAL_VALUE_REQUIREMENT_FORECAST_CUTOFF_IN_MONTHS",
+      "type": "integer",
+      "defaultValue": 24
+    }
+  ]
+}

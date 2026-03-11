@@ -1,0 +1,93 @@
+{
+  "name": "NPortrait",
+  "defines": [
+    {
+      "id": "NPortrait.GENE_DATABASE_VERSION",
+      "category": "NPortrait",
+      "key": "GENE_DATABASE_VERSION",
+      "type": "integer",
+      "defaultValue": 2,
+      "comment": "If the version saved in a file does not match this number, the portrait DNAs will get regenerated. Increase this number when making gene database changed that would break old portraits."
+    },
+    {
+      "id": "NPortrait.GRACEFUL_AGING_START",
+      "category": "NPortrait",
+      "key": "GRACEFUL_AGING_START",
+      "type": "integer",
+      "defaultValue": 25,
+      "comment": "After this age, added life expectancy will make a character look younger than they are; the effect grows the further past this point one goes"
+    },
+    {
+      "id": "NPortrait.GRACEFUL_AGING_END",
+      "category": "NPortrait",
+      "key": "GRACEFUL_AGING_END",
+      "type": "integer",
+      "defaultValue": 70,
+      "comment": "This is the apparent age at which life expectancy stops slowing down visual aging (each year onwards ages you visually 1 year)"
+    },
+    {
+      "id": "NPortrait.MAX_AGE",
+      "category": "NPortrait",
+      "key": "MAX_AGE",
+      "type": "float",
+      "defaultValue": 100,
+      "comment": "At this age portraits will use the special age gene at full strength"
+    },
+    {
+      "id": "NPortrait.DEFAULT_ANIMATION",
+      "category": "NPortrait",
+      "key": "DEFAULT_ANIMATION",
+      "type": "string",
+      "defaultValue": "idle",
+      "comment": "Default portrait animation, used as a fallback in places where portrait animations can be specified"
+    },
+    {
+      "id": "NPortrait.WEIGHT_UPDATE_YEAR_INTERVAL",
+      "category": "NPortrait",
+      "key": "WEIGHT_UPDATE_YEAR_INTERVAL",
+      "type": "integer",
+      "defaultValue": 3,
+      "comment": "Years in between portrait updating their current weight towards their target weight"
+    },
+    {
+      "id": "NPortrait.WEIGHT_UPDATE_LERP_SCALAR",
+      "category": "NPortrait",
+      "key": "WEIGHT_UPDATE_LERP_SCALAR",
+      "type": "float",
+      "defaultValue": 0.35,
+      "comment": "Scalar for the liner interoplation of the weight update to trend current weight towards target weight"
+    },
+    {
+      "id": "NPortrait.DEFAULT_BASE_WEIGHT_MIN",
+      "category": "NPortrait",
+      "key": "DEFAULT_BASE_WEIGHT_MIN",
+      "type": "integer",
+      "defaultValue": -35,
+      "comment": "Min for starting random base weight inclusive"
+    },
+    {
+      "id": "NPortrait.DEFAULT_BASE_WEIGHT_MAX",
+      "category": "NPortrait",
+      "key": "DEFAULT_BASE_WEIGHT_MAX",
+      "type": "integer",
+      "defaultValue": 35,
+      "comment": "Max for starting random base weight inclusive"
+    },
+    {
+      "id": "NPortrait.IGNORED_WEIGHT_DEVIATION_FOR_DEAD_WITHOUT_DNA",
+      "category": "NPortrait",
+      "key": "IGNORED_WEIGHT_DEVIATION_FOR_DEAD_WITHOUT_DNA",
+      "type": "integer",
+      "defaultValue": 10,
+      "comment": "Characters that die at between -10 and 10 weight, and have no DNA generated, will get their weight set to 0 to save storage in the save game"
+    },
+    {
+      "id": "NPortrait.MAX_PORTRAIT_GENERATION_DEPTH",
+      "category": "NPortrait",
+      "key": "MAX_PORTRAIT_GENERATION_DEPTH",
+      "type": "integer",
+      "defaultValue": 8,
+      "comment": "When generating someone's portrait, generate up to this many generations of missing portraits"
+    }
+  ]
+}

@@ -1,0 +1,276 @@
+{
+  "name": "NLocation",
+  "defines": [
+    {
+      "id": "NLocation.MAX_NUM_LOCATIONS_FOR_INTEGRATE_SLOWDOWN",
+      "category": "NLocation",
+      "key": "MAX_NUM_LOCATIONS_FOR_INTEGRATE_SLOWDOWN",
+      "type": "integer",
+      "defaultValue": 5
+    },
+    {
+      "id": "NLocation.RGO_BASE_TIME",
+      "category": "NLocation",
+      "key": "RGO_BASE_TIME",
+      "type": "integer",
+      "defaultValue": 180
+    },
+    {
+      "id": "NLocation.RGO_LOAD_TIME_FRACTION",
+      "category": "NLocation",
+      "key": "RGO_LOAD_TIME_FRACTION",
+      "type": "float",
+      "defaultValue": 0.33,
+      "comment": "33% of cap, if pop can afford it."
+    },
+    {
+      "id": "NLocation.RGO_LOAD_TIME_MAX_PEASANT_PERCENTAGE",
+      "category": "NLocation",
+      "key": "RGO_LOAD_TIME_MAX_PEASANT_PERCENTAGE",
+      "type": "float",
+      "defaultValue": 0.1,
+      "comment": "max % of peasants"
+    },
+    {
+      "id": "NLocation.LOOT_MONTHS",
+      "category": "NLocation",
+      "key": "LOOT_MONTHS",
+      "type": "integer",
+      "defaultValue": 12
+    },
+    {
+      "id": "NLocation.SUPPLY_LIMIT_OWNER",
+      "category": "NLocation",
+      "key": "SUPPLY_LIMIT_OWNER",
+      "type": "float",
+      "defaultValue": 0.25,
+      "comment": "Should be highest of these defines or AI will be confused."
+    },
+    {
+      "id": "NLocation.SUPPLY_LIMIT_ACCESS",
+      "category": "NLocation",
+      "key": "SUPPLY_LIMIT_ACCESS",
+      "type": "float",
+      "defaultValue": 0.1
+    },
+    {
+      "id": "NLocation.SUPPLY_LIMIT_ALLY",
+      "category": "NLocation",
+      "key": "SUPPLY_LIMIT_ALLY",
+      "type": "float",
+      "defaultValue": 0.1
+    },
+    {
+      "id": "NLocation.SUPPLY_LIMIT_CONTROLLER",
+      "category": "NLocation",
+      "key": "SUPPLY_LIMIT_CONTROLLER",
+      "type": "float",
+      "defaultValue": 0.1
+    },
+    {
+      "id": "NLocation.MIN_FRONTAGE_AFTER_TERRAIN",
+      "category": "NLocation",
+      "key": "MIN_FRONTAGE_AFTER_TERRAIN",
+      "type": "integer",
+      "defaultValue": 2
+    },
+    {
+      "id": "NLocation.DOOM_FROM_LOOTING_PER_DEVELOPMENT",
+      "category": "NLocation",
+      "key": "DOOM_FROM_LOOTING_PER_DEVELOPMENT",
+      "type": "float",
+      "defaultValue": -0.01
+    },
+    {
+      "id": "NLocation.HORDE_UNITY_FROM_LOOTING_PER_DEVELOPMENT",
+      "category": "NLocation",
+      "key": "HORDE_UNITY_FROM_LOOTING_PER_DEVELOPMENT",
+      "type": "float",
+      "defaultValue": 0.01
+    },
+    {
+      "id": "NLocation.PROSPERITY_MIN",
+      "category": "NLocation",
+      "key": "PROSPERITY_MIN",
+      "type": "integer",
+      "defaultValue": -1
+    },
+    {
+      "id": "NLocation.PROSPERITY_MAX",
+      "category": "NLocation",
+      "key": "PROSPERITY_MAX",
+      "type": "integer",
+      "defaultValue": 1
+    },
+    {
+      "id": "NLocation.FORT_GARRISON_UPKEEP",
+      "category": "NLocation",
+      "key": "FORT_GARRISON_UPKEEP",
+      "type": "integer",
+      "defaultValue": 2
+    },
+    {
+      "id": "NLocation.SUBSISTENCE_AGRICULTURE",
+      "category": "NLocation",
+      "key": "SUBSISTENCE_AGRICULTURE",
+      "type": "float",
+      "defaultValue": 0.8
+    },
+    {
+      "id": "NLocation.CAPITAL_FLIP_SPEED",
+      "category": "NLocation",
+      "key": "CAPITAL_FLIP_SPEED",
+      "type": "float",
+      "defaultValue": 0.04
+    },
+    {
+      "id": "NLocation.FORT_FLIP_SPEED",
+      "category": "NLocation",
+      "key": "FORT_FLIP_SPEED",
+      "type": "float",
+      "defaultValue": 0.033
+    },
+    {
+      "id": "NLocation.FLIP_REVERT_SPEED",
+      "category": "NLocation",
+      "key": "FLIP_REVERT_SPEED",
+      "type": "float",
+      "defaultValue": 0.033
+    },
+    {
+      "id": "NLocation.SECONDARY_CULTURE_THRESHOLD_PERCENT",
+      "category": "NLocation",
+      "key": "SECONDARY_CULTURE_THRESHOLD_PERCENT",
+      "type": "float",
+      "defaultValue": 0.9,
+      "comment": "How small should the Primary Culture be before we show a Secondary Culture in the Culture mapmode"
+    },
+    {
+      "id": "NLocation.SECONDARY_RELIGION_THRESHOLD_PERCENT",
+      "category": "NLocation",
+      "key": "SECONDARY_RELIGION_THRESHOLD_PERCENT",
+      "type": "float",
+      "defaultValue": 0.9,
+      "comment": "How small should the Primary Religion be before we show a Secondary Religion in the Religon mapmode"
+    },
+    {
+      "id": "NLocation.OVERSEAS_DISTANCE",
+      "category": "NLocation",
+      "key": "OVERSEAS_DISTANCE",
+      "type": "integer",
+      "defaultValue": 150,
+      "comment": "Provinces beyond this distance to capital are distant overseas"
+    },
+    {
+      "id": "NLocation.FREEZE_OVER_CHANCE",
+      "category": "NLocation",
+      "key": "FREEZE_OVER_CHANCE",
+      "type": "float",
+      "defaultValue": 0.2,
+      "comment": "chance of freezing over on entering at least a second week of severe winter"
+    },
+    {
+      "id": "NLocation.THAW_CHANCE",
+      "category": "NLocation",
+      "key": "THAW_CHANCE",
+      "type": "float",
+      "defaultValue": 0.4,
+      "comment": "chance of thawing on entering at least a second week after leaving a severe winter"
+    },
+    {
+      "id": "NLocation.CONQUERED_LOCATION_INTEGRATION_REBELLION_HIT",
+      "category": "NLocation",
+      "key": "CONQUERED_LOCATION_INTEGRATION_REBELLION_HIT",
+      "type": "integer",
+      "defaultValue": -10,
+      "comment": "Location loses that much integration immediately when a rebellion happens"
+    },
+    {
+      "id": "NLocation.CONQUERED_LOCATION_INTEGRATION_DECAY",
+      "category": "NLocation",
+      "key": "CONQUERED_LOCATION_INTEGRATION_DECAY",
+      "type": "float",
+      "defaultValue": -0.1,
+      "comment": "Location loses that much integration monthly if it's not owned by the country who conquered it"
+    },
+    {
+      "id": "NLocation.CONQUERED_OCCUPIED_LOCATION_INTEGRATION_DECAY",
+      "category": "NLocation",
+      "key": "CONQUERED_OCCUPIED_LOCATION_INTEGRATION_DECAY",
+      "type": "float",
+      "defaultValue": -0.025,
+      "comment": "Location loses that much integration monthly if it's not owned by the country who conquered it but it's occupied by it"
+    },
+    {
+      "id": "NLocation.LONG_TIME_TO_FILL_EMPLOYEES_FROM_PROMOTES",
+      "category": "NLocation",
+      "key": "LONG_TIME_TO_FILL_EMPLOYEES_FROM_PROMOTES",
+      "type": "integer",
+      "defaultValue": 18,
+      "comment": "number of months it would take to fill a building with employees from promotes before we get an alert"
+    },
+    {
+      "id": "NLocation.NORMAL_LOCATION_SIZE",
+      "category": "NLocation",
+      "key": "NORMAL_LOCATION_SIZE",
+      "type": "integer",
+      "defaultValue": 25,
+      "comment": "roughly the median. this size equals 100% effect of location size on institution spread. higher than this and it takes longer, lower than this and it goes quicker"
+    },
+    {
+      "id": "NLocation.MIN_LOCATION_PIXELS",
+      "category": "NLocation",
+      "key": "MIN_LOCATION_PIXELS",
+      "type": "integer",
+      "defaultValue": 100,
+      "comment": "minimum number of pixels before throwing an error"
+    },
+    {
+      "id": "NLocation.MIN_LOCATION_CHUNK_PIXELS",
+      "category": "NLocation",
+      "key": "MIN_LOCATION_CHUNK_PIXELS",
+      "type": "integer",
+      "defaultValue": 0,
+      "comment": "Print an error if there's a location with a disconnected chunk of X or less pixels"
+    },
+    {
+      "id": "NLocation.MIN_LOCATION_CHUNK_PIXELS_IMPASSABLE",
+      "category": "NLocation",
+      "key": "MIN_LOCATION_CHUNK_PIXELS_IMPASSABLE",
+      "type": "integer",
+      "defaultValue": 0,
+      "comment": "Print an error if there's an impassable location with a disconnected chunk of X of less pixels"
+    },
+    {
+      "id": "NLocation.MAX_LOCATION_NEIGHBOR_SIZE",
+      "category": "NLocation",
+      "key": "MAX_LOCATION_NEIGHBOR_SIZE",
+      "type": "integer",
+      "defaultValue": 3,
+      "comment": "warning color on Size mapmode if a location has a neighbor more than this many times bigger than itself"
+    },
+    {
+      "id": "NLocation.ROAD_PROPAGATION_FACTOR",
+      "category": "NLocation",
+      "key": "ROAD_PROPAGATION_FACTOR",
+      "type": "float",
+      "defaultValue": 0.25,
+      "comment": "Build roads next to existing roads"
+    },
+    {
+      "id": "NLocation.EXPECTED_MINIMUM_SETUP_POPULATION",
+      "category": "NLocation",
+      "key": "EXPECTED_MINIMUM_SETUP_POPULATION",
+      "type": "integer",
+      "defaultValue": 0,
+      "comment": "Total population minimum expected at setup"
+    },
+    {
+      "id": "NLocation.MONTHLY_CONTROL_DECAY",
+      "category": "NLocation",
+      "key": "MONTHLY_CONTROL_DECAY",
+      "type": "float",
+      "defaultValue": 0.01
+    }
+  ]
+}

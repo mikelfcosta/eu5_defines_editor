@@ -1,0 +1,68 @@
+{
+  "name": "NEstate",
+  "defines": [
+    {
+      "id": "NEstate.PARLIAMENT_MONTHS_NOT_CALLED_THRESHOLD",
+      "category": "NEstate",
+      "key": "PARLIAMENT_MONTHS_NOT_CALLED_THRESHOLD",
+      "type": "integer",
+      "defaultValue": 120
+    },
+    {
+      "id": "NEstate.UPKEEP_PER_BUILDING",
+      "category": "NEstate",
+      "key": "UPKEEP_PER_BUILDING",
+      "type": "float",
+      "defaultValue": -1
+    },
+    {
+      "id": "NEstate.MIN_PEASANT_ENFRANCHISMENT",
+      "category": "NEstate",
+      "key": "MIN_PEASANT_ENFRANCHISMENT",
+      "type": "float",
+      "defaultValue": 0.1
+    },
+    {
+      "id": "NEstate.MAX_PEASANT_ENFRANCHISMENT",
+      "category": "NEstate",
+      "key": "MAX_PEASANT_ENFRANCHISMENT",
+      "type": "float",
+      "defaultValue": 1
+    },
+    {
+      "id": "NEstate.LOW_POWER_THRESHOLD",
+      "category": "NEstate",
+      "key": "LOW_POWER_THRESHOLD",
+      "type": "float",
+      "defaultValue": 0.25
+    },
+    {
+      "id": "NEstate.LOW_SATISFACTION_THRESHOLD",
+      "category": "NEstate",
+      "key": "LOW_SATISFACTION_THRESHOLD",
+      "type": "float",
+      "defaultValue": 0.5
+    },
+    {
+      "id": "NEstate.COMPARATIVE_WEALTH_POWER_FACTOR",
+      "category": "NEstate",
+      "key": "COMPARATIVE_WEALTH_POWER_FACTOR",
+      "type": "float",
+      "defaultValue": 0.01
+    },
+    {
+      "id": "NEstate.COMPARATIVE_WEALTH_POWER_CAP",
+      "category": "NEstate",
+      "key": "COMPARATIVE_WEALTH_POWER_CAP",
+      "type": "float",
+      "defaultValue": 1
+    },
+    {
+      "id": "NEstate.POWER_TO_SATISFACTION_PENALTY",
+      "category": "NEstate",
+      "key": "POWER_TO_SATISFACTION_PENALTY",
+      "type": "float",
+      "defaultValue": -0.5
+    }
+  ]
+}
